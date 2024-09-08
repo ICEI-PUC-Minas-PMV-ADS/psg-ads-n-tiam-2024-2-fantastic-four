@@ -14,11 +14,12 @@ Os clientes da barbearia muitas vezes enfrentam dificuldades em agendar horário
 
 O objetivo da solução é simplificar o processo de agendamento e atendimento na barbearia. Ela visa proporcionar uma experiência mais conveniente para os clientes ao permitir o agendamento de serviços diretamente pelo aplicativo, a escolha de barbeiros e o acompanhamento de históricos de cortes. Para os barbeiros, a solução oferece um painel que facilita o gerenciamento de horários, clientes e barbeiros, melhorando a eficiência e a organização geral do estabelecimento​.
 
-**Apresente também alguns (pelo menos 2) objetivos específicos dependendo de onde você vai querer concentrar a sua prática investigativa, ou como você vai aprofundar no seu trabalho.
+- Gerenciamento e marcação de horários
+- Histórico e visualização de atendimentos
 
 ## Justificativa
 
-A justificativa para a criação do software reside nas dificuldades que tanto os clientes quanto os barbeiros enfrentam no processo atual de gestão da barbearia. Os clientes têm problemas para agendar horários, escolher barbeiros e acompanhar seus atendimentos, enquanto os barbeiros enfrentam dificuldades para organizar os horários das suas agendas de maneira eficiente. A falta de uma solução digital causa ineficiência, insatisfação e perda de tempo. Portanto, um aplicativo que centralize e otimize essas atividades melhora a experiência do cliente, aumenta a produtividade dos barbeiros e aprimora a gestão da barbearia​.
+A justificativa para a criação do software reside nas dificuldades que tanto os clientes quanto os barbeiros enfrentam no processo atual de gestão da barbearia. Os clientes têm problemas para agendar horários, escolher barbeiros e acompanhar seus atendimentos, enquanto os barbeiros enfrentam dificuldades para organizar os horários das suas agendas de maneira eficiente. A falta de uma solução digital para essa barbearia causa ineficiência, insatisfação e perda de tempo. Portanto, um aplicativo que centralize e otimize essas atividades melhora a experiência do cliente, aumenta a produtividade dos barbeiros e aprimora a gestão da barbearia​.
 
 ## Público-Alvo
 
@@ -28,4 +29,4 @@ Clientes da barbearia: Pessoas que buscam conveniência e agilidade para agendar
 Barbeiros: Profissionais que desejam uma maneira organizada de gerenciar suas agendas.
 
 
-Dono da Barbearia: Que buscam maior controle sobre agendamentos e gestão da equipe, para melhorar a eficiência operacional.
+Dono da Barbearia: Que busca um maior controle sobre agendamentos e gestão da barbebaria, para melhorar a eficiência operacional.
