@@ -19,7 +19,7 @@ Para os barbeiros o aplicativo oferece um painel de gerenciamento para otimizar 
 
 ## Orientador
 
-* Pedro Felipe
+* Pedro Felipe Alves de Oliveira
 
 ## Instruções de utilização
 
