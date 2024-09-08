@@ -52,6 +52,8 @@ Exemplificação: A equipe utiliza metodologias ágeis, tendo escolhido o Scrum 
 - Product Owner: Adrielly Juliao;
 - Equipe de Desenvolvimento: Adrielly Juliao. Filipe Diniz, Pedro Rocha, Yuri Lucas;
 - Equipe de Design: Filipe Diniz, Yuri Lucas.
+- QA:  Adrielly Juliao;
+- DevOps: Pedro Rocha; 
 
 ### Processo
 
