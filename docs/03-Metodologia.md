@@ -56,15 +56,12 @@ Exemplificação: A equipe utiliza metodologias ágeis, tendo escolhido o Scrum 
 
 ### Processo
 
-Coloque  informações sobre detalhes da implementação do Scrum seguido pelo grupo. O grupo deverá fazer uso do recurso de gerenciamento de projeto oferecido pelo GitHub, que permite acompanhar o andamento do projeto, a execução das tarefas e o status de desenvolvimento da solução.
- 
-> **Links Úteis**:
-> - [Planejamento e Gestáo Ágil de Projetos](https://pucminas.instructure.com/courses/87878/pages/unidade-2-tema-2-utilizacao-de-ferramentas-para-controle-de-versoes-de-software)
-> - [Sobre quadros de projeto](https://docs.github.com/pt/issues/organizing-your-work-with-project-boards/managing-project-boards/about-project-boards)
-> - [Project management, made simple](https://github.com/features/project-management/)
-> - [Sobre quadros de projeto](https://docs.github.com/pt/github/managing-your-work-on-github/about-project-boards)
-> - [Como criar Backlogs no Github](https://www.youtube.com/watch?v=RXEy6CFu9Hk)
-> - [Tutorial Slack](https://slack.com/intl/en-br/)
+Embora o desenvolvimento com código ainda não tenha iniciado e o quadro do GitHub para gerenciamento de projeto ainda não tenha sido utilizado, já realizamos algumas reuniões de brainstorming. Nessas reuniões, discutimos as ideias principais para o projeto, identificamos funcionalidades importantes que devem ser incluídas, e começamos a planejar o fluxo de trabalho.
+
+A metodologia Scrum será aplicada na próxima fase, quando iniciaremos o acompanhamento mais formal das tarefas e do progresso do desenvolvimento. Estão planejadas reuniões de Sprint Planning, nas quais vamos definir as metas e tarefas para cada Sprint, além de Daily Stand-ups para alinhamento rápido sobre o andamento do trabalho e identificação de possíveis impedimentos.
+
+Também faremos Sprint Reviews ao final de cada Sprint, para apresentar os resultados e demonstrar o que foi implementado, e Sprint Retrospectives, onde vamos discutir o que funcionou bem, o que pode ser melhorado, e definir ajustes para aumentar a eficiência da equipe. Essas cerimônias são essenciais para manter o ritmo de desenvolvimento, garantir que estamos sempre alinhados com os objetivos do projeto, e promover a melhoria contínua da equipe.
+
 
 ### Ferramentas
 
