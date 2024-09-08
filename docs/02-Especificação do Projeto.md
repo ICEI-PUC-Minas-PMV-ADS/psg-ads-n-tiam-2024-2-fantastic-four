@@ -150,7 +150,7 @@ O gráfico de Gantt ou diagrama de Gantt também é uma ferramenta visual utiliz
 
 Project Timeline: <a href="[1-Documentação de Contexto.md](https://docs.google.com/spreadsheets/d/1PBKknGin72xqk5tDTb0Ir0MFV3jRVsZ0LldXQSGLYak/edit?usp=sharing)"> Acesse esse link para ver a timeline completa </a>
 
-![Simple Project Timeline](img/02-project-timeline-barbershop.png)
+![Simple Project Timeline](img/ProjectTimelineBarbershop.webp)
 
 ## Gestão de Orçamento
 
