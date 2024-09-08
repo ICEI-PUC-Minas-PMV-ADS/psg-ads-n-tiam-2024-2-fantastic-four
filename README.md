@@ -1,23 +1,25 @@
-# TÍTULO DO PROJETO
+# BARBER SHOP
 
-`CURSO`
+`CURSO: ANÁLISE E DESENVOLVIMENTO DE SISTEMAS`
 
-`DISCIPLINA`
+`DISCIPLINA: TRABALHO INTERDISCIPLINAR: APLICAÇÕES MÓVEIS`
 
-`SEMESTRE`
+`SEMESTRE: 4°SEMESTRE`
 
-Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
+O projeto visa resolver os problemas enfrentados tanto por clientes quanto por barbeiros no processo de agendamento e atendimento na barbearia. Os clientes têm dificuldade em agendar horários, escolher barbeiros e acompanhar seus históricos de cortes, enquanto os barbeiros encontram desafios para organizar suas agendas e manter um registro detalhado dos atendimentos. A solução proposta é um aplicativo que simplifica o processo, permitindo aos clientes agendar serviços, selecionar barbeiros e acompanhar o histórico de atendimentos.
+
+Para os barbeiros o aplicativo oferece um painel de gerenciamento para otimizar a organização dos horários. Para os clientes o aplicativo oferece uma melhor experiência através de um sistema de agendamento intuitivo e assim aumentar a eficiência da barbearia com uma plataforma que centraliza o gerenciamento de horários e atendimentos. A justificativa do projeto está nas dificuldades de organização e comunicação enfrentadas pelos clientes e barbeiros, além da falta de eficiência causada pela ausência de uma solução digital integrada. O público-alvo abrange clientes que buscam conveniência, barbeiros que desejam gerenciar suas agendas de forma prática, e donos que precisam otimizar a gestão da barbearia.
 
 ## Integrantes
 
-* Nome completo do aluno 1
-* Nome completo do aluno 2
-* Nome completo do aluno 3
-* Nome completo do aluno 4
+* Adrielly Coelho Julião
+* Filipe Ferreira Diniz
+* Pedro Henrique Macena Rocha
+* Yuri Lucas Silva Ferreira
 
 ## Orientador
 
-* Nome completo do professor 1
+* Pedro Felipe
 
 ## Instruções de utilização
 
