@@ -3,12 +3,22 @@
 
 <span style="color:red">Pré-requisitos: <a href="2-Especificação do Projeto.md"> Documentação de Especificação</a></span>
 
-Descreva aqui a metodologia de trabalho do grupo para atacar o problema. Definições sobre os ambiente de trabalho utilizados pela  equipe para desenvolver o projeto. Abrange a relação de ambientes utilizados, a estrutura para gestão do código fonte, além da definição do processo e ferramenta através dos quais a equipe se organiza (Gestão de Times).
+A metodologia empregada neste projeto foi orientada para garantir uma abordagem estruturada e eficiente no desenvolvimento do sistema de agendamento. Iniciamos com uma fase de planejamento, onde os requisitos foram definidos em colaboração com os stakeholders para assegurar que todas as necessidades fossem compreendidas e documentadas.
 
 ## Relação de Ambientes de Trabalho
 
-Os artefatos do projeto são desenvolvidos a partir de diversas plataformas e a relação dos ambientes com seu respectivo propósito deverá ser apresentada em uma tabela que especifica que detalha Ambiente, Plataforma e Link de Acesso. 
-Nota: Vide documento modelo do estudo de caso "Portal de Notícias" e defina também os ambientes e frameworks que serão utilizados no desenvolvimento de aplicações móveis.
+| **Ambiente**                                 | **Plataforma**                            | **Link de Acesso**                                     | **Propósito**                                                      |
+| -------------------------------------------- | ----------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------ |
+| **Ambiente de Comunicação**                  | Discord / Microsoft Teams                   | [Discord](https://discord.com) [Teams](https://microsoftteams.com)                             | Comunicação entre os membros da equipe e com cliente.                            |
+| **Ambiente de Gestão de Projeto**            | Github / Trello                             | [Trello](https://www.atlassian.com/software/trello) [Github](https://www.github.com)        | Organização do backlog e sprints.                                  |
+| **Ambiente de Design UX/UI**                 | Figma                                     | [Figma](https://www.figma.com)                         | Criação e compartilhamento de protótipos e interfaces de usuário.  |
+| **Ambiente de Desenvolvimento (Mobile)**     | Visual Studio Code (IDE) | [Visual Studio Code]([https://](https://code.visualstudio.com/?wt.mc_id=DX_841432)) | Ambiente de desenvolvimento local para codificação de apps móveis. |
+| **Framework Front-End (Mobile)**             | React Native                   | [React Native](https://reactnative.dev/)               | Framework para desenvolvimento de interfaces móveis.               |
+| **Ambiente de Testes (Mobile)**              | Firebase Test Lab                | [Firebase](https://firebase.google.com/)               | Testes automatizados e manuais para aplicativos móveis.            |
+| **Ambiente de Produção (Mobile)**            | Google Play Store / Apple App Store       | -                                                      | Publicação de aplicativos móveis.                                  |
+| **Backend da Aplicação Móvel**               | Node.js                        | -                                                      | Servidor para suportar requisições da aplicação móvel.             |
+| **Banco de Dados (Mobile)**                  | Firebase Firestore              | [Firebase](https://firebase.google.com/)               | Banco de dados para armazenamento dos dados móveis.                |
+
 
 ## Controle de Versão
 
@@ -31,16 +41,6 @@ etiquetas:
 - `enhancement`: uma funcionalidade precisa ser melhorada
 - `feature`: uma nova funcionalidade precisa ser introduzida
 
-Discuta como a configuração do projeto foi feita na ferramenta de versionamento escolhida. Exponha como a gerência de tags, merges, commits e branchs é realizada. Discuta como a gerência de issues foi realizada.
-
-> **Links Úteis**:
-> - [Microfundamento: Gerência de Configuração](https://pucminas.instructure.com/courses/87878/)
-> - [Tutorial GitHub](https://guides.github.com/activities/hello-world/)
-> - [Git e Github](https://www.youtube.com/playlist?list=PLHz_AreHm4dm7ZULPAmadvNhH6vk9oNZA)
->  - [Comparando fluxos de trabalho](https://www.atlassian.com/br/git/tutorials/comparing-workflows)
-> - [Understanding the GitHub flow](https://guides.github.com/introduction/flow/)
-> - [The gitflow workflow - in less than 5 mins](https://www.youtube.com/watch?v=1SXpE08hvGs)
-
 ## Gerenciamento de Projeto
 
 ### Divisão de Papéis
@@ -48,15 +48,10 @@ Discuta como a configuração do projeto foi feita na ferramenta de versionament
 Apresente a divisão de papéis entre os membros do grupo.
 
 Exemplificação: A equipe utiliza metodologias ágeis, tendo escolhido o Scrum como base para definição do processo de desenvolvimento. A equipe está organizada da seguinte maneira:
-- Scrum Master: Felipe Domingos;
-- Product Owner: Rommel Carneiro;
-- Equipe de Desenvolvimento: Pedro Penna, Pedro Ivo, Rodrigo Richard;
-- Equipe de Design: Simone Nogueira.
-
-> **Links Úteis**:
-> - [11 Passos Essenciais para Implantar Scrum no seu Projeto](https://mindmaster.com.br/scrum-11-passos/)
-> - [Scrum em 9 minutos](https://www.youtube.com/watch?v=XfvQWnRgxG0)
-> - [Os papéis do Scrum e a verdade sobre cargos nessa técnica](https://www.atlassian.com/br/agile/scrum/roles)
+- Scrum Master: Filipe Diniz;
+- Product Owner: Adrielly Juliao;
+- Equipe de Desenvolvimento: Adrielly Juliao. Filipe Diniz, Pedro Rocha, Yuri Lucas;
+- Equipe de Design: Filipe Diniz, Yuri Lucas.
 
 ### Processo
 
@@ -74,14 +69,10 @@ Coloque  informações sobre detalhes da implementação do Scrum seguido pelo g
 
 As ferramentas empregadas no projeto são:
 
-- Editor de código.
-- Ferramentas de comunicação
-- Ferramentas de desenho de tela (_wireframing_)
+- Visual Studio Code.
+- Discord/Microsoft Teams
+- Figma
+- Trello
+- github
 
-O editor de código foi escolhido porque ele possui uma integração com o sistema de versão. As ferramentas de comunicação utilizadas possuem integração semelhante e por isso foram selecionadas. Por fim, para criar diagramas utilizamos essa ferramenta por melhor captar as necessidades da nossa solução.
-
-Liste quais ferramentas foram empregadas no desenvolvimento do projeto, justificando a escolha delas, sempre que possível.
- 
-> **Possíveis Ferramentas que auxiliarão no gerenciamento**: 
-> - [Slack](https://slack.com/)
-> - [Github](https://github.com/)
+O visual studio code foi escolhido porque ele possui uma integração com o sistema de versão. As ferramentas de comunicação discord e microsoft teams foram utilizadas por possuirem integração semelhante e por isso foram selecionadas. Para o versionameto escolhemos o github que possui otimas funções, O figma para prototipagem e wireframes por sua usabilidade, Por fim, para visualizaçao das tarefas do time usamos o trello.
