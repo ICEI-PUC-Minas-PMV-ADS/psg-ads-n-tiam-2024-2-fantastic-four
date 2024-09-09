@@ -150,6 +150,10 @@ Project Timeline: <a href="[1-Documentação de Contexto.md](https://docs.google
 
 ## Gestão de Orçamento
 
-O processo de determinar o orçamento do projeto é uma tarefa que depende, além dos produtos (saídas) dos processos anteriores do gerenciamento de custos, também de produtos oferecidos por outros processos de gerenciamento, como o escopo e o tempo.
+Após um extenso processo de cálculos, conversas detalhadas e pesquisas, chegamos ao orçamento para o projeto, que ficou um total de R$ 32.400 para um período de quatro meses. Este valor foi muito bem planejado para cobrir todas as áreas essenciais do projeto, conforme detalhado na imagem a seguir:
 
-![Orçamento](img/02-orcamento.png)
+![Orçamento](img/Orçamento.png)
+
+Este orçamento foi cuidadosamente planejado para assegurar que todas as áreas essenciais do projeto sejam devidamente cobertas, com uma abordagem eficiente e econômica. Estamos comprometidos em utilizar esses recursos de maneira a maximizar o valor entregue e garantir o sucesso do projeto.
+
+
