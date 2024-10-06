@@ -26,13 +26,25 @@ Definição de como o software é estruturado em termos dos componentes que faze
 Para hospedar e lançar nosso aplicativo nas lojas de aplicativos, criaremos contas de desenvolvedor no Google Play Console e no Apple Developer Program. Utilizaremos o Expo para gerar builds de produção para Android e iOS, que serão então carregados nas respectivas plataformas. No Google Play Console, faremos o upload do arquivo AAB, preencheremos os detalhes do aplicativo e submeteremos para revisão. Na App Store, utilizaremos o App Store Connect para enviar o arquivo IPA, preencher as informações necessárias e submeter para revisão. Após a aprovação, o aplicativo estará disponível para download nas lojas de aplicativos, garantindo um processo estruturado e eficiente para o lançamento e manutenção contínua.
 
 ## Qualidade de Software
+![Orçamento](img/qualidadeSoftware.png)
+1. **Manutenibilidade**
+    - **Modularidade**: A equipe irá estruturar o software em módulos independentes para facilitar atualizações e manutenção.
+    - **Reusabilidade**: Componentes reutilizáveis no projeto irão aumentar a eficiência e reduzir retrabalho.
+2. **Confiabilidade**
+    - **Maturidade**: Para garantir que o sistema seja confiável, ele será submetido a revisões de código (Code Review) e testes unitários automatizados (JEST).
+    - **Tolerância a falhas**: A utilização de Firebase como backend irá requerer um sistema resiliente a falhas, garantindo que os dados sejam armazenados com segurança.
+3. **UI**
+    - **Acessibilidade**: A interface do aplicativo será desenvolvida com Material UI, focando em proporcionar uma experiência de usuário intuitiva.
+    - **Interfaces**: As histórias irão passar pelo XD Review, onde todos os pontos de design serão analisados e comparados ao protótipo fiel no Figma.
+4. **Eficiência de Desempenho**
+    - **Tempo de Resposta**: A equipe irá monitorar o tempo de carregamento das telas e operações, como requisições ao Firebase.
+    - **Utilização de Recursos**: O uso de React Native irá garantir uma utilização eficiente dos recursos de dispositivos móveis.
 
-Conceituar qualidade de fato é uma tarefa complexa, mas ela pode ser vista como um método gerencial que através de procedimentos disseminados por toda a organização, busca garantir um produto final que satisfaça às expectativas dos stakeholders.
+### Métricas para avaliação da qualidade
 
-No contexto de desenvolvimento de software, qualidade pode ser entendida como um conjunto de características a serem satisfeitas, de modo que o produto de software atenda às necessidades de seus usuários. Entretanto, tal nível de satisfação nem sempre é alcançado de forma espontânea, devendo ser continuamente construído. Assim, a qualidade do produto depende fortemente do seu respectivo processo de desenvolvimento.
-
-A norma internacional ISO/IEC 25010, que é uma atualização da ISO/IEC 9126, define oito características e 30 subcaracterísticas de qualidade para produtos de software.
-Com base nessas características e nas respectivas sub-características, identifique as sub-características que sua equipe utilizará como base para nortear o desenvolvimento do projeto de software considerando-se alguns aspectos simples de qualidade. Justifique as subcaracterísticas escolhidas pelo time e elenque as métricas que permitirão a equipe avaliar os objetos de interesse.
+- **Cobertura de Testes Unitários**: Será avaliada pelo JEST, garantindo que grande parte do código esteja coberta por testes automatizados.
+- **Tempo de Resposta do Sistema**: A métrica será medida em tempo real e os dados serão armazenados no Firebase.
+- **Satisfação do Usuário**: Será avaliada através de pesquisas ou feedback direto dos stakeholders após a entrega em produção.
 
 > **Links Úteis**:
 >
