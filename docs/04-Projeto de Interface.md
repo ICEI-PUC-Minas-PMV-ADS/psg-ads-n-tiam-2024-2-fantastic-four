@@ -11,6 +11,8 @@ Visão geral da interação do usuário pelas telas do sistema e protótipo inte
 
 ![fluxoInterface01](img/fluxoInterface01.png)
 ![fluxoInterface02](img/fluxoInterface02.png)
+![fluxoInterface03](img/fluxoInterface03.webp)
+![fluxoInterface04](img/fluxoInterface04.webp)
 
 ## Wireframes
 
