@@ -45,9 +45,3 @@ Para hospedar e lançar nosso aplicativo nas lojas de aplicativos, criaremos con
 - **Cobertura de Testes Unitários**: Será avaliada pelo JEST, garantindo que grande parte do código esteja coberta por testes automatizados.
 - **Tempo de Resposta do Sistema**: A métrica será medida em tempo real e os dados serão armazenados no Firebase.
 - **Satisfação do Usuário**: Será avaliada através de pesquisas ou feedback direto dos stakeholders após a entrega em produção.
-
-> **Links Úteis**:
->
-> - [ISO/IEC 25010:2011 - Systems and software engineering — Systems and software Quality Requirements and Evaluation (SQuaRE) — System and software quality models](https://www.iso.org/standard/35733.html/)
-> - [Análise sobre a ISO 9126 – NBR 13596](https://www.tiespecialistas.com.br/analise-sobre-iso-9126-nbr-13596/)
-> - [Qualidade de Software - Engenharia de Software 29](https://www.devmedia.com.br/qualidade-de-software-engenharia-de-software-29/18209/)
