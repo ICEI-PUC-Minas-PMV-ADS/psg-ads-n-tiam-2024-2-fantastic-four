@@ -43,14 +43,7 @@ Apresente também uma figura explicando como as tecnologias estão relacionadas 
 
 ## Hospedagem
 
-Explique como a hospedagem e o lançamento da plataforma foi feita.
-
-> **Links Úteis**:
->
-> - [Website com GitHub Pages](https://pages.github.com/)
-> - [Programação colaborativa com Repl.it](https://repl.it/)
-> - [Getting Started with Heroku](https://devcenter.heroku.com/start)
-> - [Publicando Seu Site No Heroku](http://pythonclub.com.br/publicando-seu-hello-world-no-heroku.html)
+Para hospedar e lançar nosso aplicativo nas lojas de aplicativos, criaremos contas de desenvolvedor no Google Play Console e no Apple Developer Program. Utilizaremos o Expo para gerar builds de produção para Android e iOS, que serão então carregados nas respectivas plataformas. No Google Play Console, faremos o upload do arquivo AAB, preencheremos os detalhes do aplicativo e submeteremos para revisão. Na App Store, utilizaremos o App Store Connect para enviar o arquivo IPA, preencher as informações necessárias e submeter para revisão. Após a aprovação, o aplicativo estará disponível para download nas lojas de aplicativos, garantindo um processo estruturado e eficiente para o lançamento e manutenção contínua.
 
 ## Qualidade de Software
 
