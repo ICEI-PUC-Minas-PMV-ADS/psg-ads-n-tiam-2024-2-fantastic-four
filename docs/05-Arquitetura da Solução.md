@@ -46,7 +46,7 @@ Entregar um arquivo banco.sql contendo os scripts de criação das tabelas do ba
 - **Versionamento:** Git & Github
 - **Hospedagem e deploy:** Expo
 
-![Tecnologias Utilizadas](img/TecnologiasUtilizadas)
+![Tecnologias Utilizadas](img/TecnologiasUtilizadas.png)
 
 ## Hospedagem
 
