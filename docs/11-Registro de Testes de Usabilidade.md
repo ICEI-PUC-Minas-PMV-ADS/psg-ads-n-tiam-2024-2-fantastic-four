@@ -223,3 +223,90 @@ Este teste visa avaliar o entendimento e a usabilidade do sistema com base nas i
 
 O sistema entrega o que promete, sendo moderno e de fácil entendimento. No entanto, poderia incluir mais funcionalidades. Há uma preocupação com a adaptação do usuário às novas tecnologias, embora os ícones e a navegação sejam intuitivos.
 
+# Relatório de Teste com Usuário 4
+
+**Projeto**: Simplon Barber Shop  
+**Nome do Avaliador**: Yuri Lucas Silva Ferreira  
+**Data**: 09/10/2024  
+**Nome do Participante**: Lucas Henrique
+
+## Proposta
+
+Este teste visa avaliar o entendimento e a usabilidade do sistema com base nas interações de um usuário representativo do público-alvo. As áreas analisadas incluem a navegação e a satisfação geral do uso.
+
+## Questões Introdutórias e Tarefas
+
+- **Apresentação do sistema**: Pergunte ao usuário, "Apenas olhando para o sistema, que tipo de informação você acha que pode obter dele? Seja específico."  
+  **Resposta**: Facilita na organização de agendamentos, onde o cliente não precisa esperar resposta por mensagem, mas sim verificar os horários disponíveis e fazer o agendamento.
+
+- **Pergunte**: "Para quem você acha que esse sistema foi desenvolvido? Por quê?"  
+  **Resposta**: Para homens que frequentam barbearias, barbeiros e donos de barbearias.
+
+> Este documento foi desenvolvido com base nos templates disponíveis em [usability.gov](https://www.usability.gov/how-to-and-tools/resources/templates.html).
+
+## Cenário
+
+### Realizar Cadastro
+
+| Caminhos(s)                                                                                 | Sucesso na execução da tarefa | Anotações / Observações |
+|---------------------------------------------------------------------------------------------|------------------------------|-------------------------|
+| Entrar no app > Clicar em 'Registrar' > Preencher os campos 'Email', 'Senha' e 'Serviço' > Clicar em 'Próximo passo' > Preencher os campos 'Nome completo', 'Telefone' e 'Idade' > 'Concluir cadastro' | 2 - Cadastrou sem dificuldades | Intuitivo |
+
+### Tarefa 2  
+**Fazer Login**
+
+| Caminhos(s) | Sucesso na execução da tarefa | Anotações / Observações |
+|---------------|------------------------------|-------------------------|
+| Na tela inicial do app, selecionar a opção 'Login' > Preencher email e senha > Clicar em 'Login' | 2 - Completou facilmente | Fluxo intuitivo |
+
+### Tarefa 3  
+**Agendar Serviço**
+
+| Caminhos(s)   | Sucesso na execução da tarefa | Anotações / Observações |
+|---------------|------------------------------|-------------------------|
+| Com o login feito > Selecionar 'Novo agendamento' > Selecionar o barbeiro > Selecionar serviços > Escolher data e horário > Clicar em 'Concluir Agendamento' | 2 - Completou facilmente | Fluxo intuitivo e acessível |
+
+### Tarefa 4  
+**Consultar Notificações**
+
+| Caminhos(s)   | Sucesso na execução da tarefa | Anotações / Observações |
+|---------------|------------------------------|-------------------------|
+| Com o login feito > Clicar no ícone de sino na barra de navegação | 2 - Completou facilmente | As informações são bem claras |
+
+### Tarefa 5  
+**Ver Histórico de Agendamentos**
+
+| Caminhos(s)   | Sucesso na execução da tarefa | Anotações / Observações |
+|---------------|------------------------------|-------------------------|
+| Com o login feito > Clicar no ícone de relógio na barra de navegação | 2 - Completou facilmente | As informações são organizadas e fáceis de entender |
+
+## Questionário Final
+
+- **Qual sua opinião geral sobre o sistema?**  
+  Achei o sistema bem estruturado e intuitivo de usar.
+
+- **Como avaliou as atividades realizadas?**  
+  O sistema agrada pelo fluxo fácil de entender, tornando-o acessível.
+
+- **Você considera o sistema atualizado? Por quê?**  
+  Sim, o visual é agradável e possui funcionalidades que facilitam tanto o dia a dia do barbeiro quanto o do cliente.
+
+- **Qual funcionalidade mais lhe agradou?**  
+  A facilidade com que é possível administrar meus agendamentos.
+
+- **Teve algo que você não gostou?**  
+  Não, estou satisfeito.
+
+- **Há algo que sente falta no sistema?**  
+  Não.
+
+- **Como descreveria o sistema para outra pessoa?**  
+  É um app que permite agendar horários para serviços de barbearia e gerenciar a barbearia.
+
+- **Algum comentário ou pergunta adicional?**  
+  Não.
+
+## Conclusões do Avaliador
+
+O sistema cumpre bem sua proposta, é fácil de entender e utilizar no dia a dia.
+
