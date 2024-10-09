@@ -212,7 +212,6 @@ Este teste visa avaliar o entendimento e a usabilidade do sistema com base nas i
   - Agendamentos de hora em hora
   - Promoções para novos clientes (ex: 50% no próximo corte)
   - Controle de despesas internas do salão
-  - Local de vendas de produtos
 
 - **Como descreveria este sistema para um colega?**  
   "Ótimo produto."
