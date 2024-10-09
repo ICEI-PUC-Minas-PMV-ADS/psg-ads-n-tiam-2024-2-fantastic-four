@@ -25,31 +25,31 @@ A proposta deste teste é verificar o entendimento e a usabilidade do projeto de
 Realizar Cadastro
 | Caminhos(s)   | Sucesso na execução da tarefa | Anotações / Observações |
 |---------------|------------------------------|-------------------------|
-| Na tela inicial do aplicativo, clicar em Registrar            |   2 - Completou facilmente      | Gostaria que me desse a opção de ver a minha senha para eu ter certeza que foi escrita corretamente, mas tirando essa observação achei o processo fácil                        |
+| Na tela inicial do aplicativo, clicar em Registrar            | Sim | Gostaria que me desse a opção de ver a minha senha para eu ter certeza que foi escrita corretamente, mas tirando essa observação achei o processo fácil                        |
 
 ### Tarefa 2
 Realizar Login
 | Caminhos(s)   | Sucesso na execução da tarefa | Anotações / Observações |
 |---------------|------------------------------|-------------------------|
-|Na tela inicial do aplicativo, clicar em Login      | 2 - Completou facilmente   | Assim como no cadastro gostaria que me desse a opção de ver a minha senha para eu verirficar se escrevi corretamente, e na opção de esquei minha senha como seria feita a mudança de senha? Pelo aplicativo enviando um codigo para meu email?  |
+|Na tela inicial do aplicativo, clicar em Login      | Sim | Assim como no cadastro gostaria que me desse a opção de ver a minha senha para eu verirficar se escrevi corretamente, e na opção de esquei minha senha como seria feita a mudança de senha? Pelo aplicativo enviando um codigo para meu email?  |
 
 ### Tarefa 3
  Realizar Agendamento
 | Caminhos(s)   | Sucesso na execução da tarefa | Anotações / Observações |
 |---------------|------------------------------|-------------------------|
-|Após fazer o login no aplicativo, clicar no botão de novo agendamento ou no calendário na barra de navegação | 2 - Completou facilmente     | O processo de escolha do profissional, do serviço que irei realizar e a data com horário foi fácil e bem intuitivo.                       |
+|Após fazer o login no aplicativo, clicar no botão de novo agendamento ou no calendário na barra de navegação | Sim | O processo de escolha do profissional, do serviço que irei realizar e a data com horário foi fácil e bem intuitivo.                       |
 
 ### Tarefa 4
 Verificar Notificações
 | Caminhos(s)   | Sucesso na execução da tarefa | Anotações / Observações |
 |---------------|------------------------------|-------------------------|
-|Após fazer o login no aplicativo, clicar no símbolo de sininho localizado na barra de navegação | 2 - Completou facilmente   |Achei interessante ter as notificações referentes aos agendamentos exibidas |
+|Após fazer o login no aplicativo, clicar no símbolo de sininho localizado na barra de navegação | Sim |Achei interessante ter as notificações referentes aos agendamentos exibidas |
 
 ### Tarefa 5
 Verificar Histórico
 | Caminhos(s)   | Sucesso na execução da tarefa | Anotações / Observações |
 |---------------|------------------------------|-------------------------|
-|Após fazer o login no aplicativo, clicar no símbolo de relógio localizado na barra de navegação  |  2 - Completou facilmente  | A visualização do histórico está bem clara, dando para visulizar os serviços que ja foram realizados e os que estão agendados par acontecer ainda.  |
+|Após fazer o login no aplicativo, clicar no símbolo de relógio localizado na barra de navegação  | Sim | A visualização do histórico está bem clara, dando para visulizar os serviços que ja foram realizados e os que estão agendados par acontecer ainda.  |
 
 ## Questionário Final
 - Qual foi a sua impressão geral do sistema?
