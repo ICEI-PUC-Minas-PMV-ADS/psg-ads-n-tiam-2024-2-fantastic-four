@@ -24,6 +24,9 @@
 ### Menu lateral
 ![MenuLateralCliente](img/MenuLateralCliente.png)
 
+### Relatório
+![TelaRelatorio](img/TelaRelatorio.jpeg)
+
 
 ## Diagrama de Fluxo
 
