@@ -1,11 +1,29 @@
 
 # Projeto de Interface
 
-<span style="color:red">Pré-requisitos: <a href="2-Especificação do Projeto.md"> Documentação de Especificação</a></span>
+## Telas app - Lado do usuário (Cliente)
 
-Visão geral da interação do usuário pelas telas do sistema e protótipo interativo das telas com as funcionalidades que fazem parte do sistema (wireframes).
+### Login e Cadastro
+![LoginCadastro](img/LoginCadastro.png)
 
- Apresente as principais interfaces da plataforma. Discuta como ela foi elaborada de forma a atender os requisitos funcionais, não funcionais e histórias de usuário abordados nas <a href="2-Especificação do Projeto.md"> Documentação de Especificação</a>.
+### Página Inicial
+![HomePageo](img/HomePage.png)
+
+### Agendamentos
+![Agendamentos](img/Agendamentos.png)
+
+### Histórico e Produtos
+![HistoricoAgendamentosProdutos](img/HistoricoAgendamentosProdutos.png)
+
+### Perfil e Notificações
+![PerfilNotificacoes](img/PerfilNotificacoes.png)
+
+### Sobre a barbearia
+![SobreBarberShop](img/SobreBarberShop.png)
+
+### Menu lateral
+![MenuLateralCliente](img/MenuLateralCliente.png)
+
 
 ## Diagrama de Fluxo
 
