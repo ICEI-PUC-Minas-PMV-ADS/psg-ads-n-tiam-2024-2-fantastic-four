@@ -146,7 +146,7 @@ Exemplo: A conclusão desse teste com usuário é que o sistema entrega o que of
 
 **Projeto**: Simplon Barber Shop  
 **Nome do Avaliador**: Filipe Ferreira Diniz  
-**Data**: 16/06/2024  
+**Data**: 08/10/2024  
 **Participante Nome**: Alexandre Maciel Alberto (Sócio da barbearia)
 
 ## Proposta
