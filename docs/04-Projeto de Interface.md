@@ -27,6 +27,8 @@
 ### Relatório
 ![TelaRelatorio](img/TelaRelatorio.jpeg)
 
+### Relatório
+![TelainicialAgendamentoClientes](img/TelainicialAgendamentoClientes.jpeg)
 
 ## Diagrama de Fluxo
 
