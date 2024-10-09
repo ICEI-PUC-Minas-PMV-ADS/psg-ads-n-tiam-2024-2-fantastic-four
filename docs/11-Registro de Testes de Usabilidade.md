@@ -1,4 +1,4 @@
-# Relatório de Teste com Usuário
+# Relatório de Teste com Usuário 1
 
 Projeto: Simplon Barber Shop  
 Nome do Avaliador: Adrielly Coelho Julião
@@ -74,7 +74,7 @@ A conclusão desse teste com usuário é que o sistema entrega o que oferece, e 
 
 ---
 
-# Relatório de Teste com Usuário
+# Relatório de Teste com Usuário 2
 
 Projeto: Simplon Barber Shop  
 Nome do Avaliador:  Pedro Henrique Macena Rocha
@@ -140,4 +140,87 @@ Verificar Histórico
 ## Conclusões do Avaliador
 Exemplo: A conclusão desse teste com usuário é que o sistema entrega o que oferece, é um sistema moderno e de fácil entendimento, mas que poderia ter melhorias nos ícones.
 
+---
+
+# Relatório de Teste com Usuário 3
+
+**Projeto**: Simplon Barber Shop  
+**Nome do Avaliador**: Filipe Ferreira Diniz  
+**Data**: 16/06/2024  
+**Participante Nome**: Alexandre Maciel Alberto (Sócio da barbearia)
+
+## Proposta
+
+Este teste visa avaliar o entendimento e a usabilidade do sistema com base nas interações de um usuário representativo do público-alvo. As áreas analisadas incluem a navegação e a satisfação geral do uso.
+
+## Questões Introdutórias e Tarefas
+
+- Apresentação do sistema: Pergunte ao usuário, "Apenas olhando para o sistema, que tipo de informação você acha que pode obter dele? Seja específico."  
+  **Resposta**: Ajuda a ganhar tempo para agendar horários e não esquecer compromissos, devido às notificações personalizadas.
+
+- Pergunte: "Para quem você acha que esse sistema foi desenvolvido? Por quê?"  
+  **Resposta**: Para jovens que querem cortar o cabelo, pois é um sistema moderno.
+
+> Este documento foi desenvolvido com base nos templates disponíveis em [usability.gov](https://www.usability.gov/how-to-and-tools/resources/templates.html).
+
+## Cenário
+
+### Tarefa 1: Realizar Cadastro
+| Caminho(s) | Sucesso na execução da tarefa | Anotações / Observações |
+|------------|-------------------------------|-------------------------|
+| Botão de cadastro na tela inicial | Sim | Navegação simples, completou facilmente. Sugestão: avaliar necessidade de incluir data de nascimento. |
+
+### Tarefa 2: Realizar Login
+| Caminho(s) | Sucesso na execução da tarefa | Anotações / Observações |
+|------------|-------------------------------|-------------------------|
+| Após cadastro, redireciona para login | Sim | Fluxo facilitado, completou facilmente. Layout bonito. |
+
+### Tarefa 3: Realizar Agendamento
+| Caminho(s) | Sucesso na execução da tarefa | Anotações / Observações |
+|------------|-------------------------------|-------------------------|
+| Menu lateral e página inicial | Sim | Fácil de encontrar e acompanhar. Agendamentos em tempo real e possibilidade de agendar para o cliente. |
+
+### Tarefa 4: Verificar Dashboard de Métricas
+| Caminho(s) | Sucesso na execução da tarefa | Anotações / Observações |
+|------------|-------------------------------|-------------------------|
+| Ícone de barras no menu inferior | Sim | Ótima funcionalidade para controle interno. Completou com facilidade. |
+
+### Tarefa 5: Verificar Lista de Produtos
+| Caminho(s) | Sucesso na execução da tarefa | Anotações / Observações |
+|------------|-------------------------------|-------------------------|
+| Menu lateral | Não, precisou de ajuda | Completou com dificuldade. Sugestão: melhorar a visibilidade da função. |
+
+## Questionário Final
+
+- **Impressão geral do sistema**:  
+  "Moderno, intuitivo e facilita o agendamento tanto para o cliente quanto para a barbearia."
+  
+- **Impressão sobre as atividades propostas**:  
+  "Completas, mas poderiam incluir mais funcionalidades."
+
+- **Você acha que este sistema é atual? Por quê?**  
+  "Sim, pois o agendamento por aplicativo é uma tendência atual e facilita a comunicação."
+
+- **O que mais gostou no sistema?**  
+  "Modernidade e controle de clientes, gastos e agendamentos."
+
+- **O que menos gostou no sistema?**  
+  "Adaptar-se à usabilidade, já que é um sistema novo."
+
+- **Há algo que acha que está faltando no sistema?**  
+  - Link para avaliações no Google
+  - Agendamentos de hora em hora
+  - Promoções para novos clientes (ex: 50% no próximo corte)
+  - Controle de despesas internas do salão
+  - Local de vendas de produtos
+
+- **Como descreveria este sistema para um colega?**  
+  "Ótimo produto."
+
+- **Comentários finais ou perguntas?**  
+  "É difícil se adaptar à usabilidade, mas é muito bom entrar no meio digital."
+
+## Conclusões do Avaliador
+
+O sistema entrega o que promete, sendo moderno e de fácil entendimento. No entanto, poderia incluir mais funcionalidades. Há uma preocupação com a adaptação do usuário às novas tecnologias, embora os ícones e a navegação sejam intuitivos.
 
