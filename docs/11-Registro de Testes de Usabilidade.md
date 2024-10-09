@@ -1,8 +1,8 @@
 # Relatório de Teste com Usuário 1
 
-**Projeto**: Simplon Barber Shop  
-**Nome do Avaliador**: Adrielly Coelho Julião
-**Data**: 07/10/2024  
+**Projeto**: Simplon Barber Shop <br /> 
+**Nome do Avaliador**: Adrielly Coelho Julião <br /> 
+**Data**: 07/10/2024 <br /> 
 **Participante Nome**: Elieni Coelho Julião
 
 ## Proposta
@@ -74,9 +74,9 @@ A conclusão desse teste com usuário é que o sistema entrega o que oferece, e 
 ---
 
 # Relatório de Teste com Usuário 2
-**Projeto**: Simplon Barber Shop  
-**Nome do Avaliador**: Pedro Henrique Macena Rocha
-**Data**: 07/10/2024  
+**Projeto**: Simplon Barber Shop  <br /> 
+**Nome do Avaliador**: Pedro Henrique Macena Rocha <br /> 
+**Data**: 07/10/2024  <br /> 
 **Participante Nome**: Osvaldo Ferreira de Freitas Neto 
 
 ## Proposta
