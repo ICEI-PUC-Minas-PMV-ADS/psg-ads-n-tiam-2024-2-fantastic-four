@@ -1,10 +1,9 @@
 # Relatório de Teste com Usuário 1
 
-Projeto: Simplon Barber Shop  
-Nome do Avaliador: Adrielly Coelho Julião
-
-Data: 07/10/2024  
-Participante Nome: Elieni Coelho Julião
+**Projeto**: Simplon Barber Shop  
+**Nome do Avaliador**: Adrielly Coelho Julião
+**Data**: 07/10/2024  
+**Participante Nome**: Elieni Coelho Julião
 
 ## Proposta
 A proposta deste teste é verificar o entendimento e a usabilidade do projeto desenvolvido a partir das interações de um usuário representativo do público-alvo. Áreas do sistema que serão avaliadas e a satisfação geral do uso pelo usuário.
@@ -75,13 +74,10 @@ A conclusão desse teste com usuário é que o sistema entrega o que oferece, e 
 ---
 
 # Relatório de Teste com Usuário 2
-
-Projeto: Simplon Barber Shop  
-Nome do Avaliador:  Pedro Henrique Macena Rocha
-
-
-Data: 07/10/2024  
-Participante Nome: Osvaldo Ferreira de Freitas Neto 
+**Projeto**: Simplon Barber Shop  
+**Nome do Avaliador**: Pedro Henrique Macena Rocha
+**Data**: 07/10/2024  
+**Participante Nome**: Osvaldo Ferreira de Freitas Neto 
 
 ## Proposta
 A proposta deste teste é verificar o entendimento e a usabilidade do projeto desenvolvido a partir das interações de um usuário representativo do público-alvo. Áreas do sistema que serão avaliadas e a satisfação geral do uso pelo usuário.
@@ -227,7 +223,7 @@ O sistema entrega o que promete, sendo moderno e de fácil entendimento. No enta
 
 **Projeto**: Simplon Barber Shop  
 **Nome do Avaliador**: Yuri Lucas Silva Ferreira  
-**Data**: 09/10/2024  
+**Data**: 07/10/2024  
 **Nome do Participante**: Lucas Henrique
 
 ## Proposta
