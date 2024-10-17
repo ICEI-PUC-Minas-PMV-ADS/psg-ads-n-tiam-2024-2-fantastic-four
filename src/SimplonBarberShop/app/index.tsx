@@ -10,7 +10,7 @@ const App = () => {
       <ScrollView
         contentContainerStyle={stylesHeader.header}
       >
-        <Text style={{color: 'white'}}>Hello World ADRIELLY JULIÃO Pedro henrique Yuri Lindo</Text>
+        <Text style={{color: 'white'}}>Criando Tela inicial</Text>
       </ScrollView>
       <StatusBar  style="light" />
     </SafeAreaView>
