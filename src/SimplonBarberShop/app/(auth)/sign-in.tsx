@@ -5,7 +5,7 @@ import { Colors } from '@/constants/Colors'
 const SignIn = () => {
   return (
     <View>
-      <Text>SignIn</Text>
+      <Text>Iniciando funcionalidade</Text>
     </View>
   )
 }
