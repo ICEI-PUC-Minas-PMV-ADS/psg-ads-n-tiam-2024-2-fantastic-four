@@ -24,6 +24,11 @@
 ### Menu lateral
 ![MenuLateralCliente](img/MenuLateralCliente.png)
 
+### Relatório
+![TelaRelatorio](img/TelaRelatorio.jpeg)
+
+### Relatório
+![TelainicialAgendamentoClientes](img/TelainicialAgendamentoClientes.jpeg)
 
 ## Diagrama de Fluxo
 

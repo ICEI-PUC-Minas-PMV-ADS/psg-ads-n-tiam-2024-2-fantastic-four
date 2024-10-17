@@ -62,7 +62,14 @@ Com base na análise das personas foram identificadas as seguintes histórias de
 | dono e barbeiro (Fabio)       | quer que os clientes possam agendar de forma autônoma                 | que ele possa focar em seus atendimentos sem precisar gerenciar a agenda manualmente |
 |dono e barbeiro (Fabio)       | visualizar e controlar sua agenda de maneira clara e organizada                 | para evitar erros e sobrecarga |
 
+## Quadro Kanban de Histórias de Usuários
+![Quadro Kanban](img/QuadroKanban.png)
 
+Exemplo de como ficou o card do Kanban da Us Botão de Cadastro - Tela Inicial
+![Botão de Cadastro - Tela Inicial](img/BotaoDeCadastro.png)
+
+Exemplo de como ficou o card do Kanban da Us Botão de Login - Tela Inicial
+![Botão de Login - Tela Inicial](img/BotaoDeLogin.png)
 
 ## Requisitos
 
