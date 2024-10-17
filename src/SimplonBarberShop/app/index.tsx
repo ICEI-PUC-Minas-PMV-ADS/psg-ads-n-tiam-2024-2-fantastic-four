@@ -8,18 +8,11 @@ import { router } from "expo-router";
 
 const App = () => {
   return (
-    <SafeAreaView style={{ height: "100%" }}>
-      <ScrollView contentContainerStyle={stylesHeader.header}>
-        <Text style={{ color: "white" }}>
-          Hello World ADRIELLY JULIÃO Pedro henrique Yuri Lindo
-        </Text>
-        <TouchableOpacity
-          style={[
-          ]}
-          onPress={() => router.push('/sign-up')}
-        >
-          <Text>Cadastro</Text>
-        </TouchableOpacity>
+    <SafeAreaView style={{height: '100%'}}>
+      <ScrollView
+        contentContainerStyle={stylesHeader.header}
+      >
+        <Text style={{color: 'white'}}>Criando Tela inicial</Text>
       </ScrollView>
       <StatusBar style="light" />
     </SafeAreaView>
