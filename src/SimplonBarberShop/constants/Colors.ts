@@ -23,4 +23,6 @@ export const Colors = {
     tabIconDefault: '#9BA1A6',
     tabIconSelected: tintColorDark,
   },
+  labelTextInput: '#AFAFAF',
+  backgroundScreen: '#121212'
 };
