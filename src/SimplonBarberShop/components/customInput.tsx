@@ -15,7 +15,6 @@ export default function CustomInput({
   placeholder,
 }: CustomInput) {
   return (
-    
       <View style={styles.inputView}>
         <TextInput
           style={styles.input}
@@ -23,7 +22,6 @@ export default function CustomInput({
           placeholder={placeholder}
         />
       </View>
-    
   );
 }
 
