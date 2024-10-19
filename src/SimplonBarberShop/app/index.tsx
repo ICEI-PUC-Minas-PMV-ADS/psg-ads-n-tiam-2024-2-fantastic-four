@@ -1,8 +1,9 @@
-import { ScrollView, StyleSheet, Text } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import { Colors } from "@/constants/Colors";
+import CustomInput from "@/components/customInput";
 
 const App = () => {
   return (
@@ -25,7 +26,7 @@ export const stylesHeader = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     height: '100%',
-    backgroundColor: Colors.light.background
+    backgroundColor: Colors.backgroundScreen
   }
  
 });
