@@ -15,16 +15,15 @@ export default function CustomInput({
   placeholder,
 }: CustomInput) {
   return (
-    <SafeAreaView>
+    
       <View style={styles.inputView}>
-        {label && <Text style={styles.labelText}>{label}</Text>}
         <TextInput
           style={styles.input}
           value={value}
           placeholder={placeholder}
         />
       </View>
-    </SafeAreaView>
+    
   );
 }
 
@@ -33,7 +32,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     gap: 8,
-    width: 323,
+    width: 300,
   },
   labelText: {
     color: Colors.labelTextInput,
