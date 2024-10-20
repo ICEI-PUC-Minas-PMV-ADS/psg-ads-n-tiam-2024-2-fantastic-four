@@ -3,6 +3,7 @@ import * as SplashScreen from "expo-splash-screen";
 import "react-native-reanimated";
 import { useFonts } from "expo-font";
 import { useEffect } from "react";
+import { AuthProvider } from "./context/authContextProvider";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -15,7 +16,7 @@ export default function RootLayout() {
     "CircularSpotifyText-Book": require("../assets/fonts/CircularSpotifyText-Book.ttf"),
     "CircularSpotifyText-BookItalic": require("../assets/fonts/CircularSpotifyText-BookItalic.ttf"),
     "CircularSpotifyText-Light": require("../assets/fonts/CircularSpotifyText-Light.ttf"),
-    "CircularSpotifyText-Medium": require("../assets/fonts/CircularSpotifyText-Medium.ttf")
+    "CircularSpotifyText-Medium": require("../assets/fonts/CircularSpotifyText-Medium.ttf"),
   });
 
   useEffect(() => {
@@ -25,8 +26,11 @@ export default function RootLayout() {
 
   if (!fontsLoaded && !error) return null;
   return (
-    <Stack>
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-    </Stack>
+    <AuthProvider>
+      <Stack>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+      </Stack>
+    </AuthProvider>
   );
 }
