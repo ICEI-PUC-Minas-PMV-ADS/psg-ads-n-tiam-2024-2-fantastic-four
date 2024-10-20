@@ -8,17 +8,29 @@ import {
   Animated,
   Dimensions,
   Image,
+  Alert,
 } from "react-native";
 import React, { useState, useRef } from "react";
 import { Colors } from "@/constants/Colors";
 import CustomInput from "@/components/customInput";
 import GoogleImg from "../../assets/images/googleImg.png";
+import firebase from "../../service/firebaseConnection";
+import { useRouter } from "expo-router";
 
 const SignUp = () => {
   const scrollX = useRef(new Animated.Value(0)).current;
   const scrollViewRef = useRef<ScrollView>(null);
   const [currentStep, setCurrentStep] = useState<number>(0);
   const windowWidth = Dimensions.get("window").width;
+  const router = useRouter();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [nome, setNome] = useState("");
+  const [dataNascimento, setDataNascimento] = useState("");
+  const [telefone, setTelefone] = useState("");
+  const [tipo, setTipo] = useState("cliente");
 
   const handleNextStep = () => {
     if (currentStep < 1) {
@@ -41,6 +53,39 @@ const SignUp = () => {
         });
         setCurrentStep(currentStep - 1);
       }
+    }
+  };
+
+  const handleSignUp = async () => {
+    if (password !== confirmPassword) {
+      alert("As senhas não coincidem!");
+      return;
+    }
+
+    try {
+      const userCredential = await firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password);
+      const user = userCredential.user;
+
+      if (user) {
+        console.log("Usuário registrado:", user);
+
+        await firebase.firestore().collection("users").doc(user.uid).set({
+          nome: nome,
+          telefone: telefone,
+          dataNascimento: dataNascimento,
+          tipo: tipo
+        });
+
+        console.log("Dados adicionais salvos no Firestore");
+        router.push("/(auth)/sign-in");
+      } else {
+        alert("Erro ao registrar usuário: usuário não encontrado.");
+      }
+    } catch (error) {
+      console.error("Erro ao registrar usuário:", error);
+      alert("Erro ao registrar usuário: ");
     }
   };
 
@@ -73,16 +118,47 @@ const SignUp = () => {
           style={{ maxWidth: 323, flexGrow: 0 }}
         >
           <View style={{ width: windowWidth }}>
-            <CustomInput label="Email" value="" placeholder="" />
-            <CustomInput label="Senha" value="" placeholder="" />
-            <CustomInput label="Confirme sua senha" value="" placeholder="" />
+            <CustomInput
+              label="Email"
+              value={email}
+              placeholder=""
+              onChange={(emailText) => setEmail(emailText)}
+            />
+            <CustomInput
+              label="Senha"
+              value={password}
+              placeholder=""
+              onChange={(passwordText) => setPassword(passwordText)}
+            />
+            <CustomInput
+              label="Confirme sua senha"
+              value={confirmPassword}
+              placeholder=""
+              onChange={(passwordText) => setConfirmPassword(passwordText)}
+            />
           </View>
           <View style={{ width: windowWidth }}>
-            <CustomInput label="Nome Completo" value="" placeholder="" />
-            <CustomInput label="Telefone" value="" placeholder="" />
-            <CustomInput label="Data de Nascimento" value="" placeholder="" />
+            <CustomInput
+              label="Nome Completo"
+              value={nome}
+              placeholder=""
+              onChange={(nomeText) => setNome(nomeText)}
+            />
+            <CustomInput
+              label="Telefone"
+              value={telefone}
+              placeholder=""
+              onChange={(telefoneText) => setTelefone(telefoneText)}
+            />
+            <CustomInput
+              label="Data de Nascimento"
+              value={dataNascimento}
+              placeholder=""
+              onChange={(dataText) => setDataNascimento(dataText)}
+            />
           </View>
         </Animated.ScrollView>
+
         <View style={styles.stepperContainer}>
           <View
             style={currentStep === 0 ? styles.activeStep : styles.inactiveStep}
@@ -99,7 +175,7 @@ const SignUp = () => {
 
         <TouchableOpacity
           style={currentStep === 1 ? styles.buttonConcluir : styles.buttonNext}
-          onPress={handleNextStep}
+          onPress={currentStep === 1 ? handleSignUp : handleNextStep}
         >
           <Text
             style={{
@@ -116,6 +192,7 @@ const SignUp = () => {
             </View>
           )}
         </TouchableOpacity>
+
         {currentStep === 0 && (
           <>
             <View style={styles.center}>
@@ -148,9 +225,7 @@ const SignUp = () => {
     </SafeAreaView>
   );
 };
-
 export default SignUp;
-
 const styles = StyleSheet.create({
   body: {
     display: "flex",

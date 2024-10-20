@@ -7,12 +7,14 @@ interface CustomInput {
   label?: string;
   value: string;
   placeholder: string;
+  onChange: (value: string) => void;
 }
 
 export default function CustomInput({
   label,
   value,
   placeholder,
+  onChange
 }: CustomInput) {
   return (
       <View style={styles.inputView}>
@@ -20,6 +22,7 @@ export default function CustomInput({
           style={styles.input}
           value={value}
           placeholder={placeholder}
+          onChangeText={onChange}
         />
       </View>
   );

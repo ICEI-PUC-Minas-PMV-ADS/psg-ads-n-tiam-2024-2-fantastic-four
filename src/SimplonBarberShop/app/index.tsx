@@ -1,19 +1,20 @@
-import React from "react";
 import {
-  View,
-  Text,
   Image,
-  ImageBackground,
-  TouchableOpacity,
-  StyleSheet,
   ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
+import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 import customButton from "../components/customButton";
+import { AuthProvider } from "./context/authContextProvider";
 
 const App = (navigation: any) => {
   return (
+    <AuthProvider>
     <SafeAreaView style={{ height: "100%", backgroundColor: "#121212" }}>
       <ScrollView contentContainerStyle={{ height: "100%" }}>
         <View
@@ -33,7 +34,12 @@ const App = (navigation: any) => {
             source={require("../assets/images/logo.png")}
             style={styles.logo}
           />
-
+ <TouchableOpacity
+            style={[styles.button, styles.registerButton]}
+            onPress={() => router.push("/(auth)/sign-up")}
+          >
+            <Text style={styles.registerButtonText}>Registrar</Text>
+          </TouchableOpacity>
           <TouchableOpacity
             style={styles.button}
             onPress={() => router.push("/(auth)/sign-in")}
@@ -41,15 +47,11 @@ const App = (navigation: any) => {
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={[styles.button, styles.registerButton]}
-            onPress={() => router.push("/(auth)/sign-up")}
-          >
-            <Text style={styles.registerButtonText}>Registrar</Text>
-          </TouchableOpacity>
+         
         </View>
       </ScrollView>
     </SafeAreaView>
+    </AuthProvider>
   );
 };
 
