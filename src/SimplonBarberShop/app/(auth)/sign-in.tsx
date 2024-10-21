@@ -11,12 +11,22 @@ import React, { useState } from "react";
 import CustomInput from "@/components/customInput";
 import { SafeAreaView } from "react-native-safe-area-context";
 import logo from "../../assets/images/logo.png";
-import { signIn } from "@/service/firebase";
+import { signIn, useHandleResetPassword } from "@/service/firebase";
 import { router } from "expo-router";
+import CustomModal from "@/components/modals/customModal";
+import InformativeModal from "@/components/modals/informativeModal";
 
 const SignIn = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  const {
+    handleResetPassword,
+    isModalVisible,
+    modalMessage,
+    closeModal,
+    modalTitle,
+  } = useHandleResetPassword();
 
   const handleLogin = async () => {
     if (email === "" || password === "") {
@@ -80,7 +90,7 @@ const SignIn = () => {
             </TouchableOpacity>
           </View>
           <View>
-            <TouchableOpacity onPress={() => {}}>
+            <TouchableOpacity onPress={() => handleResetPassword(email)}>
               <Text
                 style={{
                   height: 35,
@@ -115,6 +125,9 @@ const SignIn = () => {
           </View>
         </View>
       </ScrollView>
+      <CustomModal visible={isModalVisible}>
+        <InformativeModal title={modalTitle} message={modalMessage} onClose={closeModal}/>
+      </CustomModal>
     </SafeAreaView>
   );
 };
@@ -153,4 +166,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 68,
   },
+ 
 });

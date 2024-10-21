@@ -36,16 +36,15 @@ const FormField = ({
 
   const handleDateChange = (event: any, selectedDate?: Date) => {
     const currentDate = selectedDate || date;
-    setShowDatePicker(false);  // Esconde o picker após a seleção
+    setShowDatePicker(false);  
     setDate(currentDate);
-    handleChangeText(moment(currentDate).format("DD/MM/YYYY")); // Formata e envia a data
+    handleChangeText(moment(currentDate).format("DD/MM/YYYY")); 
   };
 
   return (
     <View style={[styles.formView, otherStyles]}>
       <Text style={styles.formText}>{title}</Text>
       <View style={[styles.viewInput, isFocused && styles.inputFocused]}>
-        {/* Se for um campo de data, ao clicar ele abrirá o DatePicker */}
         {title === "Data de Nascimento" ? (
           <>
             <TouchableOpacity
