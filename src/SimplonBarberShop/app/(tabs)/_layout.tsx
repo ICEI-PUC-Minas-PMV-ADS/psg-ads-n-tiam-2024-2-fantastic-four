@@ -8,6 +8,9 @@ import {
 import React from "react";
 import { Tabs } from "expo-router";
 import google from '../../assets/images/googleImg.png'
+import Header from "@/components/header";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Colors } from "@/constants/Colors";
 interface TabIconProps {
   color: string;
   name: string;
@@ -38,7 +41,9 @@ const TabIcon: React.FC<TabIconProps> = ({ color, name, focused }) => {
 
 const TabsLayout: React.FC = () => {
   return (
-    <>
+    <SafeAreaView style={{height:'100%',paddingHorizontal:24, backgroundColor:Colors.backgroundScreen}}>
+    
+    <Header/>
       <Tabs
         screenOptions={{
           tabBarShowLabel: false,
@@ -81,7 +86,7 @@ const TabsLayout: React.FC = () => {
           }}
         />
       </Tabs>
-    </>
+    </SafeAreaView>
   );
 };
 
