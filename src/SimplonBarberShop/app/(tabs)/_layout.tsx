@@ -1,77 +1,42 @@
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  ImageSourcePropType,
-} from "react-native";
+import { View, StyleSheet } from "react-native";
 import React from "react";
 import { Tabs } from "expo-router";
-import google from '../../assets/images/googleImg.png'
-import Header from "@/components/header";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Colors } from "@/constants/Colors";
-import Icon from 'react-native-vector-icons/AntDesign'
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 interface TabIconProps {
   color: string;
-  name: string;
-  imgSource?: any;
-  icon?: any;
+  name: any;
   focused: boolean;
 }
 
-const TabIcon: React.FC<TabIconProps> = ({
-  icon,
-  imgSource,
-  color,
-  name,
-  focused,
-}) => {
-  return (
-    <View style={styles.imageContainer}>
-      {imgSource ? (
-        <Image
-          source={imgSource}
-          resizeMode="contain"
-          style={styles.image}
-          tintColor={color}
-        />
-      ) : (
-        <Icon name="github" size={24}/>
-      )}
-
-      <Text
-        style={{
-          fontFamily: focused
-            ? "CircularSpotifyText-Medium"
-            : "CircularSpotifyText-Light",
-          color: color,
-          fontSize: 12,
-        }}
-      >
-        {name}
-      </Text>
-    </View>
-  );
-};
+const TabIcon: React.FC<TabIconProps> = ({ color, name, focused }) => (
+  <View style={styles.imageContainer}>
+    <MaterialIcons name={name} size={30} color={color} />
+  </View>
+);
 
 const TabsLayout: React.FC = () => {
   return (
     <SafeAreaView
       style={{
         height: "100%",
-        paddingHorizontal: 24,
-        backgroundColor: Colors.backgroundScreen,
+        paddingTop: 0,
       }}
+      edges={["left", "right", "bottom"]}
     >
-      <Header />
       <Tabs
         screenOptions={{
           tabBarShowLabel: false,
-          tabBarActiveTintColor: "#D2B070",
+          tabBarActiveTintColor: Colors.goldColor,
           tabBarStyle: {
-            backgroundColor: "121212",
-            height: 80,
+            backgroundColor: "black",
+            height: 85,
+            width: "100%",
+            flexDirection: "row",
+            justifyContent: "space-around",
+            paddingHorizontal: 20,
+            borderTopWidth: 0,
           },
         }}
       >
@@ -81,18 +46,18 @@ const TabsLayout: React.FC = () => {
             title: "Home",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
-              <TabIcon color={color} name="Home" focused={focused} />
+              <TabIcon color={color} name="home" focused={focused} />
             ),
           }}
         />
 
         <Tabs.Screen
-          name="profile"
+          name="historic"
           options={{
-            title: "Profile",
+            title: "Historic",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
-              <TabIcon color={color} name="Profile" focused={focused} />
+              <TabIcon color={color} name="history" focused={focused} />
             ),
           }}
         />
@@ -102,17 +67,27 @@ const TabsLayout: React.FC = () => {
             title: "Schedulling",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
-              <TabIcon color={color} name="Schedulling" focused={focused} />
+              <TabIcon color={color} name={"event"} focused={focused} />
             ),
           }}
         />
         <Tabs.Screen
-          name="historic"
+          name="profile"
           options={{
-            title: "Historic",
+            title: "Profile",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
-              <TabIcon color={color} name="Historic" focused={focused} />
+              <TabIcon color={color} name="person" focused={focused} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="notifications"
+          options={{
+            title: "Notifications",
+            headerShown: false,
+            tabBarIcon: ({ color, focused }) => (
+              <TabIcon color={color} name="notifications" focused={focused} />
             ),
           }}
         />
