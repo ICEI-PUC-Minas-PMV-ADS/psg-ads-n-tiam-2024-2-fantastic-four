@@ -7,6 +7,7 @@ import {
   Image,
   ViewStyle,
   ImageSourcePropType,
+  DimensionValue,
 } from "react-native";
 
 interface CustomButtonProps {
@@ -14,7 +15,7 @@ interface CustomButtonProps {
   buttonStyle?: ViewStyle;
   source?: ImageSourcePropType;
   onPress: () => void;
-  width: number;
+  width: DimensionValue;
   backgroundColor: string;
   border?: number;
   borderColor?: string;
@@ -69,7 +70,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     paddingHorizontal: 13,
-    maxWidth: 310,
   },
   buttonText: {
     fontFamily: "CircularSpotifyText-Medium",

@@ -11,24 +11,40 @@ import google from '../../assets/images/googleImg.png'
 import Header from "@/components/header";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Colors } from "@/constants/Colors";
+import Icon from 'react-native-vector-icons/AntDesign'
 interface TabIconProps {
   color: string;
   name: string;
+  imgSource?: any;
+  icon?: any;
   focused: boolean;
 }
 
-const TabIcon: React.FC<TabIconProps> = ({ color, name, focused }) => {
+const TabIcon: React.FC<TabIconProps> = ({
+  icon,
+  imgSource,
+  color,
+  name,
+  focused,
+}) => {
   return (
     <View style={styles.imageContainer}>
-      <Image
-        source={google}
-        resizeMode="contain"
-        style={styles.image}
-        tintColor={color}
-      />
+      {imgSource ? (
+        <Image
+          source={imgSource}
+          resizeMode="contain"
+          style={styles.image}
+          tintColor={color}
+        />
+      ) : (
+        <Icon name="github" size={24}/>
+      )}
+
       <Text
         style={{
-          fontFamily: focused ? "CircularSpotifyText-Medium" : "CircularSpotifyText-Light",
+          fontFamily: focused
+            ? "CircularSpotifyText-Medium"
+            : "CircularSpotifyText-Light",
           color: color,
           fontSize: 12,
         }}
@@ -41,18 +57,21 @@ const TabIcon: React.FC<TabIconProps> = ({ color, name, focused }) => {
 
 const TabsLayout: React.FC = () => {
   return (
-    <SafeAreaView style={{height:'100%',paddingHorizontal:24, backgroundColor:Colors.backgroundScreen}}>
-    
-    <Header/>
+    <SafeAreaView
+      style={{
+        height: "100%",
+        paddingHorizontal: 24,
+        backgroundColor: Colors.backgroundScreen,
+      }}
+    >
+      <Header />
       <Tabs
         screenOptions={{
           tabBarShowLabel: false,
-          tabBarActiveTintColor: "#FFA001",
+          tabBarActiveTintColor: "#D2B070",
           tabBarStyle: {
             backgroundColor: "121212",
-            borderTopWidth: 0.5,
-            borderTopColor: "#232533",
-            height: 70,
+            height: 80,
           },
         }}
       >
@@ -62,26 +81,38 @@ const TabsLayout: React.FC = () => {
             title: "Home",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
-              <TabIcon
-                color={color}
-                name="Home"
-                focused={focused}
-              />
+              <TabIcon color={color} name="Home" focused={focused} />
             ),
           }}
         />
-  
+
         <Tabs.Screen
           name="profile"
           options={{
             title: "Profile",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
-              <TabIcon
-                color={color}
-                name="Profile"
-                focused={focused}
-              />
+              <TabIcon color={color} name="Profile" focused={focused} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="schedulling"
+          options={{
+            title: "Schedulling",
+            headerShown: false,
+            tabBarIcon: ({ color, focused }) => (
+              <TabIcon color={color} name="Schedulling" focused={focused} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="historic"
+          options={{
+            title: "Historic",
+            headerShown: false,
+            tabBarIcon: ({ color, focused }) => (
+              <TabIcon color={color} name="Historic" focused={focused} />
             ),
           }}
         />

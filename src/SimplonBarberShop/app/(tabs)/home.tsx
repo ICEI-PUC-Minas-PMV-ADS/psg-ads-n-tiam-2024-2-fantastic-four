@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import React, { useContext } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Colors } from "@/constants/Colors";
@@ -18,8 +18,9 @@ const Home = () => {
 
   return (
     <SafeAreaView
-      style={{ height: "100%", backgroundColor: Colors.backgroundScreen }}
+      style={{height: "100%", backgroundColor: Colors.backgroundScreen }}
     >
+      <ScrollView contentContainerStyle={{height: '100%', display: 'flex', justifyContent: 'center'}}>
       <Text
         style={{
           fontSize: 40,
@@ -33,7 +34,7 @@ const Home = () => {
         <CustomButton
           title={"Novo agendamento"}
           onPress={() => router.push('../schedulling')}
-          width={310}
+          width={'100%'}
           backgroundColor={"#D2B070"}
           source={moreIcon}
           iconSize={24}
@@ -42,7 +43,7 @@ const Home = () => {
         <CustomButton
           title={"Reserva Agendamento"}
           onPress={() => router.push('../historic')}
-          width={310}
+          width={'100%'}
           backgroundColor={"#121212"}
           source={backReserv}
           border={1}
@@ -51,6 +52,7 @@ const Home = () => {
           textColor="#D2B070"
         />
       </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
