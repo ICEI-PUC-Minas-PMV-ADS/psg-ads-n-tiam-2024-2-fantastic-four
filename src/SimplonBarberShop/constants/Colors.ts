@@ -24,5 +24,6 @@ export const Colors = {
     tabIconSelected: tintColorDark,
   },
   labelTextInput: '#AFAFAF',
-  backgroundScreen: '#121212'
+  backgroundScreen: '#121212',
+  goldColor: "#AE8333"
 };

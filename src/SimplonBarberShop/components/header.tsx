@@ -1,20 +1,24 @@
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, View, Image } from "react-native";
 import React from "react";
-import hamburger from "../assets/images/hamburger.png";
-import separador from "../assets/images/separador.png";
 import logo from "../assets/images/logoHeader.png";
-import userImage from "../assets/images/userDefault.png";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 export default function Header() {
   return (
     <View style={styles.head}>
       <View style={styles.sectioOne}>
-        <Image source={hamburger} alt="menu lateral" />
-        <Image  source={separador} alt="menu lateral" />
-        <Image  source={logo} alt="menu lateral" />
+        <MaterialIcons name="menu" size={30} color="white" />
+        <View style={styles.line} />
+        <Image
+          resizeMode="contain"
+          style={styles.image}
+          source={logo}
+          alt="menu lateral"
+        />
       </View>
-
-      <Image  source={userImage} alt="menu lateral" />
+      <View style={styles.profile}>
+        <MaterialIcons name="person" size={24} color="white" />
+      </View>
     </View>
   );
 }
@@ -24,20 +28,27 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: "#121212",
-    paddingTop: 30,
-    
+    backgroundColor: "transparent",
+    paddingBottom: 10
   },
-  sectioOne:{
-    display:'flex',
-    flexDirection: 'row',
-    gap:11
+  sectioOne: {
+    display: "flex",
+    flexDirection: "row",
+    gap: 11,
   },
-  hamburger: {
-    height: 34,
+  image: {
+    height: 31,
+    width: 41,
   },
-  separador: {
-    height: 34,
+  line: {
+    height: 30,
+    width: 1,
+    backgroundColor: "#43361C",
   },
-  
+  profile: {
+    borderWidth: 1,
+    borderColor: "white",
+    borderRadius: 50,
+    padding: 3,
+  },
 });

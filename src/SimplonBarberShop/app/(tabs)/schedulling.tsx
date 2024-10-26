@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import MobileLayout from '@/components/layout/mobileLayout'
 
 const Schedulling = () => {
   return (
-    <View>
+    <MobileLayout>
       <Text>Schedulling</Text>
-    </View>
+    </MobileLayout>
   )
 }
 
