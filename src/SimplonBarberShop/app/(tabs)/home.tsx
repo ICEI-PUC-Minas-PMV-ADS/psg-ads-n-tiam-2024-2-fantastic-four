@@ -1,12 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useContext } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Colors } from "@/constants/Colors";
+import React from "react";
 import { useAuthContext } from "../context/authContextProvider";
 import CustomButton from "@/components/customButton";
-import moreIcon from '../../assets/icons/more.png'
-import backReserv from '../../assets/icons/backReserv.png'
+import moreIcon from "../../assets/icons/more.png";
+import backReserv from "../../assets/icons/backReserv.png";
 import { router } from "expo-router";
+import MobileLayout from "@/components/layout/mobileLayout";
 
 const Home = () => {
   const { user } = useAuthContext();
@@ -17,9 +16,7 @@ const Home = () => {
     : "";
 
   return (
-    <SafeAreaView
-      style={{ height: "100%", backgroundColor: Colors.backgroundScreen }}
-    >
+    <MobileLayout>
       <Text
         style={{
           fontSize: 40,
@@ -29,10 +26,10 @@ const Home = () => {
       >
         Olá, {formattedFirstName}
       </Text>
-      <View style={{display:"flex",gap:12}}>
+      <View style={{ display: "flex", gap: 12 }}>
         <CustomButton
           title={"Novo agendamento"}
-          onPress={() => router.push('../schedulling')}
+          onPress={() => router.push("../schedulling")}
           width={310}
           backgroundColor={"#D2B070"}
           source={moreIcon}
@@ -41,7 +38,7 @@ const Home = () => {
         />
         <CustomButton
           title={"Reserva Agendamento"}
-          onPress={() => router.push('../historic')}
+          onPress={() => router.push("../historic")}
           width={310}
           backgroundColor={"#121212"}
           source={backReserv}
@@ -51,7 +48,7 @@ const Home = () => {
           textColor="#D2B070"
         />
       </View>
-    </SafeAreaView>
+    </MobileLayout>
   );
 };
 
