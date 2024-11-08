@@ -1,11 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-
-interface Barber {
-  name: string;
-  image: string;
-}
 interface BarberSelectProps {
   onPress: () => void;
   selectedBarber: Barber | null;

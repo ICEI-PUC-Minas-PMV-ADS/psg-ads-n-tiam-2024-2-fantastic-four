@@ -6,33 +6,40 @@ import ServiceSelect from "@/components/schedulling/serviceSelect";
 import DateTimeSelect from "@/components/schedulling/dateTimeSelect";
 import CustomModal from "@/components/modals/customModal";
 import BarberSelectModal from "@/components/modals/schedulling/barberSelectModal";
-
-interface Barber {
-  name: string;
-  image: string;
-}
+import ServiceSelectModal from "@/components/modals/schedulling/serviceSelectModal";
 
 const Schedulling = () => {
-  const [isVisible, setVisible] = useState(false);
+  const [isBarberVisible, setBarberVisible] = useState(false);
+  const [isServiceVisible, setServiceVisible] = useState(false);
   const [selectedBarber, setSelectedBarber] = useState<Barber | null>(null);
+  const [selectedService, setSelectedService] = useState<Service | null>(null);
 
   function handleSelectBarber(barber: Barber) {
     setSelectedBarber(barber);
-    setVisible(false);
+    setBarberVisible(false);
+  }
+
+  function handleSelectService(service: Service) {
+    setSelectedService(service);
+    setServiceVisible(false);
   }
 
   return (
     <MobileLayout>
       <View style={styles.container}>
         <Text style={styles.title}>Agendamento</Text>
-        <BarberSelect onPress={() => setVisible(true)} selectedBarber={selectedBarber} />
-        <ServiceSelect />
+        <BarberSelect onPress={() => setBarberVisible(true)} selectedBarber={selectedBarber} />
+        <ServiceSelect onPress={() => setServiceVisible(true)} selectedService={selectedService}/>
         <DateTimeSelect />
       </View>
 
-      <CustomModal visible={isVisible}>
-        <BarberSelectModal onClose={() => setVisible(false)} onSelectBarber={handleSelectBarber} />
+      <CustomModal visible={isBarberVisible}>
+        <BarberSelectModal onClose={() => setBarberVisible(false)} onSelectBarber={handleSelectBarber} />
       </CustomModal>
+      <CustomModal visible={isServiceVisible}>
+      <ServiceSelectModal onClose={() => setServiceVisible(false)} onSelectService={handleSelectService} />
+      </CustomModal>
+
     </MobileLayout>
   );
 };

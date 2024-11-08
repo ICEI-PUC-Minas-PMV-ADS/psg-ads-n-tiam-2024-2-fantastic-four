@@ -5,32 +5,36 @@ import CustomButton from "@/components/customButton";
 
 interface BarberSelectModalProps {
   onClose: () => void;
-  onSelectBarber: (barber: Barber) => void;
+  onSelectService: (service: Service) => void;
 }
 
-const barbers = [
+const services = [
   {
-    name: "Fábio",
-    image: "https://d28hgpri8am2if.cloudfront.net/book_images/cvr9781421520568_9781421520568_hr.jpg",
+    id:1,
+    serviceName: "Corte",
+    price: 20.50,
+    timeSpent: 1
   },
   {
-    name: "Alexandre",
-    image: "https://th.bing.com/th/id/R.299a77477c4b33625bd9b5f3fca5720c?rik=EJmFrtxG%2ffwr%2bQ&pid=ImgRaw&r=0",
+    id:2,
+    serviceName: "Barba",
+    price: 15.50,
+    timeSpent: 0.3
   },
 ];
 
-export default function BarberSelectModal({ onClose, onSelectBarber }: BarberSelectModalProps) {
+export default function BarberSelectModal({ onClose, onSelectService }: BarberSelectModalProps) {
   const [isSelected, setIsSelected] = useState(false);
-  const [barberSelected, setBarber] = useState<Barber | null>(null);
+  const [serviceSelected, setService] = useState<Service | null>(null);
 
-  function handleSelectbarber(barber: Barber) {
-    setBarber(barber);
+  function handleSelectbarber(service: Service) {
+    setService(service);
     setIsSelected(true);
   }
 
   function handleConfirm() {
-    if (isSelected && barberSelected) {
-      onSelectBarber(barberSelected);
+    if (isSelected && serviceSelected) {
+      onSelectService(serviceSelected);
     }
     onClose();
   }
@@ -42,36 +46,34 @@ export default function BarberSelectModal({ onClose, onSelectBarber }: BarberSel
           <MaterialIcons name="cancel" size={31} color="white" />
         </TouchableOpacity>
       </View>
-      <Text style={styles.text1}>Selecionar Barbeiro</Text>
+      <Text style={styles.text1}>Selecionar serviço</Text>
       <View style={styles.section2}>
-        {barbers.map((barber, index) => (
+        {services.map((service, index) => (
           <TouchableOpacity
             style={[
               styles.card,
-              barberSelected === barber &&
+              serviceSelected === service &&
                 isSelected && { borderWidth: 1, borderColor: "#4ECB71" },
             ]}
             key={index}
-            onPress={() => handleSelectbarber(barber)}
+            onPress={() => handleSelectbarber(service)}
           >
             <View style={styles.section1}>
-            {barber ? (
-          <Image source={{ uri: barber.image }} style={styles.image} />
-        ) : (
-          <MaterialIcons name="person" size={33} color="white" />
-        )}
-              <Text style={styles.text2}>{barber.name}</Text>
+            
+          <MaterialIcons name="content-cut" size={33} color="white" />
+        
+              <Text style={styles.text2}>{service.serviceName}</Text>
             </View>
             <View>
               <MaterialIcons
                 name={
-                  barberSelected === barber && isSelected
+                  serviceSelected === service && isSelected
                     ? "check-circle"
                     : "add-circle"
                 }
                 size={31}
                 color={
-                  barberSelected === barber && isSelected ? "#4ECB71" : "white"
+                  serviceSelected === service && isSelected ? "#4ECB71" : "white"
                 }
               />
             </View>
