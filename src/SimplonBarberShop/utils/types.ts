@@ -9,3 +9,10 @@ interface Barber {
     price: Number;
     timeSpent: Number;
   }
+
+  interface Time {
+    id: Number;
+    day: string;
+    time: string;
+    status: boolean;
+  }
