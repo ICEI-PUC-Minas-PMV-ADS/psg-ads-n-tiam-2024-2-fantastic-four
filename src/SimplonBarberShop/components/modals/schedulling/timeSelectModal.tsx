@@ -1,37 +1,74 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
-import { MaterialIcons } from "@expo/vector-icons";
 import CustomButton from "@/components/customButton";
 import { Calendar, DateData, LocaleConfig } from "react-native-calendars";
+import firebase from "firebase/compat";
 
-LocaleConfig.locales['pt-br'] = {
+LocaleConfig.locales["pt-br"] = {
   monthNames: [
-    'Janeiro',
-    'Fevereiro',
-    'Março',
-    'Abril',
-    'Maio',
-    'Junho',
-    'Julho',
-    'Agosto',
-    'Setembro',
-    'Outubro',
-    'Novembro',
-    'Dezembro'
+    "Janeiro",
+    "Fevereiro",
+    "Março",
+    "Abril",
+    "Maio",
+    "Junho",
+    "Julho",
+    "Agosto",
+    "Setembro",
+    "Outubro",
+    "Novembro",
+    "Dezembro",
   ],
   monthNamesShort: [
-    'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'
+    "Jan",
+    "Fev",
+    "Mar",
+    "Abr",
+    "Mai",
+    "Jun",
+    "Jul",
+    "Ago",
+    "Set",
+    "Out",
+    "Nov",
+    "Dez",
   ],
   dayNames: [
-    'Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'
+    "Domingo",
+    "Segunda-feira",
+    "Terça-feira",
+    "Quarta-feira",
+    "Quinta-feira",
+    "Sexta-feira",
+    "Sábado",
   ],
-  dayNamesShort: [
-    'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'
-  ],
-  today: 'Hoje'
+  dayNamesShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
+  today: "Hoje",
 };
 
-LocaleConfig.defaultLocale = 'pt-br';
+LocaleConfig.defaultLocale = "pt-br";
+
+const horarios = [
+  "09:00",
+  "09:30",
+  "10:00",
+  "10:30",
+  "11:00",
+  "11:30",
+  "12:00",
+  "12:30",
+  "13:00",
+  "13:30",
+  "14:00",
+  "14:30",
+  "15:00",
+  "15:30",
+  "16:00",
+  "16:30",
+  "17:00",
+  "17:30",
+  "18:00",
+];
 
 interface TimeSelectModalProps {
   onClose: () => void;
@@ -58,63 +95,43 @@ export default function TimeSelectModal({
   onSelectTime,
 }: TimeSelectModalProps) {
   const [isSelected, setIsSelected] = useState(false);
-  const [timeSelected, setTime] = useState<Time | null>(null);
 
-  function handleSelectbarber(time: Time) {
-    setTime(time);
+  function handleSelectTime() {
+    if (day && horarioEscolhido)
+      onSelectTime({ date: day.dateString, time: horarioEscolhido });
     setIsSelected(true);
   }
 
   function handleConfirm() {
-    if (isSelected && timeSelected) {
-      onSelectTime(timeSelected);
-    }
+    handleSelectTime();
     onClose();
   }
   const [day, setDay] = useState<DateData>();
+  const [horarioEscolhido, setHorarioEscolhido] = useState<string[]>([""]);
+
+  const [horariosDisponiveis, setHorariosDisponiveis] = useState<string[]>([
+    "",
+  ]);
+
+  const handleSelectDate = async (selectedDay: DateData) => {
+    setDay(selectedDay);
+    const agendamentos = await firebase
+      .firestore()
+      .collection("schedullings")
+      .where("date", "==", selectedDay.dateString)
+      .get();
+
+    const horariosIndisponiveis = agendamentos.docs.flatMap(
+      (doc) => doc.data().hours
+    );
+    const horariosDisponiveisFiltrados = horarios.filter(
+      (horario) => !horariosIndisponiveis.includes(horario)
+    );
+    setHorariosDisponiveis(horariosDisponiveisFiltrados);
+  };
+
   return (
     <View style={styles.modal}>
-      {/* <View style={{ alignItems: "flex-end", width: "100%" }}>
-        <TouchableOpacity onPress={onClose}>
-          <MaterialIcons name="cancel" size={31} color="white" />
-        </TouchableOpacity>
-      </View>
-      <Text style={styles.text1}>Selecionar Barbeiro</Text>
-      <View style={styles.section2}>
-        {times.map((time, index) => (
-          <TouchableOpacity
-            style={[
-              styles.card,
-              timeSelected === time &&
-                isSelected && { borderWidth: 1, borderColor: "#4ECB71" },
-            ]}
-            key={index}
-            onPress={() => handleSelectbarber(time)}
-          >
-            <View style={styles.section1}>
-            {time ? (
-          <Image source={{ uri: time.image }} style={styles.image} />
-        ) : (
-          <MaterialIcons name="person" size={33} color="white" />
-        )}
-              <Text style={styles.text2}>{time.name}</Text>
-            </View>
-            <View>
-              <MaterialIcons
-                name={
-                  timeSelected === time && isSelected
-                    ? "check-circle"
-                    : "add-circle"
-                }
-                size={31}
-                color={
-                  timeSelected === time && isSelected ? "#4ECB71" : "white"
-                }
-              />
-            </View>
-          </TouchableOpacity>
-        ))}
-      </View> */}
       <Calendar
         style={styles.calendar}
         headerStyle={styles.header}
@@ -123,13 +140,32 @@ export default function TimeSelectModal({
           todayTextColor: "#d2b070",
           selectedDayBackgroundColor: "#d2b070",
           selectedDayTextColor: "black",
-          arrowColor:"#d2b070"
+          arrowColor: "#d2b070",
         }}
-        onDayPress={setDay}
-        markedDates={day &&{
-          [day.dateString]: {selected: true}
-        }}
+        onDayPress={handleSelectDate}
+        markedDates={
+          day && {
+            [day.dateString]: { selected: true },
+          }
+        }
       />
+      <View style={styles.horarioList}>
+        {horariosDisponiveis.map((hour: string, index: number) => (
+          <TouchableOpacity
+            key={index}
+            onPress={() => setHorarioEscolhido([hour])}
+            style={[
+              styles.botaoHorario,
+              horarioEscolhido.includes(hour) && {
+                borderWidth: 1,
+                borderColor: "#4ECB71",
+              },
+            ]}
+          >
+            <Text style={{ color: "white" }}>{hour}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
       <View>
         <CustomButton
           title="Confirmar"
@@ -150,11 +186,12 @@ const styles = StyleSheet.create({
   modal: {
     backgroundColor: "#323434",
     width: "100%",
-    height: 400,
+    height: "auto",
     borderRadius: 8,
     alignItems: "center",
     padding: 12,
     justifyContent: "center",
+    paddingVertical: 25,
   },
   section2: {
     gap: 21,
@@ -191,5 +228,19 @@ const styles = StyleSheet.create({
   header: {
     borderBottomWidth: 1,
     borderBottomColor: "#d2b070",
+  },
+  horarioList: {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 10,
+    justifyContent: "center",
+    paddingVertical: 10,
+  },
+  botaoHorario: {
+    backgroundColor: "#4F5050",
+    color: "white",
+    borderRadius: 5,
+    paddingHorizontal: 20,
   },
 });

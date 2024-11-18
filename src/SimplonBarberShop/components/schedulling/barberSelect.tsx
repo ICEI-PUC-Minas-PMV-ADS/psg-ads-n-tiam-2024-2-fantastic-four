@@ -15,11 +15,13 @@ const BarberSelect = ({ onPress, selectedBarber }: BarberSelectProps) => {
         ) : (
           <MaterialIcons name="person" size={33} color="white" />
         )}
-        {selectedBarber?(
+        {selectedBarber ? (
           <Text style={styles.text2}>
-          {selectedBarber ? selectedBarber.name : "Escolha o barbeiro"}
-        </Text>
-        ): (<Text style={styles.text1}>Escolha o barbeiro</Text>)}
+            {selectedBarber ? selectedBarber.name : "Escolha o barbeiro"}
+          </Text>
+        ) : (
+          <Text style={styles.text1}>Escolha o barbeiro</Text>
+        )}
       </View>
       <TouchableOpacity onPress={onPress}>
         <MaterialIcons
@@ -52,7 +54,7 @@ const styles = StyleSheet.create({
   },
   text1: {
     fontFamily: "CircularSpotifyText-Bold",
-    color:'#ADADAD'
+    color: "#ADADAD",
   },
   image: {
     width: 33,

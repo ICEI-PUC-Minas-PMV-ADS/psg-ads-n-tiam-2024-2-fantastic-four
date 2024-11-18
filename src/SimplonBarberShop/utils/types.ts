@@ -11,8 +11,6 @@ interface Barber {
   }
 
   interface Time {
-    id: Number;
-    day: string;
-    time: string;
-    status: boolean;
+    date: string;
+    time: string[];
   }

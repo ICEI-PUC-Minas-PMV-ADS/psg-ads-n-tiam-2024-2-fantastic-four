@@ -8,6 +8,7 @@ import CustomModal from "@/components/modals/customModal";
 import BarberSelectModal from "@/components/modals/schedulling/barberSelectModal";
 import ServiceSelectModal from "@/components/modals/schedulling/serviceSelectModal";
 import TimeSelectModal from "@/components/modals/schedulling/timeSelectModal";
+import CustomButton from "@/components/customButton";
 
 const Schedulling = () => {
   const [isBarberVisible, setBarberVisible] = useState(false);
@@ -34,23 +35,52 @@ const Schedulling = () => {
 
   return (
     <MobileLayout>
-      <View style={styles.container}>
-        <Text style={styles.title}>Agendamento</Text>
-        <BarberSelect onPress={() => setBarberVisible(true)} selectedBarber={selectedBarber} />
-        <ServiceSelect onPress={() => setServiceVisible(true)} selectedService={selectedService}/>
-        <DateTimeSelect onPress={() => setTimeVisible(true)} selectedTime={selectedTime}/>
+      <View style={styles.space}>
+        <View style={styles.container}>
+          <Text style={styles.title}>Agendamento</Text>
+          <BarberSelect
+            onPress={() => setBarberVisible(true)}
+            selectedBarber={selectedBarber}
+          />
+          <ServiceSelect
+            onPress={() => setServiceVisible(true)}
+            selectedService={selectedService}
+          />
+          <DateTimeSelect
+            onPress={() => setTimeVisible(true)}
+            selectedTime={selectedTime}
+          />
+        </View>
+        <View>
+          <CustomButton
+            title={"CONCLUIR AGENDAMENTO"}
+            onPress={() => {}}
+            buttonStyle={{}}
+            width={"100%"}
+            backgroundColor={"#D2B070"}
+            textColor={"black"}
+          />
+        </View>
       </View>
 
       <CustomModal visible={isBarberVisible}>
-        <BarberSelectModal onClose={() => setBarberVisible(false)} onSelectBarber={handleSelectBarber} />
+        <BarberSelectModal
+          onClose={() => setBarberVisible(false)}
+          onSelectBarber={handleSelectBarber}
+        />
       </CustomModal>
       <CustomModal visible={isServiceVisible}>
-      <ServiceSelectModal onClose={() => setServiceVisible(false)} onSelectService={handleSelectService} />
+        <ServiceSelectModal
+          onClose={() => setServiceVisible(false)}
+          onSelectService={handleSelectService}
+        />
       </CustomModal>
       <CustomModal visible={isTimeVisible}>
-      <TimeSelectModal onClose={() => setTimeVisible(false)} onSelectTime={handleSelectTime} />
+        <TimeSelectModal
+          onClose={() => setTimeVisible(false)}
+          onSelectTime={handleSelectTime}
+        />
       </CustomModal>
-
     </MobileLayout>
   );
 };
@@ -67,6 +97,10 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     alignItems: "center",
+    gap: 20,
+  },
+  space: {
+    justifyContent: "space-between",
+    height: 550,
   },
 });
-

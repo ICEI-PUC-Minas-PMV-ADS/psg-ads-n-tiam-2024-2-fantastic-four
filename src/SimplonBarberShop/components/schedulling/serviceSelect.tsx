@@ -1,9 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { Double } from "react-native/Libraries/Types/CodegenTypes";
-
-
 
 interface ServiceSelectProps {
   onPress: () => void;
@@ -17,7 +14,9 @@ const ServiceSelect = ({ onPress, selectedService }: ServiceSelectProps) => {
 
         {selectedService ? (
           <Text style={styles.text2}>
-            {selectedService ? selectedService.serviceName : "Escolha o Serciço"}
+            {selectedService
+              ? selectedService.serviceName
+              : "Escolha o Serciço"}
           </Text>
         ) : (
           <Text style={styles.text1}>Escolha o serviço</Text>

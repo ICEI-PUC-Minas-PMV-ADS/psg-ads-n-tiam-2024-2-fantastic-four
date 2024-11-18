@@ -1,6 +1,7 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { formatDateToDDMMYYYY } from "@/utils/utils";
 
 interface timeSelectProps {
   onPress: () => void;
@@ -10,14 +11,18 @@ const DateTimeSelect = ({ onPress, selectedTime }: timeSelectProps) => {
   return (
     <View style={styles.card}>
       <View style={styles.section1}>
-      
-          <MaterialIcons name="person" size={33} color="white" />
-        
-        {selectedTime?(
+        <MaterialIcons name="event" size={33} color="white" />
+        {selectedTime ? (
           <Text style={styles.text2}>
-          {selectedTime ? selectedTime.day : "Escolha o horário"}
-        </Text>
-        ): (<Text style={styles.text1}>Escolha o horário</Text>)}
+            {selectedTime
+              ? `${formatDateToDDMMYYYY(selectedTime.date)} - ${
+                  selectedTime.time
+                }`
+              : "Escolha o horário"}
+          </Text>
+        ) : (
+          <Text style={styles.text1}>Escolha o horário</Text>
+        )}
       </View>
       <TouchableOpacity onPress={onPress}>
         <MaterialIcons
@@ -27,10 +32,10 @@ const DateTimeSelect = ({ onPress, selectedTime }: timeSelectProps) => {
         />
       </TouchableOpacity>
     </View>
-  )
-}
+  );
+};
 
-export default DateTimeSelect
+export default DateTimeSelect;
 
 const styles = StyleSheet.create({
   card: {
@@ -50,7 +55,7 @@ const styles = StyleSheet.create({
   },
   text1: {
     fontFamily: "CircularSpotifyText-Bold",
-    color:'#ADADAD'
+    color: "#ADADAD",
   },
   image: {
     width: 33,
@@ -62,11 +67,3 @@ const styles = StyleSheet.create({
     color: "#FFFBFB",
   },
 });
-
-
-
-
-
-
-
-
