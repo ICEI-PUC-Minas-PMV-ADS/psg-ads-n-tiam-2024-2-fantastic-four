@@ -22,6 +22,7 @@ const TabsLayout: React.FC = () => {
       style={{
         height: "100%",
         paddingTop: 0,
+        backgroundColor: 'black'
       }}
       edges={["left", "right", "bottom"]}
     >
@@ -35,8 +36,7 @@ const TabsLayout: React.FC = () => {
             width: "100%",
             flexDirection: "row",
             justifyContent: "space-around",
-            paddingHorizontal: 20,
-            borderTopWidth: 0,
+            paddingHorizontal: 20
           },
         }}
       >

@@ -121,7 +121,7 @@ export const signIn = async (email: string, password: string) => {
       isModalVisible,
       modalTitle,
       modalMessage,
-      closeModal
+      closeModal,
     };
   };
 
@@ -142,4 +142,65 @@ export const getUserProfile = async (uid: string) => {
 
   export const signOut = async () => {
     await firebase.auth().signOut();
+  };
+
+
+  export const redefinirPassword = async (): Promise<boolean> => {
+    const auth = firebase.auth();
+    const user = auth.currentUser;
+  
+    if (!user) {
+      Alert.alert("Erro", "Usuário não autenticado.");
+      return false;
+    }
+  
+    const password = prompt(
+      'Digite uma nova senha!\n\nOBSERVAÇÃO:\n\n' +
+      '- Senha deve conter no mínimo 10 caracteres\n' +
+      '- Senha deve conter pelo menos um caractere especial: @$!%*?&\n' +
+      '- Senha deve conter pelo menos uma letra maiúscula\n' +
+      '- Senha deve conter pelo menos uma letra minúscula\n' +
+      '- Senha deve conter pelo menos um número'
+    );
+  
+    if (!password) return false;
+  
+    const newPassword = password.replaceAll(' ', '');
+  
+    const hasUppercase = /[A-Z]/.test(newPassword);
+    const hasLowercase = /[a-z]/.test(newPassword);
+    const hasNumber = /[0-9]/.test(newPassword);
+    const hasSpecialChar = /[@$!%*?&]/.test(newPassword);
+    const isMinLength = newPassword.length >= 10;
+  
+    if (!hasUppercase) {
+      Alert.alert("Erro", "Senha deve conter pelo menos uma letra maiúscula.");
+      return false;
+    }
+    if (!hasLowercase) {
+      Alert.alert("Erro", "Senha deve conter pelo menos uma letra minúscula.");
+      return false;
+    }
+    if (!hasNumber) {
+      Alert.alert("Erro", "Senha deve conter pelo menos um número.");
+      return false;
+    }
+    if (!hasSpecialChar) {
+      Alert.alert("Erro", "Senha deve conter pelo menos um caractere especial: @$!%*?&");
+      return false;
+    }
+    if (!isMinLength) {
+      Alert.alert("Erro", "Senha deve conter no mínimo 10 caracteres.");
+      return false;
+    }
+  
+    try {
+      await user.updatePassword(newPassword);
+      Alert.alert("Sucesso", "Senha redefinida com sucesso!");
+      return true;
+    } catch (error: any) {
+      console.error("Erro ao redefinir senha:", error);
+      Alert.alert("Erro", "Ocorreu um erro ao redefinir a senha. Tente novamente.");
+      return false;
+    }
   };
