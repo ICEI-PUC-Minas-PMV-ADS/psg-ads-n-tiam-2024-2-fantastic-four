@@ -6,8 +6,9 @@ import { useAuthContext } from "../context/authContextProvider";
 import firebase from "../../service/firebaseConnection";
 import CustomButton from "@/components/customButton";
 import { router } from "expo-router";
+import { signOut, redefinirPassword } from "@/service/firebase";
+import EditProfileModal from "@/components/modals/editProfileModal";
 
-// Definindo a interface para os dados do usuário
 interface UserData {
   nome: string;
   dataNascimento: string;
@@ -16,6 +17,7 @@ interface UserData {
 
 const Profile = () => {
   const { user } = useAuthContext();
+  const [isEditProfileModalVisible, setEditProfileModalVisible] = useState(false);
 
   return (
     <MobileLayout>
@@ -44,10 +46,10 @@ const Profile = () => {
                 <Text style={styles.infoText}>{user.dataNascimento}</Text>
               </View>
             </View>
-            <View>
+            <View style={styles.btnEdit}>
               <CustomButton
-                title={"Editar Perfil"}
-                onPress={() => router.push("../historic")}
+                title={"Editar"}
+                onPress={() => setEditProfileModalVisible(true)}
                 width={164}
                 backgroundColor={"#121212"}
                 border={1}
@@ -57,9 +59,21 @@ const Profile = () => {
               />
             </View>
             <View style={styles.footer}>
-              <Text style={styles.footerText}>Redefinir Senha</Text>
-              <Text style={styles.footerText}>Sair do Aplicativo</Text>
+              <Text style={styles.footerText} onPress={redefinirPassword}>
+                Redefinir Senha
+              </Text>
+              <Text style={styles.footerText} onPress={signOut}>
+                Sair do Aplicativo
+              </Text>
             </View>
+            <EditProfileModal
+              visible={isEditProfileModalVisible}
+              onClose={() => setEditProfileModalVisible(false)}
+              currentPhone={user.telefone}
+              userId={user.uid}
+              nome={user.nome}
+              dataNascimento={user.dataNascimento}
+            />
           </>
         )}
       </View>
@@ -131,5 +145,8 @@ const styles = StyleSheet.create({
     color: "#A9A9A9",
     fontSize: 16,
     marginVertical: 5,
+  },
+  btnEdit: {
+    marginVertical: 13,
   },
 });
