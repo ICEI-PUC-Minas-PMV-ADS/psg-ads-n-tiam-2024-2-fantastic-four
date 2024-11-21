@@ -66,3 +66,126 @@ Para hospedar a aplicação, utilize o **Firebase Hosting** ou faça build de pr
 
 ## 7. Ambiente de Hospedagem
 O projeto será desenvolvido e testado utilizando **Expo**, facilitando o desenvolvimento mobile. O **Firebase Hosting** ou outros serviços gerenciados do Firebase serão utilizados para disponibilizar a aplicação.
+
+# SimplonBarberShop - Autenticação
+
+```typescript
+  export const signIn = async (email: string, password: string) => {
+  try {
+    const response = await firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password);
+    const uid = response.user?.uid;
+
+    if (!uid) {
+      throw new Error("UID não encontrado");
+    }
+
+    const userProfile = await firebase
+      .firestore()
+      .collection("users")
+      .doc(uid)
+      .get();
+
+    if (!userProfile.exists) {
+      throw new Error("Usuário não encontrado no Firestore");
+    }
+    return true;
+  } catch (error: any) {
+    switch (error.code) {
+      case "auth/user-not-found":
+        alert("Usuário não encontrado.");
+        break;
+      case "auth/wrong-password":
+        alert("Senha incorreta.");
+        break;
+      case "auth/invalid-email":
+        alert("E-mail inválido.");
+        break;
+      case "auth/user-disabled":
+        alert("Usuário desativado.");
+        break;
+      default:
+        alert("Ocorreu um erro desconhecido. Tente novamente mais tarde.");
+    }
+    return error;
+  }
+};
+
+export const signUp = async (
+  email: string,
+  password: string,
+  nome: string,
+  dataNascimento: string,
+  telefone: string,
+  tipo: string
+) => {
+  try {
+    const response = await firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password);
+    const uid = response.user?.uid;
+    await firebase.firestore().collection("users").doc(uid).set({
+      nome,
+      dataNascimento,
+      telefone,
+      email,
+      tipo,
+      created_at: new Date(),
+    });
+    alert("Cadastro realizado com sucesso!");
+  } catch (error: any) {
+    switch (error.code) {
+      case "auth/email-already-in-use":
+        alert("Este e-mail já está em uso.");
+        break;
+      case "auth/invalid-email":
+        alert("E-mail inválido.");
+        break;
+      case "auth/operation-not-allowed":
+        alert("Operação não permitida.");
+        break;
+      case "auth/weak-password":
+        alert("A senha é muito fraca.");
+        break;
+      default:
+        alert("Ocorreu um erro desconhecido. Tente novamente mais tarde.");
+    }
+  }
+};
+  ```
+
+# SimplonBarberShop - Agendamentos
+
+```typescript
+async function handleSubmit() {
+    if (!selectedBarber || !selectedService || !selectedTime) {
+      Alert.alert("Erro", "Todos os campos devem ser preenchidos.");
+      return;
+    }
+    if (user) {
+      const payload = {
+        day: selectedTime.date,
+        time: selectedTime.time,
+        idUser: user.uid,
+        idBarber: selectedBarber.barberId,
+        services: [selectedService],
+        products: [],
+        totalPrice: selectedService.price || 0,
+        status: "pending",
+      };
+
+      try {
+        await firebase
+          .firestore()
+          .collection("schedullings")
+          .doc()
+          .set(payload);
+        Alert.alert("Sucesso", "Agendamento concluído com sucesso!");
+      } catch (e) {
+        Alert.alert("Erro", "Erro ao salvar agendamento");
+      }
+      router.push("/home");
+    }
+  }
+  ```
