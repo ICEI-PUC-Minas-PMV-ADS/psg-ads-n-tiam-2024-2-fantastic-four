@@ -91,6 +91,17 @@ const TabsLayout: React.FC = () => {
             ),
           }}
         />
+
+        <Tabs.Screen
+          name="about"
+          options={{
+            title: "About",
+            headerShown: false,
+            tabBarIcon: ({ color, focused }) => (
+              <TabIcon color={color} name="info" focused={focused} />
+            ),
+          }}
+        />
       </Tabs>
     </SafeAreaView>
   );
