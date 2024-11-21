@@ -36,9 +36,9 @@ const FormField = ({
 
   const handleDateChange = (event: any, selectedDate?: Date) => {
     const currentDate = selectedDate || date;
-    setShowDatePicker(false);  
+    setShowDatePicker(false);
     setDate(currentDate);
-    handleChangeText(moment(currentDate).format("DD/MM/YYYY")); 
+    handleChangeText(moment(currentDate).format("DD/MM/YYYY"));
   };
 
   return (
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     width: 310,
     gap: 6,
-    marginTop: 9
+    marginTop: 9,
   },
   formText: {
     fontSize: 15,

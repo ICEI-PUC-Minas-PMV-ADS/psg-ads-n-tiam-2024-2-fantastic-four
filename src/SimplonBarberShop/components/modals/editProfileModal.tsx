@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, Modal, TextInput, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Modal,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 import firebase from "../../service/firebaseConnection";
 
 interface EditProfileModalProps {
@@ -8,7 +15,7 @@ interface EditProfileModalProps {
   currentPhone: string;
   userId: string;
   nome: string;
-  dataNascimento: string; 
+  dataNascimento: string;
 }
 
 const EditProfileModal: React.FC<EditProfileModalProps> = ({
@@ -54,7 +61,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
       <View style={styles.modalOverlay}>
         <View style={styles.modalContent}>
           <Text style={styles.modalTitle}>Editar Perfil</Text>
-          
+
           <View style={styles.readOnlyField}>
             <Text style={styles.fieldLabel}>Nome:</Text>
             <Text style={styles.fieldValue}>{nome}</Text>
@@ -176,10 +183,10 @@ const styles = StyleSheet.create({
   readOnlyField: {
     width: "100%",
     marginBottom: 15,
-    backgroundColor: "#333", 
+    backgroundColor: "#333",
     padding: 10,
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: "#555", 
+    borderColor: "#555",
   },
 });

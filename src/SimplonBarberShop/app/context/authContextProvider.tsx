@@ -5,8 +5,8 @@ import React, {
   useEffect,
   useContext,
 } from "react";
-import firebase from "../../service/firebaseConnection"; // Certifique-se de que o caminho está correto
-import { getUserProfile } from "../../service/firebase"; // Importa a função
+import firebase from "../../service/firebaseConnection";
+import { getUserProfile } from "../../service/firebase";
 import { Alert } from "react-native";
 interface AuthContextData {
   signed: boolean;
@@ -60,39 +60,39 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       return null;
     }
   };
-  
 
   useEffect(() => {
-    const unsubscribe = firebase.auth().onAuthStateChanged(async (currentUser) => {
-      setIsLoading(true);
-  
-      if (currentUser) {
-        try {
-          const userProfile = await getCurrentUser(currentUser);
-          if (userProfile) {
-            setIsLoggedIn(true);
-            setUser(userProfile);
-          } else {
+    const unsubscribe = firebase
+      .auth()
+      .onAuthStateChanged(async (currentUser) => {
+        setIsLoading(true);
+
+        if (currentUser) {
+          try {
+            const userProfile = await getCurrentUser(currentUser);
+            if (userProfile) {
+              setIsLoggedIn(true);
+              setUser(userProfile);
+            } else {
+              setIsLoggedIn(false);
+              setUser(null);
+            }
+          } catch (error) {
+            console.error("Erro ao obter perfil do usuário:", error);
             setIsLoggedIn(false);
             setUser(null);
+          } finally {
+            setIsLoading(false);
           }
-        } catch (error) {
-          console.error("Erro ao obter perfil do usuário:", error);
+        } else {
           setIsLoggedIn(false);
           setUser(null);
-        } finally {
           setIsLoading(false);
         }
-      } else {
-        setIsLoggedIn(false);
-        setUser(null);
-        setIsLoading(false);
-      }
-    });
-  
+      });
+
     return () => unsubscribe();
   }, []);
-  
 
   return (
     <AuthContext.Provider

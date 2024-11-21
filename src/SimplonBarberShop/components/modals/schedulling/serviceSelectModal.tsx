@@ -10,20 +10,23 @@ interface BarberSelectModalProps {
 
 const services = [
   {
-    id:1,
+    id: 1,
     serviceName: "Corte",
-    price: 20.50,
-    timeSpent: 1
+    price: 50.0,
+    timeSpent: 1,
   },
   {
-    id:2,
+    id: 2,
     serviceName: "Barba",
-    price: 15.50,
-    timeSpent: 0.3
+    price: 30.0,
+    timeSpent: 0.3,
   },
 ];
 
-export default function BarberSelectModal({ onClose, onSelectService }: BarberSelectModalProps) {
+export default function BarberSelectModal({
+  onClose,
+  onSelectService,
+}: BarberSelectModalProps) {
   const [isSelected, setIsSelected] = useState(false);
   const [serviceSelected, setService] = useState<Service | null>(null);
 
@@ -59,9 +62,8 @@ export default function BarberSelectModal({ onClose, onSelectService }: BarberSe
             onPress={() => handleSelectbarber(service)}
           >
             <View style={styles.section1}>
-            
-          <MaterialIcons name="content-cut" size={33} color="white" />
-        
+              <MaterialIcons name="content-cut" size={33} color="white" />
+
               <Text style={styles.text2}>{service.serviceName}</Text>
             </View>
             <View>
@@ -73,7 +75,9 @@ export default function BarberSelectModal({ onClose, onSelectService }: BarberSe
                 }
                 size={31}
                 color={
-                  serviceSelected === service && isSelected ? "#4ECB71" : "white"
+                  serviceSelected === service && isSelected
+                    ? "#4ECB71"
+                    : "white"
                 }
               />
             </View>
@@ -141,5 +145,3 @@ const styles = StyleSheet.create({
     borderRadius: 16.5,
   },
 });
-
-

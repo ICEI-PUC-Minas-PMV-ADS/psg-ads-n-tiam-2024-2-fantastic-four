@@ -22,7 +22,7 @@ const TabsLayout: React.FC = () => {
       style={{
         height: "100%",
         paddingTop: 0,
-        backgroundColor: 'black'
+        backgroundColor: "black",
       }}
       edges={["left", "right", "bottom"]}
     >
@@ -32,11 +32,11 @@ const TabsLayout: React.FC = () => {
           tabBarActiveTintColor: Colors.goldColor,
           tabBarStyle: {
             backgroundColor: "black",
-            height: 85,
             width: "100%",
             flexDirection: "row",
             justifyContent: "space-around",
-            paddingHorizontal: 20
+            paddingHorizontal: 20,
+            paddingTop: 5,
           },
         }}
       >
@@ -50,7 +50,6 @@ const TabsLayout: React.FC = () => {
             ),
           }}
         />
-
         <Tabs.Screen
           name="historic"
           options={{
@@ -91,7 +90,6 @@ const TabsLayout: React.FC = () => {
             ),
           }}
         />
-
         <Tabs.Screen
           name="about"
           options={{

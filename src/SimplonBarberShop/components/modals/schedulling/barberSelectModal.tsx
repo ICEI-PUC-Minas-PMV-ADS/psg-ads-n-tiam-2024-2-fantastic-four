@@ -10,16 +10,23 @@ interface BarberSelectModalProps {
 
 const barbers = [
   {
+    barberId: 1,
     name: "Fábio",
-    image: "https://d28hgpri8am2if.cloudfront.net/book_images/cvr9781421520568_9781421520568_hr.jpg",
+    image:
+      "https://d28hgpri8am2if.cloudfront.net/book_images/cvr9781421520568_9781421520568_hr.jpg",
   },
   {
+    barberId: 2,
     name: "Alexandre",
-    image: "https://th.bing.com/th/id/R.299a77477c4b33625bd9b5f3fca5720c?rik=EJmFrtxG%2ffwr%2bQ&pid=ImgRaw&r=0",
+    image:
+      "https://th.bing.com/th/id/R.299a77477c4b33625bd9b5f3fca5720c?rik=EJmFrtxG%2ffwr%2bQ&pid=ImgRaw&r=0",
   },
 ];
 
-export default function BarberSelectModal({ onClose, onSelectBarber }: BarberSelectModalProps) {
+export default function BarberSelectModal({
+  onClose,
+  onSelectBarber,
+}: BarberSelectModalProps) {
   const [isSelected, setIsSelected] = useState(false);
   const [barberSelected, setBarber] = useState<Barber | null>(null);
 
@@ -55,11 +62,11 @@ export default function BarberSelectModal({ onClose, onSelectBarber }: BarberSel
             onPress={() => handleSelectbarber(barber)}
           >
             <View style={styles.section1}>
-            {barber ? (
-          <Image source={{ uri: barber.image }} style={styles.image} />
-        ) : (
-          <MaterialIcons name="person" size={33} color="white" />
-        )}
+              {barber ? (
+                <Image source={{ uri: barber.image }} style={styles.image} />
+              ) : (
+                <MaterialIcons name="person" size={33} color="white" />
+              )}
               <Text style={styles.text2}>{barber.name}</Text>
             </View>
             <View>
@@ -139,5 +146,3 @@ const styles = StyleSheet.create({
     borderRadius: 16.5,
   },
 });
-
-

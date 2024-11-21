@@ -6,7 +6,6 @@ import { useFonts } from "expo-font";
 import { useEffect } from "react";
 import { AuthProvider } from "./context/authContextProvider";
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {

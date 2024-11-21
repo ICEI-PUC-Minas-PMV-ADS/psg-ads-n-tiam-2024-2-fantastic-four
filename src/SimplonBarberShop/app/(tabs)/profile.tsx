@@ -1,9 +1,8 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import React, { useEffect, useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
 import { MaterialIcons, Feather } from "@expo/vector-icons";
 import MobileLayout from "@/components/layout/mobileLayout";
 import { useAuthContext } from "../context/authContextProvider";
-import firebase from "../../service/firebaseConnection";
 import CustomButton from "@/components/customButton";
 import { router } from "expo-router";
 import { signOut, redefinirPassword } from "@/service/firebase";
@@ -16,8 +15,15 @@ interface UserData {
 }
 
 const Profile = () => {
-  const { user } = useAuthContext();
-  const [isEditProfileModalVisible, setEditProfileModalVisible] = useState(false);
+  const { user, setIsLoggedIn } = useAuthContext();
+  const [isEditProfileModalVisible, setEditProfileModalVisible] =
+    useState(false);
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    signOut();
+    router.push("/");
+  };
 
   return (
     <MobileLayout>
@@ -62,7 +68,7 @@ const Profile = () => {
               <Text style={styles.footerText} onPress={redefinirPassword}>
                 Redefinir Senha
               </Text>
-              <Text style={styles.footerText} onPress={signOut}>
+              <Text style={styles.footerText} onPress={handleLogout}>
                 Sair do Aplicativo
               </Text>
             </View>

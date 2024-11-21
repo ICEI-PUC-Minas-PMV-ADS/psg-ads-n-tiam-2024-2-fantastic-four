@@ -8,7 +8,6 @@ import {
   Animated,
   Dimensions,
   Image,
-  Alert,
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
@@ -20,7 +19,6 @@ import firebase from "../../service/firebaseConnection";
 import { useRouter } from "expo-router";
 
 const SignUp = () => {
-  const scrollX = useRef(new Animated.Value(0)).current;
   const scrollViewRef = useRef<ScrollView>(null);
   const [currentStep, setCurrentStep] = useState<number>(0);
   const windowWidth = Dimensions.get("window").width;
@@ -138,7 +136,9 @@ const SignUp = () => {
                 title="Senha"
                 value={password}
                 placeholder=""
-                handleChangeText={(passwordText: string) => setPassword(passwordText)}
+                handleChangeText={(passwordText: string) =>
+                  setPassword(passwordText)
+                }
               />
               <CustomInput
                 title="Confirme sua senha"
@@ -160,14 +160,18 @@ const SignUp = () => {
                 title="Telefone"
                 value={telefone}
                 placeholder=""
-                handleChangeText={(telefoneText: string) => setTelefone(telefoneText)}
+                handleChangeText={(telefoneText: string) =>
+                  setTelefone(telefoneText)
+                }
                 keyboardType="numeric"
               />
               <CustomInput
                 title="Data de Nascimento"
                 value={dataNascimento}
                 placeholder="Selecione uma data"
-                handleChangeText={(dataText: any) => setDataNascimento(dataText)}
+                handleChangeText={(dataText: any) =>
+                  setDataNascimento(dataText)
+                }
               />
             </View>
           </Animated.ScrollView>
@@ -185,13 +189,18 @@ const SignUp = () => {
             />
           </View>
           {currentStep === 1 && (
-            <TouchableOpacity style={styles.button} onPress={handlePreviousStep}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={handlePreviousStep}
+            >
               <Text style={styles.buttonText}>Voltar</Text>
             </TouchableOpacity>
           )}
 
           <TouchableOpacity
-            style={currentStep === 1 ? styles.buttonConcluir : styles.buttonNext}
+            style={
+              currentStep === 1 ? styles.buttonConcluir : styles.buttonNext
+            }
             onPress={currentStep === 1 ? handleSignUp : handleNextStep}
           >
             <Text

@@ -1,4 +1,11 @@
-import { Image, TouchableOpacity, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Redirect, router } from "expo-router";
@@ -79,7 +86,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 12,
-    marginTop: 10
+    marginTop: 10,
   },
   registerButton: {
     backgroundColor: "transparent",
@@ -97,4 +104,4 @@ const styles = StyleSheet.create({
     fontFamily: "CircularSpotifyText-Bold",
   },
 });
- export default App;
+export default App;

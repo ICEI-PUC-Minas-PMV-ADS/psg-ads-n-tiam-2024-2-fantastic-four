@@ -126,7 +126,11 @@ const SignIn = () => {
         </View>
       </ScrollView>
       <CustomModal visible={isModalVisible}>
-        <InformativeModal title={modalTitle} message={modalMessage} onClose={closeModal}/>
+        <InformativeModal
+          title={modalTitle}
+          message={modalMessage}
+          onClose={closeModal}
+        />
       </CustomModal>
     </SafeAreaView>
   );
@@ -166,5 +170,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 68,
   },
- 
 });

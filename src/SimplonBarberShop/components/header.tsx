@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     backgroundColor: "transparent",
-    paddingBottom: 10
+    paddingBottom: 10,
   },
   sectioOne: {
     display: "flex",

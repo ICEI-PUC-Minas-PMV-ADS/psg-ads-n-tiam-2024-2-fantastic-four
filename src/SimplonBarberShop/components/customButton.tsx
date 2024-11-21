@@ -74,6 +74,6 @@ const styles = StyleSheet.create({
   buttonText: {
     fontFamily: "CircularSpotifyText-Medium",
     fontSize: 18,
-    color: "#fff", // Adicionei uma cor de texto padrão
+    color: "#fff",
   },
 });
