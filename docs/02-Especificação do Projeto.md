@@ -65,6 +65,9 @@ Com base na análise das personas foram identificadas as seguintes histórias de
 ## Quadro Kanban de Histórias de Usuários
 ![Quadro Kanban](img/QuadroKanban.png)
 
+## Quadro Kanban atualizado dia 20/11/2024
+![Quadro Kanban v2](img/quadrokaban_02.png)
+
 Exemplo de como ficou o card do Kanban da Us Botão de Cadastro - Tela Inicial
 ![Botão de Cadastro - Tela Inicial](img/BotaoDeCadastro.png)
 
