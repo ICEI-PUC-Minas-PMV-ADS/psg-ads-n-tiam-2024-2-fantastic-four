@@ -189,3 +189,18 @@ async function handleSubmit() {
     }
   }
   ```
+
+
+# Atualizações individuais - 20/11/2024
+
+## Adrielly: 
+Página de sobre com informações sobre a barbearia, tela inicial do sistema, tela principal, teste de funcionalidades, refinamento de estórias e conversas com cliente.
+
+## Filipe: 
+Configurações de layouts, funções de agendamento, tabs de navegação, tela de cadastro de usuário, resolução de bugs, planning poker, pontuação de estorias, acompanhamento de entregas por sub sprint
+
+## Yuri: 
+Página de perfil, trazendo as informações de usuário, modal para atualizar dados de contato do usuário, botão para sair, função de cadastro de usuário, função de login.
+
+## Pedro: 
+Construção dos componentes para escolha do barbeiro, escolha do serviço, escolha horário, verificações necessárias para validar as escolhas do usuário e a configuração do ambiente de desenvolvimento e testes.
