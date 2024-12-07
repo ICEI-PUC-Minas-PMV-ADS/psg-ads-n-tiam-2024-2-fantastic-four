@@ -13,6 +13,7 @@ import firebase from "../../service/firebaseConnection";
 import { useAuthContext } from "../context/authContextProvider";
 import { router } from "expo-router";
 import { useNavigation } from '@react-navigation/native';
+import useNotifications from "@/hooks/useNotification";
 
 const Schedulling = () => {
   const navigation = useNavigation(); 
@@ -23,7 +24,7 @@ const Schedulling = () => {
   const [selectedBarber, setSelectedBarber] = useState<Barber | null>(null);
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [selectedTime, setSelectedTime] = useState<Time | null>(null);
-
+  const {addNotification} = useNotifications();
   async function handleSubmit() {
     if (!selectedBarber || !selectedService || !selectedTime) {
       Alert.alert("Erro", "Todos os campos devem ser preenchidos.");
@@ -47,6 +48,13 @@ const Schedulling = () => {
           .collection("schedullings")
           .doc()
           .set(payload);
+          addNotification({
+            message: "Notificação teste.",
+            icon: "notifications",
+            status: "ler",
+            idUser: user.uid,
+            type: "info",
+          });
         Alert.alert("Sucesso", "Agendamento concluído com sucesso!");
       } catch (e) {
         Alert.alert("Erro", "Erro ao salvar agendamento");
