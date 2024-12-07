@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "724001305962",
+    "project_id": "simplonbarbershop",
+    "storage_bucket": "simplonbarbershop.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:724001305962:android:29251da7ad50e873c62113",
+        "android_client_info": {
+          "package_name": "com.anonymous.SimplonBarberShop"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6yvmPFF0LBVsKhMFITiZDZp1Gd1qMvog"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:724001305962:android:3898ed46fa730ec4c62113",
+        "android_client_info": {
+          "package_name": "com.barbershop.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6yvmPFF0LBVsKhMFITiZDZp1Gd1qMvog"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

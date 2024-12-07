@@ -10,10 +10,17 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Redirect, router } from "expo-router";
 import { AuthProvider, useAuthContext } from "./context/authContextProvider";
+import { usePushNotifications } from "@/hooks/usePushNotifications";
 
 const App = () => {
   const { isLoggedIn, isLoading } = useAuthContext();
+  
+  const {expoPushToken,  notification} = usePushNotifications()
 
+  const data = JSON.stringify(notification, undefined, 2)
+  
+  
+  
   if (!isLoading && isLoggedIn) return <Redirect href="/home" />;
 
   return (
