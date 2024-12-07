@@ -4,16 +4,25 @@ import { useAuthContext } from "../context/authContextProvider";
 import CustomButton from "@/components/customButton";
 import moreIcon from "../../assets/icons/more.png";
 import backReserv from "../../assets/icons/backReserv.png";
-import { router } from "expo-router";
+import { useNavigation } from '@react-navigation/native';
 import MobileLayout from "@/components/layout/mobileLayout";
 
 const Home = () => {
   const { user } = useAuthContext();
+  const navigation = useNavigation();
 
   const firstName = user?.nome?.split(" ")[0];
   const formattedFirstName = firstName
     ? firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase()
     : "";
+
+  const navigateToSchedulingTab = () => {
+    navigation.navigate('schedullingTab' as never); 
+  };
+
+  const navigateToHistoricTab = () => {
+    navigation.navigate('historicTab' as never);
+  };
 
   return (
     <MobileLayout>
@@ -29,7 +38,7 @@ const Home = () => {
       <View style={{ display: "flex", gap: 12 }}>
         <CustomButton
           title={"Novo agendamento"}
-          onPress={() => router.push("../schedulling")}
+          onPress={navigateToSchedulingTab} 
           width={310}
           backgroundColor={"#D2B070"}
           source={moreIcon}
@@ -38,7 +47,7 @@ const Home = () => {
         />
         <CustomButton
           title={"Reserva Agendamento"}
-          onPress={() => router.push("../historic")}
+          onPress={navigateToHistoricTab} 
           width={310}
           backgroundColor={"#121212"}
           source={backReserv}

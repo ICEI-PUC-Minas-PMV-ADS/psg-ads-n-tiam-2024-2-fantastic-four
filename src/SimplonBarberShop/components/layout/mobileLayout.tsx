@@ -1,7 +1,6 @@
 import React from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
-import Header from "../header";
 import { LinearGradient } from "expo-linear-gradient";
 
 interface MobileLayoutProps {
@@ -17,7 +16,6 @@ const MobileLayout = ({ children }: MobileLayoutProps) => {
         colors={['#000000', '#121212']}
         style={[styles.gradient, { paddingTop: insets.top + 20 }]}
       >
-        <Header />
         <ScrollView 
           contentContainerStyle={{
             paddingBottom: 20,

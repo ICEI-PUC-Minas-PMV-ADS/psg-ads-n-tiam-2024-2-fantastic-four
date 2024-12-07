@@ -12,8 +12,10 @@ import CustomButton from "@/components/customButton";
 import firebase from "../../service/firebaseConnection";
 import { useAuthContext } from "../context/authContextProvider";
 import { router } from "expo-router";
+import { useNavigation } from '@react-navigation/native';
 
 const Schedulling = () => {
+  const navigation = useNavigation(); 
   const { user } = useAuthContext();
   const [isBarberVisible, setBarberVisible] = useState(false);
   const [isServiceVisible, setServiceVisible] = useState(false);
@@ -49,7 +51,7 @@ const Schedulling = () => {
       } catch (e) {
         Alert.alert("Erro", "Erro ao salvar agendamento");
       }
-      router.push("/home");
+      navigation.navigate('homeTab' as never);
     }
   }
 

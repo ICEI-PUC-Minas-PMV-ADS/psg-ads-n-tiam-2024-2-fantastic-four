@@ -1,13 +1,24 @@
-import { StyleSheet, View, Image } from "react-native";
+import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import logo from "../assets/images/logoHeader.png";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { useNavigation } from "@react-navigation/native";
+import type { DrawerNavigationProp } from "@react-navigation/drawer";
+
+type RootDrawerParamList = {
+  Home: undefined;
+  Profile: undefined;
+};
 
 export default function Header() {
+  const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
+
   return (
     <View style={styles.head}>
       <View style={styles.sectioOne}>
-        <MaterialIcons name="menu" size={30} color="white" />
+        <TouchableOpacity onPress={() => navigation.openDrawer()}>
+          <MaterialIcons name="menu" size={30} color="white" />
+        </TouchableOpacity>
         <View style={styles.line} />
         <Image
           resizeMode="contain"
@@ -28,8 +39,10 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: "transparent",
+    backgroundColor: "black",
     paddingBottom: 10,
+    paddingHorizontal: 20,
+    paddingTop: 20,
   },
   sectioOne: {
     display: "flex",
