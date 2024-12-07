@@ -11,6 +11,7 @@ import Notifications from "./notifications";
 import About from "./about";
 import Header from "@/components/header";
 import { Colors } from "@/constants/Colors";
+import Customers from "./customers";
 
 type DrawerNavigatorParamList = {
   homeDrawer: undefined;
@@ -28,6 +29,7 @@ type TabNavigatorParamList = {
   profileTab: undefined;
   notificationsTab: undefined;
   aboutTab: undefined;
+  customerTab: undefined;
 };
 
 const Drawer = createDrawerNavigator<DrawerNavigatorParamList>();
@@ -100,6 +102,14 @@ const TabsLayout: React.FC<{ tab: string }> = ({ tab }) => {
           tabBarIcon: ({ color }) => <TabIcon color={color} name="info" />,
         }}
       />
+      <Tab.Screen
+        name="customerTab"
+        component={Customers}
+        options={{
+          tabBarIcon: ({ color }) => <TabIcon color={color} name="info" />,
+        }}
+      />
+      
     </Tab.Navigator>
   );
 };
