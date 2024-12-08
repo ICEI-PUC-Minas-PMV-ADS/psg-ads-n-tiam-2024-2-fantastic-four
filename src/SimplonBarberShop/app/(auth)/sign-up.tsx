@@ -30,7 +30,7 @@ const SignUp = () => {
   const [nome, setNome] = useState("");
   const [dataNascimento, setDataNascimento] = useState("");
   const [telefone, setTelefone] = useState("");
-  const [tipo, setTipo] = useState("cliente");
+  const [isBarber, setIsBarber] = useState(true);
 
   const handleNextStep = () => {
     if (currentStep < 1) {
@@ -75,7 +75,7 @@ const SignUp = () => {
           nome: nome,
           telefone: telefone,
           dataNascimento: dataNascimento,
-          tipo: tipo,
+          isBarber: isBarber,
         });
 
         console.log("Dados adicionais salvos no Firestore");

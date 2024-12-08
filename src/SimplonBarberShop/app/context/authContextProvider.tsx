@@ -23,7 +23,7 @@ interface UserProfile {
   email: string;
   dataNascimento: string;
   telefone: string;
-  tipo: string;
+  isBarber: boolean;
 }
 
 interface AuthProviderProps {
@@ -51,7 +51,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           email: currentUser.email || "",
           dataNascimento: userProfile?.dataNascimento || "",
           telefone: userProfile?.telefone || "",
-          tipo: userProfile?.tipo || "",
+          isBarber: userProfile?.isBarber || false,
         };
       }
       return null;

@@ -13,6 +13,7 @@ type RootDrawerParamList = {
 export default function Header() {
   const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
 
+  
   return (
     <View style={styles.head}>
       <View style={styles.sectioOne}>
@@ -27,9 +28,9 @@ export default function Header() {
           alt="menu lateral"
         />
       </View>
-      <View style={styles.profile}>
+      <TouchableOpacity style={styles.profile} onPress={() => navigation.navigate("profileDrawer" as never)}>
         <MaterialIcons name="person" size={24} color="white" />
-      </View>
+      </TouchableOpacity>
     </View>
   );
 }

@@ -4,7 +4,7 @@ import { useAuthContext } from "../context/authContextProvider";
 import CustomButton from "@/components/customButton";
 import moreIcon from "../../assets/icons/more.png";
 import backReserv from "../../assets/icons/backReserv.png";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 import MobileLayout from "@/components/layout/mobileLayout";
 
 const Home = () => {
@@ -17,11 +17,15 @@ const Home = () => {
     : "";
 
   const navigateToSchedulingTab = () => {
-    navigation.navigate('schedullingTab' as never); 
+    navigation.navigate("schedullingTab" as never);
   };
 
   const navigateToHistoricTab = () => {
-    navigation.navigate('historicTab' as never);
+    if (user?.isBarber) {
+      navigation.navigate("schedullingBarberTab" as never);
+    } else {
+      navigation.navigate("historicTab" as never);
+    }
   };
 
   return (
@@ -38,7 +42,7 @@ const Home = () => {
       <View style={{ display: "flex", gap: 12 }}>
         <CustomButton
           title={"Novo agendamento"}
-          onPress={navigateToSchedulingTab} 
+          onPress={navigateToSchedulingTab}
           width={310}
           backgroundColor={"#D2B070"}
           source={moreIcon}
@@ -46,8 +50,8 @@ const Home = () => {
           textColor="#121212"
         />
         <CustomButton
-          title={"Reserva Agendamento"}
-          onPress={navigateToHistoricTab} 
+          title={user?.isBarber ? "Ver agendamentos" : "Reserva Agendamento"}
+          onPress={navigateToHistoricTab}
           width={310}
           backgroundColor={"#121212"}
           source={backReserv}
