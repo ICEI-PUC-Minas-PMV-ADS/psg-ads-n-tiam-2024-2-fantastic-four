@@ -1,3 +1,5 @@
+import { Colors } from "@/constants/Colors";
+import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
 import {
   View,
@@ -13,7 +15,7 @@ import {
 interface NotificationCardProps {
   mensage: string;
   buttonStyle?: ViewStyle;
-  icon?: ImageSourcePropType;
+  icon?: any;
   onPress: () => void;
   width: DimensionValue;
   backgroundColor: string;
@@ -35,7 +37,7 @@ function NotificationCard({
   border,
   borderColor,
   textColor,
-  iconSize = 40,
+  iconSize = 30,
   isAction,
   notificatioData,
 }: NotificationCardProps) {
@@ -43,11 +45,11 @@ function NotificationCard({
     <View style={styles.container}>
       {icon && (
         <View style={styles.iconContainer}>
-          <Image source={icon} style={[styles.icon, { width: iconSize, height: iconSize }]} />
+          <MaterialIcons name={icon} size={iconSize} color={Colors.goldColor} />
         </View>
       )}
       <View style={styles.textContainer}>
-        <Text style={[styles.mensageText, { color: textColor }]}>{mensage}</Text>
+        <Text style={[styles.mensageText, { color:'white' }]}>{mensage}</Text>
         {notificatioData && (
           <Text style={styles.notificatioDataText}>{notificatioData}</Text>
         )}
@@ -99,7 +101,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     padding: 16,
     borderRadius: 12,
-    backgroundColor: "#fff",
+    backgroundColor: "#4F5050",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -107,10 +109,10 @@ const styles = StyleSheet.create({
     elevation: 4,
     flexDirection: "row",
     alignItems: "center",
+    color: 'white'
   },
   iconContainer: {
     marginRight: 16,
-    backgroundColor: "#f0f0f0",
     padding: 10,
     borderRadius: 50,
     alignItems: "center",
@@ -122,6 +124,7 @@ const styles = StyleSheet.create({
   textContainer: {
     flex: 1,
     justifyContent: "center",
+   
   },
   mensageText: {
     fontFamily: "CircularSpotifyText-Medium",

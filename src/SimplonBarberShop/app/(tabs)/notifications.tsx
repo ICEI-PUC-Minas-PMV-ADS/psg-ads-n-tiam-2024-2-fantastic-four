@@ -3,15 +3,16 @@ import MobileLayout from "@/components/layout/mobileLayout";
 import { Text, View, StyleSheet } from "react-native";
 import firebase from "firebase/compat";
 import NotificationCard from "@/components/notification/notificationCard";
+import { useAuthContext } from "../context/authContextProvider";
 
 export default function Notifications() {
   const [notificacoes, setNotificacoes] = useState<any[]>([]);
-
-  // Função para buscar as notificações
+  const { user } = useAuthContext();
   const handleGetNotification = async () => {
     const notificacoesBuscadas = await firebase
       .firestore()
       .collection("notifications")
+      .where("idUser", "==", user?.uid)
       .get();
 
     const notificacoesData = notificacoesBuscadas.docs.map((doc) => ({
@@ -33,14 +34,16 @@ export default function Notifications() {
           notificacoes.map((notificacao) => (
             <NotificationCard
               key={notificacao.id}
-              mensage={notificacao.mensage}
-              onPress={() => console.log(`Notificação ${notificacao.id} clicada`)}
+              mensage={notificacao.message}
+              onPress={() =>
+                console.log(`Notificação ${notificacao.id} clicada`)
+              }
               buttonStyle={styles.cardButton}
               icon={notificacao.icon}
               width={"90%"}
               backgroundColor={"#fff"}
               textColor={"#000"}
-              isAction={true}
+              isAction={false}
               notificatioData={notificacao.date}
             />
           ))
@@ -56,7 +59,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    padding: 16,
   },
   emptyText: {
     fontSize: 16,

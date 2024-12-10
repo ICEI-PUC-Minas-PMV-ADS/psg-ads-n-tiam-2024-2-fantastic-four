@@ -2,22 +2,28 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import CustomButton from "@/components/customButton";
+import { Barber } from "@/utils/types";
 
 interface BarberSelectModalProps {
   onClose: () => void;
   onSelectBarber: (barber: Barber) => void;
 }
 
-const barbers = [
+const barbers: Barber[] = [
   {
-    barberId: 1,
-    name: "Fábio",
-    image:
-      "https://d28hgpri8am2if.cloudfront.net/book_images/cvr9781421520568_9781421520568_hr.jpg",
+    uid: "QeKedO6vcAVMwJDbt6WyGsr7jcq1",
+    nome: "Fábio",
+    telefone: '31993273796',
+    email: "fabiodiniz@yahoo.com.br",
+    dataNascimento: "25/05/1972",
+    image: "https://d28hgpri8am2if.cloudfront.net/book_images/cvr9781421520568_9781421520568_hr.jpg",
   },
   {
-    barberId: 2,
-    name: "Alexandre",
+    uid: "Fl9b54rLMDZqo9dDMditGbdl91j1",
+    nome: "Alexandre",
+    telefone: '31999883988',
+    email: "xandecomaciel@yahoo.com.br",
+    dataNascimento: "24/01/1970",
     image:
       "https://th.bing.com/th/id/R.299a77477c4b33625bd9b5f3fca5720c?rik=EJmFrtxG%2ffwr%2bQ&pid=ImgRaw&r=0",
   },
@@ -67,7 +73,7 @@ export default function BarberSelectModal({
               ) : (
                 <MaterialIcons name="person" size={33} color="white" />
               )}
-              <Text style={styles.text2}>{barber.name}</Text>
+              <Text style={styles.text2}>{barber.nome}</Text>
             </View>
             <View>
               <MaterialIcons
