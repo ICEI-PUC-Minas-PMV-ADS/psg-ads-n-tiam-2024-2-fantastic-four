@@ -8,7 +8,7 @@ interface CustomModalProps {
 
 const CustomModal: React.FC<CustomModalProps> = ({ visible, children }) => {
   return (
-    <Modal transparent={true} visible={visible} animationType="fade">
+    <Modal transparent={true} visible={visible} animationType="slide">
       <View style={styles.overlay}>
         <View style={styles.modalContent}>{children}</View>
       </View>

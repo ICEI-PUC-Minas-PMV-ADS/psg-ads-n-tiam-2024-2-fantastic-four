@@ -1,15 +1,26 @@
-interface Barber {
-  barberId: number;
-  name: string;
-  image: string;
+export interface Barber {
+  uid: string;
+  nome: string;
+  telefone: string;
+  email: string;
+  dataNascimento: string;
+  image?: string;
 }
-interface Service {
+export interface Service {
   id: Number;
   serviceName: string;
   price: Number;
   timeSpent: Number;
 }
-interface Time {
+export interface Time {
   date: string;
   time: string[];
+}
+
+export interface Customer {
+  id: string;
+  nome: string;
+  telefone: string;
+  email: string;
+  dataNascimento: string;
 }

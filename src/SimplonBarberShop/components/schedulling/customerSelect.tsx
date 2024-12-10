@@ -1,41 +1,37 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { Barber } from "@/utils/types";
-interface BarberSelectProps {
+import { Customer } from "@/utils/types";
+interface CustomerSelectProps {
   onPress: () => void;
-  selectedBarber: Barber | null;
+  selectedCustomer: Customer | null;
 }
 
-const BarberSelect = ({ onPress, selectedBarber }: BarberSelectProps) => {
+const CustomerSelect = ({ onPress, selectedCustomer }: CustomerSelectProps) => {
   return (
     <View style={styles.card}>
       <View style={styles.section1}>
-        {selectedBarber ? (
-          <Image source={{ uri: selectedBarber.image }} style={styles.image} />
-        ) : (
-          <MaterialIcons name="person" size={33} color="white" />
-        )}
-        {selectedBarber ? (
+        <MaterialIcons name="person" size={33} color="white" />
+        {selectedCustomer ? (
           <Text style={styles.text2}>
-            {selectedBarber ? selectedBarber.nome : "Escolha o barbeiro"}
+            {selectedCustomer.nome}
           </Text>
         ) : (
-          <Text style={styles.text1}>Escolha o barbeiro</Text>
+          <Text style={styles.text1}>Escolha o cliente</Text>
         )}
       </View>
       <TouchableOpacity onPress={onPress}>
         <MaterialIcons
-          name={selectedBarber ? "check-circle" : "add-circle"}
+          name={selectedCustomer ? "check-circle" : "add-circle"}
           size={31}
-          color={selectedBarber ? "#4ECB71" : "white"}
+          color={selectedCustomer ? "#4ECB71" : "white"}
         />
       </TouchableOpacity>
     </View>
   );
 };
 
-export default BarberSelect;
+export default CustomerSelect;
 
 const styles = StyleSheet.create({
   card: {

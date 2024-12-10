@@ -50,7 +50,7 @@ const TabIcon: React.FC<{ color: string; name: any }> = ({ color, name }) => (
 );
 
 const TabsLayout: React.FC<{ tab: string }> = ({ tab }) => {
-  const { user, setIsLoggedIn } = useAuthContext();
+  const { user } = useAuthContext();
 
   return (
     <Tab.Navigator
