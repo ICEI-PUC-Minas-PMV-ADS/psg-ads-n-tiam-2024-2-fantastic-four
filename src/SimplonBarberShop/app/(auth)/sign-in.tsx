@@ -15,6 +15,8 @@ import { signIn, useHandleResetPassword } from "@/service/firebase";
 import { router } from "expo-router";
 import CustomModal from "@/components/modals/customModal";
 import InformativeModal from "@/components/modals/informativeModal";
+import Toast from "react-native-toast-message";
+import toastConfig from "@/utils/toastConfig";
 
 const SignIn = () => {
   const [email, setEmail] = useState<string>("");
@@ -43,7 +45,7 @@ const SignIn = () => {
       Alert.alert("Erro", response.error);
       return;
     }
-    Alert.alert("Sucesso", "Login realizado com sucesso!");
+
     router.replace("/home");
   };
 
@@ -132,6 +134,7 @@ const SignIn = () => {
           onClose={closeModal}
         />
       </CustomModal>
+      <Toast config={toastConfig}/>
     </SafeAreaView>
   );
 };
