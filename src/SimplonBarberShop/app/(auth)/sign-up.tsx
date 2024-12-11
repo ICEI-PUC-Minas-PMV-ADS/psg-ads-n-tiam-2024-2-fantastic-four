@@ -10,6 +10,7 @@ import {
   Image,
   KeyboardAvoidingView,
   Platform,
+  ActivityIndicator,
 } from "react-native";
 import React, { useState, useRef } from "react";
 import { Colors } from "@/constants/Colors";
@@ -32,6 +33,7 @@ const SignUp = () => {
   const [dataNascimento, setDataNascimento] = useState("");
   const [telefone, setTelefone] = useState("");
   const [isBarber, setIsBarber] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleNextStep = () => {
     if (currentStep < 1) {
@@ -58,6 +60,7 @@ const SignUp = () => {
   };
 
   const handleSignUp = async () => {
+    setLoading(true);
     if (password !== confirmPassword) {
       Toast.show({
         type: "error",
@@ -120,6 +123,7 @@ const SignUp = () => {
         text2: String(error.FirebaseError.Firebase),
       });
     }
+    setLoading(false);
   };
 
   return (
@@ -249,15 +253,19 @@ const SignUp = () => {
             }
             onPress={currentStep === 1 ? handleSignUp : handleNextStep}
           >
-            <Text
-              style={{
-                fontFamily: "CircularSpotifyText-Bold",
-                color: "#D2B070",
-                textAlign: "center",
-              }}
-            >
-              {currentStep === 0 ? "Próximo passo" : "Concluir cadastro"}
-            </Text>
+            {loading ? (
+              <ActivityIndicator color="white" />
+            ) : (
+              <Text
+                style={{
+                  fontFamily: "CircularSpotifyText-Bold",
+                  color: "#D2B070",
+                  textAlign: "center",
+                }}
+              >
+                {currentStep === 0 ? "Próximo passo" : "Concluir cadastro"}
+              </Text>
+            )}
             {currentStep === 0 && (
               <View style={styles.center}>
                 <View style={styles.line} />

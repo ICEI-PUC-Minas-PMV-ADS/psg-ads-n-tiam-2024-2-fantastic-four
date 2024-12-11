@@ -4,6 +4,7 @@ import {
   View,
   TouchableOpacity,
   Image,
+  ActivityIndicator, // Importação adicional
 } from "react-native";
 import React, { useState } from "react";
 import CustomInput from "@/components/customInput";
@@ -20,6 +21,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 const SignIn = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const {
     handleResetPassword,
@@ -39,10 +41,14 @@ const SignIn = () => {
       return;
     }
 
+    setLoading(true);
+
     const response = await signIn(
       email.replaceAll(" ", ""),
       password.replaceAll(" ", "")
     );
+
+    setLoading(false);
 
     if (!response.success) {
       return;
@@ -86,16 +92,24 @@ const SignIn = () => {
             />
           </View>
           <View>
-            <TouchableOpacity onPress={handleLogin} style={styles.buttonLogin}>
-              <Text
-                style={{
-                  fontFamily: "CircularSpotifyText-Bold",
-                  fontSize: 20,
-                  color: "white",
-                }}
-              >
-                Login
-              </Text>
+            <TouchableOpacity
+              onPress={handleLogin}
+              style={styles.buttonLogin}
+              disabled={loading}
+            >
+              {loading ? (
+                <ActivityIndicator color="white" />
+              ) : (
+                <Text
+                  style={{
+                    fontFamily: "CircularSpotifyText-Bold",
+                    fontSize: 20,
+                    color: "white",
+                  }}
+                >
+                  Login
+                </Text>
+              )}
             </TouchableOpacity>
           </View>
           <View>
@@ -151,10 +165,10 @@ export default SignIn;
 const styles = StyleSheet.create({
   body: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-    height: '100%',
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: "100%",
     backgroundColor: "#121212",
   },
   login: {
@@ -177,6 +191,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#AE8333",
     marginTop: 24,
+    opacity: 1,
   },
   registrar: {
     display: "flex",
