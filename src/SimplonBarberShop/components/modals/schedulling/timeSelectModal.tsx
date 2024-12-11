@@ -4,6 +4,7 @@ import CustomButton from "@/components/customButton";
 import { Calendar, DateData, LocaleConfig } from "react-native-calendars";
 import firebase from "firebase/compat";
 import { Time } from "@/utils/types";
+import Toast from "react-native-toast-message";
 
 LocaleConfig.locales["pt-br"] = {
   monthNames: [
@@ -73,10 +74,9 @@ const horarios = [
 
 interface TimeSelectModalProps {
   onClose: () => void;
-  onSelectTime: (time: Time) => void;
+  onSelectTime: (time: any) => void;
   selectedBarber: string | undefined;
 }
-
 
 export default function TimeSelectModal({
   onClose,
@@ -85,16 +85,21 @@ export default function TimeSelectModal({
 }: TimeSelectModalProps) {
   const [isSelected, setIsSelected] = useState(false);
 
-  function handleSelectTime() {
-    if (day && horarioEscolhido)
-      onSelectTime({ date: day.dateString, time: horarioEscolhido });
-    setIsSelected(true);
+  function handleConfirm() {
+    if (day && horarioEscolhido.length > 0 && horarioEscolhido[0] !== "") {
+      onSelectTime({ date: day, time: horarioEscolhido });
+      console.log(day, horarioEscolhido);
+      setIsSelected(true);
+      onClose();
+    } else {
+      Toast.show({
+        type: "error",
+        text1: "Nenhum horário selecionado!",
+        text2: "Selecione para continuar",
+      });
+    }
   }
 
-  function handleConfirm() {
-    handleSelectTime();
-    onClose();
-  }
   const [day, setDay] = useState<DateData>();
   const [horarioEscolhido, setHorarioEscolhido] = useState<string[]>([""]);
 
@@ -103,7 +108,24 @@ export default function TimeSelectModal({
   ]);
 
   const handleSelectDate = async (selectedDay: DateData) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1);
+
+    const selectedDate = new Date(selectedDay.dateString);
+    if (selectedDate < yesterday) {
+      Toast.show({
+        type: "error",
+        text1: "Data inválida!",
+        text2: "Não é possível selecionar uma data anterior a ontem.",
+      });
+      return;
+    }
+
     setDay(selectedDay);
+
     const agendamentos = await firebase
       .firestore()
       .collection("schedullings")
@@ -126,6 +148,10 @@ export default function TimeSelectModal({
 
   return (
     <View style={styles.modal}>
+      <TouchableOpacity style={styles.closeButton} onPress={onClose}>
+        <Text style={styles.closeButtonText}>X</Text>
+      </TouchableOpacity>
+
       <Calendar
         style={styles.calendar}
         headerStyle={styles.header}
@@ -172,16 +198,18 @@ export default function TimeSelectModal({
           textColor="black"
           buttonStyle={{
             height: 35,
-            marginTop: 10
+            marginTop: 10,
           }}
         />
       </View>
+      <Toast />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   modal: {
+    zIndex: 1,
     backgroundColor: "#323434",
     width: "100%",
     height: "auto",
@@ -191,37 +219,25 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingVertical: 25,
   },
-  section2: {
-    gap: 21,
-    marginBottom: 38,
+  closeButton: {
+    position: "absolute",
+    top: 10,
+    right: 10,
+
+    borderRadius: 15,
+    width: 30,
+    height: 30,
+    justifyContent: "center",
+    alignItems: "center",
   },
-  text1: {
-    fontFamily: "CircularSpotifyText-Bold",
-    fontSize: 18,
+  closeButtonText: {
     color: "white",
-    marginBottom: 38,
-  },
-  card: {
-    width: "100%",
-    height: 74,
-    backgroundColor: "#4f5050",
-    borderRadius: 8,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: 15,
-  },
-  section1: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 9,
-  },
-  text2: {
-    fontFamily: "CircularSpotifyText-Bold",
-    color: "#FFFBFB",
+    fontSize: 16,
+    fontWeight: "bold",
   },
   calendar: {
     borderRadius: 8,
+    marginTop: 15,
   },
   header: {
     borderBottomWidth: 1,

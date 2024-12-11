@@ -14,6 +14,7 @@ const toastConfig = {
       style={{
         borderLeftColor: "#28a745",
         backgroundColor: "#d4edda",
+        zIndex: 1000,
       }}
       contentContainerStyle={{ paddingHorizontal: 15 }}
       text1Style={{
@@ -46,6 +47,7 @@ const toastConfig = {
       style={{
         borderLeftColor: "#dc3545",
         backgroundColor: "#f8d7da",
+        zIndex: 1000,
       }}
       contentContainerStyle={{ paddingHorizontal: 15 }}
       text1Style={{
