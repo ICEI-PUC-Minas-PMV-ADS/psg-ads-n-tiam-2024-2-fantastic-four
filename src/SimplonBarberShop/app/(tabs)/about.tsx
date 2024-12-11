@@ -71,14 +71,16 @@ const About = () => {
             <Image source={Fabio} style={styles.ceoImage} />
             <Text style={styles.ceoName}>CEO e Barbeiro Fábio</Text>
             <Text style={styles.ceoDescription}>
-            Com mais de 30 anos de experiência como barbeiro, Fábio é um dos fundadores da Barbearia Simplon.
+              Com mais de 30 anos de experiência como barbeiro, Fábio é um dos
+              fundadores da Barbearia Simplon.
             </Text>
           </View>
           <View style={styles.ceoProfile}>
             <Image source={Alexandre} style={styles.ceoImage} />
             <Text style={styles.ceoName}>CEO e Barbeiro Alexandre</Text>
             <Text style={styles.ceoDescription}>
-            Co-fundador da Barbearia Simplon, Alexandre soma mais de três décadas de dedicação à profissão de barbeiro.
+              Co-fundador da Barbearia Simplon, Alexandre soma mais de três
+              décadas de dedicação à profissão de barbeiro.
             </Text>
           </View>
         </View>
@@ -96,8 +98,8 @@ const About = () => {
               latitudeDelta: 0.001,
               longitudeDelta: 0.001,
             }}
-            scrollEnabled={false} 
-            zoomEnabled={false} 
+            scrollEnabled={false}
+            zoomEnabled={false}
           >
             <Marker
               coordinate={{ latitude: -19.93823, longitude: -43.98028 }}
@@ -105,10 +107,8 @@ const About = () => {
             />
           </MapView>
 
-          
-          <TouchableOpacity
-            onPress={handleOpenInMaps}
-          >
+          {/* Botão para abrir diretamente no Google Maps */}
+          <TouchableOpacity onPress={handleOpenInMaps}>
             <Text>Abrir no Maps</Text>
           </TouchableOpacity>
         </View>
@@ -134,38 +134,38 @@ const About = () => {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.contactButton}>
-  <MaterialIcons
-    name="phone"
-    size={24}
-    color="#fff"
-    onPress={() => handlePhonePress("+5531991650801")} 
-  />
-  <Text style={styles.contactText}>(31) 9 9165-0801 | Fábio</Text>
-  <FontAwesome
-    name="whatsapp"
-    size={24}
-    color="#D2B070"
-    style={styles.whatsappIcon}
-    onPress={() => handleWhatsappPress("+5531991650801")} 
-  />
-</TouchableOpacity>
+            <MaterialIcons
+              name="phone"
+              size={24}
+              color="#fff"
+              onPress={() => handlePhonePress("+5531991650801")} // Discar
+            />
+            <Text style={styles.contactText}>(31) 9 9165-0801 | Fábio</Text>
+            <FontAwesome
+              name="whatsapp"
+              size={24}
+              color="#D2B070"
+              style={styles.whatsappIcon}
+              onPress={() => handleWhatsappPress("+5531991650801")} // WhatsApp
+            />
+          </TouchableOpacity>
 
-<TouchableOpacity style={styles.contactButton}>
-  <MaterialIcons
-    name="phone"
-    size={24}
-    color="#fff"
-    onPress={() => handlePhonePress("+5531999883988")} 
-  />
-  <Text style={styles.contactText}>(31) 9 9988-3988 | Alexandre</Text>
-  <FontAwesome
-    name="whatsapp"
-    size={24}
-    color="#D2B070"
-    style={styles.whatsappIcon}
-    onPress={() => handleWhatsappPress("+5531999883988")} 
-  />
-</TouchableOpacity>
+          <TouchableOpacity style={styles.contactButton}>
+            <MaterialIcons
+              name="phone"
+              size={24}
+              color="#fff"
+              onPress={() => handlePhonePress("+5531999883988")} // Discar
+            />
+            <Text style={styles.contactText}>(31) 9 9988-3988 | Alexandre</Text>
+            <FontAwesome
+              name="whatsapp"
+              size={24}
+              color="#D2B070"
+              style={styles.whatsappIcon}
+              onPress={() => handleWhatsappPress("+5531999883988")} // WhatsApp
+            />
+          </TouchableOpacity>
           <View style={styles.line} />
 
           <TouchableOpacity
