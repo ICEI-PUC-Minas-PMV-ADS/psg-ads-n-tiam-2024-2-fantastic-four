@@ -4,7 +4,6 @@ import {
   View,
   TouchableOpacity,
   Image,
-  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import CustomInput from "@/components/customInput";
@@ -32,7 +31,11 @@ const SignIn = () => {
 
   const handleLogin = async () => {
     if (email === "" || password === "") {
-      Alert.alert("Erro", "Por favor, preencha todos os campos.");
+      Toast.show({
+        type: "error",
+        text1: "Erro",
+        text2: "Por favor, preencha todos os campos.",
+      });
       return;
     }
 
@@ -41,8 +44,7 @@ const SignIn = () => {
       password.replaceAll(" ", "")
     );
 
-    if (response.error) {
-      Alert.alert("Erro", response.error);
+    if (!response.success) {
       return;
     }
 
@@ -54,7 +56,7 @@ const SignIn = () => {
       <KeyboardAwareScrollView
         contentContainerStyle={{ flexGrow: 1 }}
         enableOnAndroid
-        extraHeight={100} 
+        extraHeight={100}
         extraScrollHeight={100}
       >
         <View
@@ -149,6 +151,10 @@ export default SignIn;
 const styles = StyleSheet.create({
   body: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    height: '100%',
     backgroundColor: "#121212",
   },
   login: {
