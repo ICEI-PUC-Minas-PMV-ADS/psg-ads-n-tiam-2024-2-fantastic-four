@@ -67,6 +67,8 @@ const SignUp = () => {
         text1: "Erro",
         text2: "As senhas não coincidem!",
       });
+      setLoading(false);
+
       return;
     }
 
@@ -83,6 +85,7 @@ const SignUp = () => {
         text1: "Existem campos vazios!",
         text2: "Preencha todos os campos.",
       });
+      setLoading(false);
       return;
     }
 
@@ -115,6 +118,7 @@ const SignUp = () => {
           text1: "Erro ao registrar usuário",
           text2: "usuário não encontrado",
         });
+        setLoading(false);
       }
     } catch (error: any) {
       Toast.show({
@@ -122,6 +126,7 @@ const SignUp = () => {
         text1: "Erro ao registrar usuário",
         text2: String(error.FirebaseError.Firebase),
       });
+      setLoading(false);
     }
     setLoading(false);
   };
