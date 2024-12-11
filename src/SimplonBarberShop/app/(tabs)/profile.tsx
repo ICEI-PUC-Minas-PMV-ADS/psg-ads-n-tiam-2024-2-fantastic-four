@@ -65,9 +65,7 @@ const Profile = () => {
               />
             </View>
             <View style={styles.footer}>
-              <Text style={styles.footerText} onPress={redefinirPassword}>
-                Redefinir Senha
-              </Text>
+             
               <Text style={styles.footerText} onPress={handleLogout}>
                 Sair do Aplicativo
               </Text>

@@ -10,6 +10,21 @@ import {
 import firebase from "../../service/firebaseConnection";
 import Toast from "react-native-toast-message";
 
+// Função para formatar o número de telefone
+const formatPhone = (phone: string) => {
+  // Remove qualquer caractere não numérico
+  let cleaned = phone.replace(/\D/g, "");
+
+  // Aplica a máscara (XX) XXXXX-XXXX
+  if (cleaned.length <= 10) {
+    cleaned = cleaned.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+  } else {
+    cleaned = cleaned.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+  }
+
+  return cleaned;
+};
+
 interface EditProfileModalProps {
   visible: boolean;
   onClose: () => void;
@@ -40,7 +55,10 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
       return;
     }
 
-    if (newPhone.replace(/\D/g, "").length < 11) {
+    // Remove qualquer formatação para validar a quantidade de dígitos
+    const plainPhone = newPhone.replace(/\D/g, "");
+
+    if (plainPhone.length < 11) {
       Toast.show({
         type: "error",
         text1: "Erro",
@@ -49,11 +67,14 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
       return;
     }
 
+    // Formata o telefone antes de salvar
+    const formattedPhone = formatPhone(newPhone);
+
     setLoading(true);
 
     try {
       await firebase.firestore().collection("users").doc(userId).update({
-        telefone: newPhone,
+        telefone: formattedPhone,
       });
       Toast.show({
         type: "success",
@@ -69,6 +90,16 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
       });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handlePhoneChange = (text: string) => {
+    // Limita o número de dígitos para 11 e aplica a formatação
+    const formattedPhone = formatPhone(text);
+    const phoneWithoutMask = formattedPhone.replace(/\D/g, "");
+
+    if (phoneWithoutMask.length <= 11) {
+      setNewPhone(formattedPhone);
     }
   };
 
@@ -93,7 +124,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
             <TextInput
               style={styles.input}
               value={newPhone}
-              onChangeText={setNewPhone}
+              onChangeText={handlePhoneChange}
               keyboardType="phone-pad"
               placeholder="Novo telefone"
               placeholderTextColor="#A9A9A9"
