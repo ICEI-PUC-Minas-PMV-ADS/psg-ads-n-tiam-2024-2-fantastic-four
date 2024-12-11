@@ -7,6 +7,8 @@ import "moment/locale/pt-br";
 import { Ionicons } from "@expo/vector-icons"; // Para ícones
 import CancelButton from "@/components/cancelButton";
 import useNotifications from "@/hooks/useNotification";
+import RescheduleModal from "@/components/modals/schedulling/RescheduleModal";
+import { Barber } from "@/utils/types";
 
 interface Scheduling {
   id: string;
@@ -20,14 +22,10 @@ interface Scheduling {
 
 const Historic = () => {
   const [appointments, setAppointments] = useState<Scheduling[]>([]);
-  const [upcomingAppointments, setUpcomingAppointments] = useState<
-    Scheduling[]
-  >([]);
   const [uid, setUid] = useState<string | null>(null);
   const { addNotification } = useNotifications();
   const [loading, setLoading] = useState(true);
 
-  // Fetch user ID (uid)
   useEffect(() => {
     const fetchUser = async () => {
       const user = firebase.auth().currentUser;
@@ -41,65 +39,65 @@ const Historic = () => {
 
   useEffect(() => {
     if (!uid) return;
-
-    const fetchAppointments = async () => {
-      setLoading(true); // Ativar o loading
-      try {
-        const snapshot = await firebase
-          .firestore()
-          .collection("schedullings")
-          .where("idUser", "==", uid)
-          .get();
-
-        const data: Scheduling[] = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...(doc.data() as Omit<Scheduling, "id">),
-        }));
-
-        const now = moment();
-
-        const upcoming = data
-          .filter((item) => {
-            const appointmentDate = moment(
-              `${item.day} ${item.time}`,
-              "YYYY-MM-DD HH:mm"
-            );
-            return appointmentDate.isAfter(now);
-          })
-          .sort((a, b) => {
-            const dateA = moment(`${a.day} ${a.time}`, "YYYY-MM-DD HH:mm");
-            const dateB = moment(`${b.day} ${b.time}`, "YYYY-MM-DD HH:mm");
-            return dateA.diff(dateB);
-          });
-
-        const history = data
-          .filter((item) => {
-            const appointmentDate = moment(
-              `${item.day} ${item.time}`,
-              "YYYY-MM-DD HH:mm"
-            );
-            return appointmentDate.isBefore(now);
-          })
-          .sort((a, b) => {
-            const dateA = moment(`${a.day} ${a.time}`, "YYYY-MM-DD HH:mm");
-            const dateB = moment(`${b.day} ${b.time}`, "YYYY-MM-DD HH:mm");
-            return dateB.diff(dateA);
-          });
-
-        setUpcomingAppointments(upcoming);
-        setAppointments(history);
-      } catch (error) {
-        console.error("Error fetching appointments:", error);
-      } finally {
-        setLoading(false); // Desativar o loading
-      }
-    };
-
-    fetchAppointments();
+  
+    const unsubscribe = firebase
+      .firestore()
+      .collection("schedullings")
+      .where("idUser", "==", uid)
+      .onSnapshot(
+        (snapshot) => {
+          setLoading(true);
+          try {
+            const data: Scheduling[] = snapshot.docs.map((doc) => ({
+              id: doc.id,
+              ...(doc.data() as Omit<Scheduling, "id">),
+            }));
+  
+            const now = moment();
+  
+            const pending = data.filter((item) => {
+              const appointmentDate = moment(
+                `${item.day} ${item.time}`,
+                "YYYY-MM-DD HH:mm"
+              );
+              return appointmentDate.isAfter(now) && item.status !== "canceled";
+            });
+  
+            const history = data.filter((item) => {
+              const appointmentDate = moment(
+                `${item.day} ${item.time}`,
+                "YYYY-MM-DD HH:mm"
+              );
+              return appointmentDate.isBefore(now) && item.status !== "canceled";
+            });
+  
+            const canceled = data.filter((item) => item.status === "canceled");
+  
+            setAppointments([
+              ...pending,
+              ...history.sort((a, b) => {
+                const dateA = moment(`${a.day} ${a.time}`, "YYYY-MM-DD HH:mm");
+                const dateB = moment(`${b.day} ${b.time}`, "YYYY-MM-DD HH:mm");
+                return dateB.diff(dateA);
+              }),
+              ...canceled,
+            ]);
+          } catch (error) {
+            console.error("Error fetching appointments:", error);
+          } finally {
+            setLoading(false);
+          }
+        },
+        (error) => {
+          console.error("Error with Firestore snapshot listener:", error);
+        }
+      );
+  
+    return () => unsubscribe();
   }, [uid]);
+  
 
   function cancelAgen(idSchedulling: string, dateSchedulling: string) {
-    console.log(idSchedulling);
     if (!uid) return;
 
     const schedullingRef = firebase
@@ -110,7 +108,6 @@ const Historic = () => {
     schedullingRef
       .update({
         status: "canceled",
-        time: [],
       })
       .then(() => {
         addNotification({
@@ -128,16 +125,31 @@ const Historic = () => {
       });
   }
 
-  const getBarberName = (idBarber: number) => {
-    switch (idBarber) {
-      case 1:
-        return "Fábio";
-      case 2:
-        return "Alexandre";
-      default:
-        return "Barbeiro";
-    }
-  };
+  function getBarberName(idBarber: string): string {
+    const barbers: Barber[] = [
+      {
+        uid: "QeKedO6vcAVMwJDbt6WyGsr7jcq1",
+        nome: "Fábio",
+        telefone: "31993273796",
+        email: "fabiodiniz@yahoo.com.br",
+        dataNascimento: "25/05/1972",
+        
+      },
+      {
+        uid: "Fl9b54rLMDZqo9dDMditGbdl91j1",
+        nome: "Alexandre",
+        telefone: "31999883988",
+        email: "xandecomaciel@yahoo.com.br",
+        dataNascimento: "24/01/1970",
+        
+      },
+    ];
+  
+    const barber = barbers.find((barber) => barber.uid === idBarber);
+    return barber ? barber.nome : "Barbeiro não encontrado";
+  }
+  
+  
 
   const renderServices = (services: { serviceName: string }[]) => {
     return services.map((service, index) => (
@@ -148,13 +160,14 @@ const Historic = () => {
     ));
   };
 
-  const renderCard = (item: Scheduling, isUpcoming: boolean) => {
+  const renderCard = (item: Scheduling) => {
     const appointmentDate = moment(
       `${item.day} ${item.time}`,
       "YYYY-MM-DD HH:mm"
     );
     const isPending = appointmentDate.isAfter(moment());
-
+    const isHistory = appointmentDate.isBefore(moment()) && item.status !== "canceled";
+  
     return (
       <View
         key={item.id}
@@ -162,10 +175,9 @@ const Historic = () => {
           styles.card,
           item.status === "canceled"
             ? styles.CanceledBord
-            : isUpcoming && isPending
+            : isPending
             ? styles.pendingCard
             : styles.historyCard,
-          ,
         ]}
       >
         <View style={styles.cardHeader}>
@@ -176,7 +188,7 @@ const Historic = () => {
               color={
                 item.status === "canceled"
                   ? "#5f5858"
-                  : isUpcoming && isPending
+                  : isPending
                   ? "#F8F8F8"
                   : "#979797"
               }
@@ -186,10 +198,10 @@ const Historic = () => {
                 item.status === "canceled" ? styles.textCancel : styles.text
               }
             >
-              {getBarberName(item.idBarber)}
+              {getBarberName(item.idBarber.toString())}
             </Text>
           </View>
-
+  
           <View style={styles.iconTextContainer}>
             <Ionicons
               name="calendar"
@@ -197,7 +209,7 @@ const Historic = () => {
               color={
                 item.status === "canceled"
                   ? "#5f5858"
-                  : isUpcoming && isPending
+                  : isPending
                   ? "#F8F8F8"
                   : "#979797"
               }
@@ -210,7 +222,7 @@ const Historic = () => {
               {moment(item.day).format("ddd, MMM D")}
             </Text>
           </View>
-
+  
           <View style={styles.iconTextContainer}>
             <Ionicons
               name="time"
@@ -218,7 +230,7 @@ const Historic = () => {
               color={
                 item.status === "canceled"
                   ? "#5f5858"
-                  : isUpcoming && isPending
+                  : isPending
                   ? "#F8F8F8"
                   : "#979797"
               }
@@ -232,33 +244,70 @@ const Historic = () => {
             </Text>
           </View>
         </View>
-
+  
         <View style={styles.separator} />
+        <View style={styles.servicesRow}>
+          <Text
+            style={
+              item.status === "canceled"
+                ? styles.textCancel
+                : styles.textServicoNome
+            }
+          >
+            {renderServices(item.services)}
+          </Text>
+        </View>
+  
         {item.status === "canceled" ? (
-          <>
-            <View style={[styles.servicesRow]}>
-              <Text style={styles.textCancel}>
-                {renderServices(item.services)}
-              </Text>
-            </View>
-          </>
+          <View style={styles.ButtonConfig}>
+            <Text style={styles.cancelText}>Cancelado</Text>
+          </View>
         ) : (
-          <View style={[styles.servicesRow]}>
-            <Text style={styles.textServicoNome}>
-                {renderServices(item.services)}
-              </Text>
+          <View style={styles.cancelButtonConfig}>
+            {isHistory && (
+              <RescheduleModal remarcar={item.id} />
+            )}
+            {!isHistory && (
+              <CancelButton onPress={() => cancelAgen(item.id, item.time)} />
+            )}
           </View>
         )}
+      </View>
+    );
+  };
+  
+  const renderSectionTitle = (title: string) => {
+    return <Text style={styles.sectionTitle}>{title}</Text>;
+  };
 
-        <View style={styles.cancelButtonConfig}>
-          {item.status === "canceled" ? (
-            <>
-              <Text style={styles.cancelText}>Cancelado</Text>
-            </>
-          ) : (
-            <CancelButton onPress={() => cancelAgen(item.id, item.time)} />
-          )}
-        </View>
+  const renderCardsByStatus = (status: string) => {
+    const filteredAppointments = appointments.filter((item) => {
+      const appointmentDate = moment(
+        `${item.day} ${item.time}`,
+        "YYYY-MM-DD HH:mm"
+      );
+      if (status === "pending") {
+        return appointmentDate.isAfter(moment()) && item.status !== "canceled";
+      } else if (status === "history") {
+        return appointmentDate.isBefore(moment()) && item.status !== "canceled";
+      } else if (status === "canceled") {
+        return item.status === "canceled";
+      }
+      return false;
+    });
+
+    if (filteredAppointments.length === 0) return null;
+
+    return (
+      <View>
+        {renderSectionTitle(
+          status === "pending"
+            ? "Próximos"
+            : status === "history"
+            ? "Histórico"
+            : "Cancelados"
+        )}
+        {filteredAppointments.map((item) => renderCard(item))}
       </View>
     );
   };
@@ -266,17 +315,7 @@ const Historic = () => {
   if (loading) {
     return (
       <MobileLayout>
-         <Text
-        style={{
-          marginBottom: 26,
-          fontFamily: "CircularSpotifyText-Bold",
-          color: "white",
-          fontSize: 15,
-          textAlign: 'center'
-        }}
-      >
-        Histórico de agendamentos
-      </Text>
+        <Text style={styles.sectionTitle}>Histórico de agendamentos</Text>
         <ActivityIndicator size="large" color="#AE8333" />
       </MobileLayout>
     );
@@ -284,20 +323,10 @@ const Historic = () => {
 
   return (
     <MobileLayout>
-      <Text
-        style={{
-          marginBottom: 26,
-          fontFamily: "CircularSpotifyText-Bold",
-          color: "white",
-          fontSize: 15,
-          textAlign: "center",
-        }}
-      >
-        Histórico de agendamentos
-      </Text>
-      {upcomingAppointments.map((item) => renderCard(item, true))}
-      <View style={styles.separatorLine} />
-      {appointments.map((item) => renderCard(item, false))}
+      <Text style={styles.sectionTitle}>Histórico de agendamentos</Text>
+      {renderCardsByStatus("pending")}
+      {renderCardsByStatus("history")}
+      {renderCardsByStatus("canceled")}
     </MobileLayout>
   );
 };
@@ -356,6 +385,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#AE8333",
     marginVertical: 15,
   },
+  ButtonConfig: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 10,
+  },
   cancelButtonConfig: {
     flex: 1,
     alignItems: "center",
@@ -373,8 +409,8 @@ const styles = StyleSheet.create({
   textCancel: {
     color: "#8d8282e4",
   },
-  textServicoNome:{
-color: "#fff",
+  textServicoNome: {
+    color: "#fff",
   },
 });
 
