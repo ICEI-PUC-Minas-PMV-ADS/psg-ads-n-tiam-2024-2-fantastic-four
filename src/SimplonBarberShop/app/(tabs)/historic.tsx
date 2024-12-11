@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from "react";
 import MobileLayout from "@/components/layout/mobileLayout";
 import firebase from "../../service/firebaseConnection";
 import moment from "moment";
 import "moment/locale/pt-br";
-import { Ionicons } from "@expo/vector-icons"; // Para ícones
+import { Ionicons } from "@expo/vector-icons";
 
 interface Scheduling {
   id: string;
@@ -21,6 +21,7 @@ const Historic = () => {
     []
   );
   const [uid, setUid] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   // Fetch user ID (uid)
   useEffect(() => {
@@ -38,6 +39,7 @@ const Historic = () => {
     if (!uid) return;
 
     const fetchAppointments = async () => {
+      setLoading(true); // Ativar o loading
       try {
         const snapshot = await firebase
           .firestore()
@@ -84,6 +86,8 @@ const Historic = () => {
         setAppointments(history);
       } catch (error) {
         console.error("Error fetching appointments:", error);
+      } finally {
+        setLoading(false); // Desativar o loading
       }
     };
 
@@ -164,6 +168,25 @@ const Historic = () => {
       </View>
     );
   };
+
+  if (loading) {
+    return (
+      <MobileLayout>
+         <Text
+        style={{
+          marginBottom: 26,
+          fontFamily: "CircularSpotifyText-Bold",
+          color: "white",
+          fontSize: 15,
+          textAlign: 'center'
+        }}
+      >
+        Histórico de agendamentos
+      </Text>
+        <ActivityIndicator size="large" color="#AE8333" />
+      </MobileLayout>
+    );
+  }
 
   return (
     <MobileLayout>

@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { Service } from "@/utils/types";
 
 interface ServiceSelectProps {
   onPress: () => void;
@@ -8,7 +9,7 @@ interface ServiceSelectProps {
 }
 const ServiceSelect = ({ onPress, selectedService }: ServiceSelectProps) => {
   return (
-    <View style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={onPress}>
       <View style={styles.section1}>
         <MaterialIcons name="content-cut" size={33} color="white" />
 
@@ -29,7 +30,7 @@ const ServiceSelect = ({ onPress, selectedService }: ServiceSelectProps) => {
           color={selectedService ? "#4ECB71" : "white"}
         />
       </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
   );
 };
 export default ServiceSelect;

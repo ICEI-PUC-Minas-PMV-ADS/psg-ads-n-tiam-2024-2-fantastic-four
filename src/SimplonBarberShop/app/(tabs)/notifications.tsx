@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import MobileLayout from "@/components/layout/mobileLayout";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import firebase from "firebase/compat";
 import NotificationCard from "@/components/notification/notificationCard";
 import { useAuthContext } from "../context/authContextProvider";
@@ -14,17 +20,18 @@ interface Notificacao {
   idUser: string; // ID do usuário associado à notificação
   isAction: boolean; // Indica se a notificação possui ação
   date: string; // Data da notificação no formato ISO
-  idSchedullings: string; 
+  idSchedullings: string;
 }
 export default function Notifications() {
   const [notificacoesHoje, setNotificacoesHoje] = useState<any[]>([]);
   const [notificacoesOutras, setNotificacoesOutras] = useState<any[]>([]);
   const { user } = useAuthContext();
   const { addNotification } = useNotifications();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!user?.uid) return;
-  
+    setLoading(true);
     const unsubscribe = firebase
       .firestore()
       .collection("notifications")
@@ -45,27 +52,27 @@ export default function Notifications() {
             } as Notificacao;
           })
           .filter((notificacao) => notificacao.status === "ler");
-  
+
         const hoje = new Date();
         hoje.setHours(0, 0, 0, 0);
-  
+
         const hojeNotificacoes = notificacoesData.filter((n) => {
           const notificacaoDate = new Date(n.date);
           return notificacaoDate >= hoje;
         });
-  
+
         const outrasNotificacoes = notificacoesData.filter((n) => {
           const notificacaoDate = new Date(n.date);
           return notificacaoDate < hoje;
         });
-  
+
         setNotificacoesHoje(hojeNotificacoes);
         setNotificacoesOutras(outrasNotificacoes);
+        setLoading(false);
       });
-  
+
     return () => unsubscribe();
   }, [user?.uid]);
-  
 
   const limparTodasNotificacoes = async () => {
     if (!user?.uid) return;
@@ -171,18 +178,47 @@ export default function Notifications() {
     }
   }
 
+  if (loading) {
+    return (
+      <MobileLayout>
+        <Text
+          style={{
+            marginBottom: 26,
+            fontFamily: "CircularSpotifyText-Bold",
+            color: "white",
+            fontSize: 15,
+            textAlign: "center",
+          }}
+        >
+          Notificações
+        </Text>
+        <ActivityIndicator size="large" color="#AE8333" />
+      </MobileLayout>
+    );
+  }
+
   return (
     <MobileLayout>
-      {(notificacoesHoje.length > 0 || notificacoesOutras.length > 0) && (
-        <View style={styles.clear}>
-          <TouchableOpacity
-            onPress={limparTodasNotificacoes}
-            style={styles.clearButton}
-          >
-            <Text style={styles.clearButtonText}>Limpar Todas</Text>
-          </TouchableOpacity>
-        </View>
-      )}
+      <View style={{flex: 2}}>
+        <Text
+          style={{
+            fontFamily: "CircularSpotifyText-Bold",
+            color: "white",
+            fontSize: 15,
+            textAlign: "center"
+          }}
+        >
+          Notificações
+        </Text>
+        {(notificacoesHoje.length > 0 || notificacoesOutras.length > 0) && (
+            <TouchableOpacity
+              onPress={limparTodasNotificacoes}
+              style={styles.clearButton}
+            >
+              <Text style={styles.clearButtonText}>Limpar Todas</Text>
+            </TouchableOpacity>
+        )}
+      </View>
 
       <View style={styles.container}>
         {notificacoesHoje.length > 0 && (
@@ -265,22 +301,14 @@ const styles = StyleSheet.create({
   cardButton: {
     marginVertical: 8,
   },
-  clear: {
-    flex: 1,
-    alignItems: "flex-end",
-  },
   clearButton: {
-    flex: 1,
-    justifyContent: "center",
+    width: "100%",
     backgroundColor: "transparent",
-    padding: 7,
-
-    width: "35%",
   },
   clearButtonText: {
     fontFamily: "CircularSpotifyText-Bold",
     color: "#d12f2f",
     fontSize: 12,
-    textAlign: "center",
+    textAlign: 'right',
   },
 });
