@@ -9,7 +9,7 @@ interface CustomerSelectProps {
 
 const CustomerSelect = ({ onPress, selectedCustomer }: CustomerSelectProps) => {
   return (
-    <View style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={onPress}>
       <View style={styles.section1}>
         <MaterialIcons name="person" size={33} color="white" />
         {selectedCustomer ? (
@@ -27,7 +27,7 @@ const CustomerSelect = ({ onPress, selectedCustomer }: CustomerSelectProps) => {
           color={selectedCustomer ? "#4ECB71" : "white"}
         />
       </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
   );
 };
 

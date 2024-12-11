@@ -49,29 +49,29 @@ const Schedulling = () => {
     }
     if (user) {
       let payload;
-      if(user?.isBarber){
-      payload = {
-        day: selectedTime.date,
-        time: selectedTime.time,
-        idUser: selectedCustomer?.uid,
-        idBarber: user.uid,
-        services: [selectedService],
-        products: [],
-        totalPrice: selectedService.price || 0,
-        status: "pending",
-      };
-    } else {
-      payload = {
-        day: selectedTime.date,
-        time: selectedTime.time,
-        idUser: user.uid,
-        idBarber: selectedBarber.uid,
-        services: [selectedService],
-        products: [],
-        totalPrice: selectedService.price || 0,
-        status: "pending",
-      };
-    }
+      if (user?.isBarber) {
+        payload = {
+          day: selectedTime.date,
+          time: selectedTime.time,
+          idUser: selectedCustomer?.uid,
+          idBarber: user.uid,
+          services: [selectedService],
+          products: [],
+          totalPrice: selectedService.price || 0,
+          status: "pending",
+        };
+      } else {
+        payload = {
+          day: selectedTime.date,
+          time: selectedTime.time,
+          idUser: user.uid,
+          idBarber: selectedBarber.uid,
+          services: [selectedService],
+          products: [],
+          totalPrice: selectedService.price || 0,
+          status: "pending",
+        };
+      }
 
       try {
         const agendamento = await firebase
@@ -90,9 +90,9 @@ const Schedulling = () => {
         });
 
         Alert.alert("Sucesso", "Agendamento concluído com sucesso!");
-        setSelectedTime(null)
-        setSelectedService(null)
-        setSelectedCustomer(null)
+        setSelectedTime(null);
+        setSelectedService(null);
+        setSelectedCustomer(null);
       } catch (e) {
         Alert.alert("Erro", "Erro ao salvar agendamento");
       }
@@ -133,14 +133,18 @@ const Schedulling = () => {
               TOTAL: {`R$ ${selectedService?.price?.toFixed(2)}`}
             </Text>
           )}
-          <CustomButton
-            title={"CONCLUIR AGENDAMENTO"}
-            onPress={handleSubmit}
-            buttonStyle={{}}
-            width={"100%"}
-            backgroundColor={"#D2B070"}
-            textColor={"black"}
-          />
+          {(selectedBarber || selectedCustomer) &&
+            selectedService &&
+            selectedTime && (
+              <CustomButton
+                title={"CONCLUIR AGENDAMENTO"}
+                onPress={handleSubmit}
+                buttonStyle={{}}
+                width={"100%"}
+                backgroundColor={"#D2B070"}
+                textColor={"black"}
+              />
+            )}
         </View>
       </View>
       <CustomModal visible={isBarberVisible}>

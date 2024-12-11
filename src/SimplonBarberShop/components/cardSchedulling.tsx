@@ -34,7 +34,7 @@ const CardSchedulling: React.FC<CardSchedullingProps> = ({ schedulling }) => {
   return (
     <View style={styles.cardContainer}>
       <View style={styles.cardHeader}>
-        <Text style={styles.barberName}>Barbeiro: {userNames}</Text>
+        <Text style={styles.barberName}><Text style={{fontFamily: "CircularSpotifyText-Medium"}}>Barbeiro | </Text> {userNames.split(" ")[0]}</Text>
         <Text style={styles.date}>
           {formatDateToDDMMYYYY(schedulling?.day)}
         </Text>
@@ -67,7 +67,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#3A3A3A",
     borderRadius: 8,
     padding: 12,
-    marginTop: 10,
   },
   cardHeader: {
     flexDirection: "row",
@@ -75,18 +74,18 @@ const styles = StyleSheet.create({
     marginBottom: 1,
   },
   barberName: {
-    fontSize: 17,
+    fontSize: 14,
     color: "#FFFFFF",
-    fontFamily: "CircularSpotifyText-Book.ttf",
+    fontFamily: "CircularSpotifyText-Book",
   },
   date: {
-    fontSize: 15,
+    fontSize: 14,
     color: "#FFFFFF",
   },
   serviceName: {
     color: "#FFFFFF",
     marginTop: 1,
-    fontSize: 17,
+    fontSize: 14,
     fontFamily: "CircularSpotifyText-Book",
   },
   timeContainer: {
@@ -95,7 +94,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   time: {
-    fontSize: 17,
+    fontSize: 14,
     color: "#FFFFFF",
   },
   statusIndicator: {

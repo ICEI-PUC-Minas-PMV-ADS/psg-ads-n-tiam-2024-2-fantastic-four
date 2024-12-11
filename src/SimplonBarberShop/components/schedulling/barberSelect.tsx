@@ -9,7 +9,7 @@ interface BarberSelectProps {
 
 const BarberSelect = ({ onPress, selectedBarber }: BarberSelectProps) => {
   return (
-    <View style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={onPress}>
       <View style={styles.section1}>
         {selectedBarber ? (
           <Image source={{ uri: selectedBarber.image }} style={styles.image} />
@@ -31,7 +31,7 @@ const BarberSelect = ({ onPress, selectedBarber }: BarberSelectProps) => {
           color={selectedBarber ? "#4ECB71" : "white"}
         />
       </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
   );
 };
 
