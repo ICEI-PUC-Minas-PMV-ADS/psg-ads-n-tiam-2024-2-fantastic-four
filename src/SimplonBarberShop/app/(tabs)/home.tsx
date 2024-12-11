@@ -10,7 +10,7 @@ import CardSchedulling from "@/components/cardSchedulling";
 import { NoAppointment } from "@/components/noAppointmen";
 import firebase from "firebase/compat";
 import moment from "moment";
-
+import Toast from "react-native-toast-message";
 
 function convertDateToISOFormat(date: string): string {
   const [day, month, year] = date.split("/").map(Number);
@@ -31,13 +31,15 @@ interface Scheduling {
 const Home = () => {
   const { user } = useAuthContext();
   const navigation = useNavigation();
-  const uid = user?.uid
+  const uid = user?.uid;
   const firstName = user?.nome?.split(" ")[0];
   const formattedFirstName = firstName
     ? firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase()
     : "";
 
-  const [nextSchedulling, setNextSchedulling] = useState<Scheduling|null>(null);
+  const [nextSchedulling, setNextSchedulling] = useState<Scheduling | null>(
+    null
+  );
 
   useEffect(() => {
     if (!uid) return;
@@ -80,6 +82,14 @@ const Home = () => {
     fetchAppointments();
   }, []);
 
+  useEffect(() => {
+    Toast.show({
+      type: "success",
+      text1: `Bem vindo ${user?.nome?.split(" ")[0]}!`,
+      text2: "Login realizado com sucesso",
+    });
+  }, [user?.uid]);
+  
   const navigateToSchedulingTab = () => {
     navigation.navigate("schedullingTab" as never);
   };
@@ -103,20 +113,23 @@ const Home = () => {
       >
         Olá, {formattedFirstName}
       </Text>
-        {!user?.isBarber && (<><View style={styles.textAppointment}>
-        <Text style={styles.title}>Próximos agendamentos</Text>
-      </View>
+      {!user?.isBarber && (
+        <>
+          <View style={styles.textAppointment}>
+            <Text style={styles.title}>Próximos agendamentos</Text>
+          </View>
 
-      <ScrollView style={{ marginTop: 20 }}>
-        {nextSchedulling ? (
-          <CardSchedulling schedulling={nextSchedulling} />
-        ) : (
-          <NoAppointment />
-        )}
-      </ScrollView>
+          <ScrollView style={{ marginTop: 20 }}>
+            {nextSchedulling ? (
+              <CardSchedulling schedulling={nextSchedulling} />
+            ) : (
+              <NoAppointment />
+            )}
+          </ScrollView>
 
-      <View style={styles.separatorLine} /></>)}
-      
+          <View style={styles.separatorLine} />
+        </>
+      )}
 
       <View style={{ display: "flex", gap: 12 }}>
         <CustomButton

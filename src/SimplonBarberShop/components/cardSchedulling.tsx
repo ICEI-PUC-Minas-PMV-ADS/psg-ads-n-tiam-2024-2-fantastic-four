@@ -24,7 +24,7 @@ const CardSchedulling: React.FC<CardSchedullingProps> = ({ schedulling }) => {
           setUserNames(userName);
         }
       } catch (error) {
-        console.error("Erro ao buscar nome do usuário:", error);
+       return;
       }
     };
 

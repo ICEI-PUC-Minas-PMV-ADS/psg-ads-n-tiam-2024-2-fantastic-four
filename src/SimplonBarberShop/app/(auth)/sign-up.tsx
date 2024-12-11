@@ -17,6 +17,7 @@ import CustomInput from "@/components/customInput";
 import GoogleImg from "../../assets/images/googleImg.png";
 import firebase from "../../service/firebaseConnection";
 import { useRouter } from "expo-router";
+import Toast from "react-native-toast-message";
 
 const SignUp = () => {
   const scrollViewRef = useRef<ScrollView>(null);
@@ -58,7 +59,11 @@ const SignUp = () => {
 
   const handleSignUp = async () => {
     if (password !== confirmPassword) {
-      alert("As senhas não coincidem!");
+      Toast.show({
+        type: 'error',
+        text1: 'Erro',
+        text2: 'As senha não coincidem'
+      })
       return;
     }
 
