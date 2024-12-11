@@ -106,6 +106,7 @@ const SignUp = () => {
         });
 
         router.push("/(auth)/sign-in");
+        
       } else {
         Toast.show({
           type: "error",
