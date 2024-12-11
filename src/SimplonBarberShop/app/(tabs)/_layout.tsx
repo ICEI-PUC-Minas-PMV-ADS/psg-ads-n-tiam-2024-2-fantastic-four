@@ -30,7 +30,7 @@ type DrawerNavigatorParamList = {
   statisticsTab: undefined;
   customersDrawer: undefined;
   statisticsDrawer: undefined;
-  logoutDrawer: undefined
+  logoutDrawer: undefined;
 };
 
 type TabNavigatorParamList = {
@@ -176,7 +176,6 @@ const TabsLayout: React.FC<{ tab: string }> = ({ tab }) => {
 };
 
 export default function DrawerWithTabs() {
-
   const commonScreenOptions = {
     drawerStyle: {
       backgroundColor: "black",
@@ -194,7 +193,6 @@ export default function DrawerWithTabs() {
     signOut();
     router.push("/");
   };
-
 
   return (
     <>
@@ -277,14 +275,15 @@ export default function DrawerWithTabs() {
               ),
               drawerLabel: "Fazer Logout",
             }}
-            component={() => null}
             listeners={{
               drawerItemPress: (e) => {
                 e.preventDefault();
-                handleLogout()
+                handleLogout();
               },
             }}
-          />
+          >
+            {() => null}
+          </Drawer.Screen>
         </Drawer.Navigator>
       ) : (
         <Drawer.Navigator screenOptions={commonScreenOptions}>
@@ -361,14 +360,15 @@ export default function DrawerWithTabs() {
               ),
               drawerLabel: "Fazer Logout",
             }}
-            component={() => null} // Componente vazio ou lógica de navegação
             listeners={{
               drawerItemPress: (e) => {
                 e.preventDefault();
-                handleLogout()
+                handleLogout();
               },
             }}
-          />
+          >
+            {() => null}
+          </Drawer.Screen>
         </Drawer.Navigator>
       )}
       <Toast config={toastConfig} />
