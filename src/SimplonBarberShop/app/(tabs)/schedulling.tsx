@@ -55,7 +55,7 @@ const Schedulling = () => {
       let payload;
       if (user?.isBarber) {
         payload = {
-          day: selectedTime.date,
+          day: selectedTime.date.dateString,
           time: selectedTime.time,
           idUser: selectedCustomer?.uid,
           idBarber: user.uid,
@@ -66,7 +66,7 @@ const Schedulling = () => {
         };
       } else {
         payload = {
-          day: selectedTime.date,
+          day: selectedTime.date.dateString,
           time: selectedTime.time,
           idUser: user.uid,
           idBarber: selectedBarber.uid,

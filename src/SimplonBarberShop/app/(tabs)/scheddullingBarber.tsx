@@ -1,4 +1,10 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import MobileLayout from "@/components/layout/mobileLayout";
 import firebase from "firebase/compat";
@@ -17,14 +23,17 @@ const SchedulingBarber = () => {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedSchedullings, setSelectedSchedullings] = useState<any[]>([]);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [loadingSchedullings, setLoadingSchedullings] = useState(true);
+  const [loadingUserNames, setLoadingUserNames] = useState(false);
 
   useEffect(() => {
     if (!user?.uid) return;
 
     const fetchSchedullings = async () => {
+      setLoadingSchedullings(true);
       const today = new Date();
       const todayFormatted = formatDate(today);
-      console.log(todayFormatted);
+
       firebase
         .firestore()
         .collection("schedullings")
@@ -36,6 +45,7 @@ const SchedulingBarber = () => {
             ...doc.data(),
           }));
           setSchedullings(agendamentos);
+          setLoadingSchedullings(false);
         });
     };
 
@@ -60,6 +70,7 @@ const SchedulingBarber = () => {
   // Carregar nomes dos usuários para os agendamentos
   useEffect(() => {
     const fetchUserNames = async () => {
+      setLoadingUserNames(true);
       const userNamesMap: any = {};
       for (let scheduling of schedullings) {
         const userRef = firebase
@@ -72,13 +83,13 @@ const SchedulingBarber = () => {
         }
       }
       setUserNames(userNamesMap);
+      setLoadingUserNames(false);
     };
 
     if (schedullings.length > 0) {
       fetchUserNames();
     }
   }, [schedullings]);
-
 
   const handleSelectDate = (day: any) => {
     const correctedDate = new Date(day.timestamp);
@@ -91,7 +102,6 @@ const SchedulingBarber = () => {
     fetchSelectedSchedullings(adjustedDate);
     setModalVisible(true);
   };
-  
 
   const closeModal = () => {
     setModalVisible(false);
@@ -115,7 +125,9 @@ const SchedulingBarber = () => {
         >
           HOJE
         </Text>
-        {schedullings.length > 0 ? (
+        {loadingSchedullings ? (
+          <ActivityIndicator size="large" color="#d2b070" />
+        ) : schedullings.length > 0 ? (
           <>
             {isExpanded
               ? schedullings.map((scheduling) => (
@@ -127,7 +139,10 @@ const SchedulingBarber = () => {
                           fontFamily: "CircularSpotifyText-Medium",
                         }}
                       >
-                        {userNames[scheduling.idUser] || "Nome não encontrado"}
+                        {loadingUserNames
+                          ? "Carregando..."
+                          : userNames[scheduling.idUser] ||
+                            "Nome não encontrado"}
                       </Text>
                       {scheduling.services.map(
                         (service: any, index: number) => (
@@ -172,7 +187,10 @@ const SchedulingBarber = () => {
                           fontFamily: "CircularSpotifyText-Medium",
                         }}
                       >
-                        {userNames[scheduling.idUser] || "Nome não encontrado"}
+                        {loadingUserNames
+                          ? "Carregando..."
+                          : userNames[scheduling.idUser] ||
+                            "Nome não encontrado"}
                       </Text>
                       {scheduling.services.map(
                         (service: any, index: number) => (
@@ -220,7 +238,9 @@ const SchedulingBarber = () => {
                     fontFamily: "CircularSpotifyText-Medium",
                   }}
                 >
-                  {isExpanded ? `Fechar` : `Ver Mais (${schedullings.length - 2})`}
+                  {isExpanded
+                    ? `Fechar`
+                    : `Ver Mais (${schedullings.length - 2})`}
                 </Text>
               </TouchableOpacity>
             )}
