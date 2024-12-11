@@ -17,6 +17,7 @@ import CustomInput from "@/components/customInput";
 import GoogleImg from "../../assets/images/googleImg.png";
 import firebase from "../../service/firebaseConnection";
 import { useRouter } from "expo-router";
+import Toast from "react-native-toast-message";
 
 const SignUp = () => {
   const scrollViewRef = useRef<ScrollView>(null);
@@ -30,7 +31,7 @@ const SignUp = () => {
   const [nome, setNome] = useState("");
   const [dataNascimento, setDataNascimento] = useState("");
   const [telefone, setTelefone] = useState("");
-  const [tipo, setTipo] = useState("cliente");
+  const [isBarber, setIsBarber] = useState(true);
 
   const handleNextStep = () => {
     if (currentStep < 1) {
@@ -58,7 +59,11 @@ const SignUp = () => {
 
   const handleSignUp = async () => {
     if (password !== confirmPassword) {
-      alert("As senhas não coincidem!");
+      Toast.show({
+        type: 'error',
+        text1: 'Erro',
+        text2: 'As senha não coincidem'
+      })
       return;
     }
 
@@ -75,7 +80,7 @@ const SignUp = () => {
           nome: nome,
           telefone: telefone,
           dataNascimento: dataNascimento,
-          tipo: tipo,
+          isBarber: isBarber,
         });
 
         console.log("Dados adicionais salvos no Firestore");

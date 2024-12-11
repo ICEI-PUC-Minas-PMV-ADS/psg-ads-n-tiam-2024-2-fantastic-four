@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import CustomButton from "@/components/customButton";
 import { Calendar, DateData, LocaleConfig } from "react-native-calendars";
 import firebase from "firebase/compat";
+import { Time } from "@/utils/types";
 
 LocaleConfig.locales["pt-br"] = {
   monthNames: [
@@ -73,26 +74,14 @@ const horarios = [
 interface TimeSelectModalProps {
   onClose: () => void;
   onSelectTime: (time: Time) => void;
+  selectedBarber: string | undefined;
 }
 
-const times = [
-  {
-    id: 1,
-    day: "13",
-    time: ["10:00"],
-    status: true,
-  },
-  {
-    id: 1,
-    day: "3",
-    time: "11:00",
-    status: true,
-  },
-];
 
 export default function TimeSelectModal({
   onClose,
   onSelectTime,
+  selectedBarber,
 }: TimeSelectModalProps) {
   const [isSelected, setIsSelected] = useState(false);
 
@@ -118,12 +107,17 @@ export default function TimeSelectModal({
     const agendamentos = await firebase
       .firestore()
       .collection("schedullings")
-      .where("date", "==", selectedDay.dateString)
+      .where("day", "==", selectedDay.dateString)
       .get();
 
-    const horariosIndisponiveis = agendamentos.docs.flatMap(
-      (doc) => doc.data().hours
+    const agendamentosForSelectedBarber = agendamentos.docs.filter(
+      (doc) => doc.data().idBarber === selectedBarber
     );
+
+    const horariosIndisponiveis = agendamentosForSelectedBarber.flatMap(
+      (doc) => doc.data().time
+    );
+
     const horariosDisponiveisFiltrados = horarios.filter(
       (horario) => !horariosIndisponiveis.includes(horario)
     );
@@ -149,23 +143,26 @@ export default function TimeSelectModal({
           }
         }
       />
-      <View style={styles.horarioList}>
-        {horariosDisponiveis.map((hour: string, index: number) => (
-          <TouchableOpacity
-            key={index}
-            onPress={() => setHorarioEscolhido([hour])}
-            style={[
-              styles.botaoHorario,
-              horarioEscolhido.includes(hour) && {
-                borderWidth: 1,
-                borderColor: "#4ECB71",
-              },
-            ]}
-          >
-            <Text style={{ color: "white" }}>{hour}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
+      {horariosDisponiveis.length > 1 && (
+        <View style={styles.horarioList}>
+          {horariosDisponiveis.map((hour: string, index: number) => (
+            <TouchableOpacity
+              key={index}
+              onPress={() => setHorarioEscolhido([hour])}
+              style={[
+                styles.botaoHorario,
+                horarioEscolhido.includes(hour) && {
+                  borderWidth: 1,
+                  borderColor: "#4ECB71",
+                },
+              ]}
+            >
+              <Text style={{ color: "white" }}>{hour}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      )}
+
       <View>
         <CustomButton
           title="Confirmar"
@@ -175,6 +172,7 @@ export default function TimeSelectModal({
           textColor="black"
           buttonStyle={{
             height: 35,
+            marginTop: 10
           }}
         />
       </View>

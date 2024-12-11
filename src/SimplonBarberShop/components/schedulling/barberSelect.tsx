@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { Barber } from "@/utils/types";
 interface BarberSelectProps {
   onPress: () => void;
   selectedBarber: Barber | null;
@@ -17,7 +18,7 @@ const BarberSelect = ({ onPress, selectedBarber }: BarberSelectProps) => {
         )}
         {selectedBarber ? (
           <Text style={styles.text2}>
-            {selectedBarber ? selectedBarber.name : "Escolha o barbeiro"}
+            {selectedBarber ? selectedBarber.nome : "Escolha o barbeiro"}
           </Text>
         ) : (
           <Text style={styles.text1}>Escolha o barbeiro</Text>

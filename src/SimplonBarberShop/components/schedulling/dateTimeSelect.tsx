@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { formatDateToDDMMYYYY } from "@/utils/utils";
+import { Time } from "@/utils/types";
 
 interface timeSelectProps {
   onPress: () => void;

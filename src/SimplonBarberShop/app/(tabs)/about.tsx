@@ -3,22 +3,39 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
   ScrollView,
   TouchableOpacity,
   Linking,
+  Image,
 } from "react-native";
-import logo from "../../assets/images/logo.png";
+import MapView, { Marker } from "react-native-maps";
 import MobileLayout from "@/components/layout/mobileLayout";
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
+import logo from "../../assets/images/logo.png";
+import Fabio from "../../assets/images/Fabio.png";
+import Alexandre from "../../assets/images/Alexandre.png";
+import Video from "react-native-video";
 
 const About = () => {
   const handlePhonePress = (phone: string) => {
     Linking.openURL(`tel:${phone}`);
   };
 
+  const handleWhatsappPress = (phoneNumber: string) => {
+    Linking.openURL(`whatsapp://send?phone=${phoneNumber}`);
+  };
+
   const handleInstagramPress = () => {
-    Linking.openURL("https://www.instagram.com/barbeariasimplon"); // Substitua pelo link correto
+    Linking.openURL("https://www.instagram.com/barbeariasimplon");
+  };
+
+  const handleOpenInMaps = () => {
+    const latitude = -19.93802;
+    const longitude = -43.9802;
+    const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+    Linking.openURL(url).catch((err) =>
+      console.error("Erro ao abrir o mapa:", err)
+    );
   };
 
   return (
@@ -27,43 +44,43 @@ const About = () => {
         <View style={styles.logoContainer}>
           <Image source={logo} style={styles.logo} />
           <Text style={styles.description}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-            aliquam efficitur posuere. Vestibulum pretium sapien augue, in porta
-            justo tempor non. Cras nec arcu ut ipsum sodales convallis vel quis
-            orci. Cras aliquet tempor erat et consectetur. Phasellus sed massa
-            cursus turpis mattis placerat. Sed lobortis quam id odio ultrices,
-            vel pulvinar augue laoreet. Aliquam.
+            Há 30 anos, uma amizade deu origem a uma parceria que se transformou
+            em uma história de sucesso e tradição: a Barbearia Simplon. No mesmo
+            endereço onde tudo começou, mantemos vivo o espírito de acolhimento
+            e excelência que conquistou gerações. Dois amigos, movidos pela
+            paixão pelo ofício e pela vontade de fazer a diferença, se uniram
+            sem imaginar que essa sociedade resistiria ao tempo e se tornaria
+            referência na comunidade. Hoje, temos o orgulho de atender amigos
+            que estão conosco desde os primeiros dias e de dar as boas-vindas à
+            terceira geração de clientes, filhos e netos daqueles que nos
+            confiaram sua confiança e seu estilo.
           </Text>
         </View>
 
-        <View style={styles.videoContainer}>
-          <Image
-            source={{ uri: "https://via.placeholder.com/300x150" }}
-            style={styles.videoThumbnail}
+        {/*<View style={styles.videoContainer}>
+          <Video
+            source={require("../../videoApresentacao.mp4")} // Corrigir o caminho do vídeo
+            style={styles.video}
+            controls={true} // Mostra controles de play/pause
+            resizeMode="cover" // Ajusta o vídeo para cobrir a área
           />
-        </View>
+        </View>*/}
 
         <View style={styles.ceoContainer}>
           <View style={styles.ceoProfile}>
-            <Image
-              source={{ uri: "https://via.placeholder.com/100" }}
-              style={styles.ceoImage}
-            />
+            <Image source={Fabio} style={styles.ceoImage} />
             <Text style={styles.ceoName}>CEO e Barbeiro Fábio</Text>
             <Text style={styles.ceoDescription}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a
-              elit in orci volutpat venenatis. Quisque imperdiet rhoncus elit.
+              Com mais de 30 anos de experiência como barbeiro, Fábio é um dos
+              fundadores da Barbearia Simplon.
             </Text>
           </View>
           <View style={styles.ceoProfile}>
-            <Image
-              source={{ uri: "https://via.placeholder.com/100" }}
-              style={styles.ceoImage}
-            />
+            <Image source={Alexandre} style={styles.ceoImage} />
             <Text style={styles.ceoName}>CEO e Barbeiro Alexandre</Text>
             <Text style={styles.ceoDescription}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a
-              elit in orci volutpat venenatis. Quisque imperdiet rhoncus elit.
+              Co-fundador da Barbearia Simplon, Alexandre soma mais de três
+              décadas de dedicação à profissão de barbeiro.
             </Text>
           </View>
         </View>
@@ -73,57 +90,87 @@ const About = () => {
           <Text style={styles.address}>
             Rua Monte Simplon, 1124 - Salgado Filho
           </Text>
-          <Image
-            source={{ uri: "https://via.placeholder.com/300x200" }}
+          <MapView
             style={styles.map}
-          />
+            initialRegion={{
+              latitude: -19.93823,
+              longitude: -43.98028,
+              latitudeDelta: 0.001,
+              longitudeDelta: 0.001,
+            }}
+            scrollEnabled={false}
+            zoomEnabled={false}
+          >
+            <Marker
+              coordinate={{ latitude: -19.93823, longitude: -43.98028 }}
+              onPress={handleOpenInMaps}
+            />
+          </MapView>
+
+          {/* Botão para abrir diretamente no Google Maps */}
+          <TouchableOpacity onPress={handleOpenInMaps}>
+            <Text>Abrir no Maps</Text>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.contactContainer}>
           <Text style={styles.contactTitle}>Contato</Text>
+
           <TouchableOpacity
             style={styles.contactButtonWithoutIcon}
             onPress={() => handlePhonePress("(31) 3372-1686")}
           >
             <MaterialIcons name="phone" size={24} color="#fff" />
-            <Text style={styles.contactText}>(31) 3372-1686</Text>
+            <Text
+              style={{
+                fontSize: 14,
+                color: "#fff",
+                marginLeft: 8,
+                textAlign: "center",
+              }}
+            >
+              (31) 3372-1686
+            </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.contactButton}
-            onPress={() => handlePhonePress("(31) 9 9165-0801")}
-          >
-            <MaterialIcons name="phone" size={24} color="#fff" />
+          <TouchableOpacity style={styles.contactButton}>
+            <MaterialIcons
+              name="phone"
+              size={24}
+              color="#fff"
+              onPress={() => handlePhonePress("+5531991650801")} // Discar
+            />
             <Text style={styles.contactText}>(31) 9 9165-0801 | Fábio</Text>
             <FontAwesome
               name="whatsapp"
               size={24}
               color="#D2B070"
               style={styles.whatsappIcon}
+              onPress={() => handleWhatsappPress("+5531991650801")} // WhatsApp
             />
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.contactButton}
-            onPress={() => handlePhonePress("(31) 9 9988-3988")}
-          >
-            <MaterialIcons name="phone" size={24} color="#fff" />
+          <TouchableOpacity style={styles.contactButton}>
+            <MaterialIcons
+              name="phone"
+              size={24}
+              color="#fff"
+              onPress={() => handlePhonePress("+5531999883988")} // Discar
+            />
             <Text style={styles.contactText}>(31) 9 9988-3988 | Alexandre</Text>
             <FontAwesome
               name="whatsapp"
               size={24}
               color="#D2B070"
               style={styles.whatsappIcon}
+              onPress={() => handleWhatsappPress("+5531999883988")} // WhatsApp
             />
           </TouchableOpacity>
-
           <View style={styles.line} />
 
           <TouchableOpacity
             style={styles.instagramContainer}
-            onPress={() =>
-              Linking.openURL("https://instagram.com/barbeariasimplon")
-            }
+            onPress={handleInstagramPress}
           >
             <FontAwesome name="instagram" size={32} color="#D2B070" />
             <Text style={styles.instagramText}>@barbeariasimplon</Text>
@@ -137,18 +184,9 @@ const About = () => {
 export default About;
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-  },
-  logoContainer: {
-    alignItems: "center",
-    marginBottom: 20,
-  },
-  logo: {
-    width: 161,
-    height: 168,
-    resizeMode: "contain",
-  },
+  container: { padding: 16 },
+  logoContainer: { alignItems: "center", marginBottom: 20 },
+  logo: { width: 161, height: 168, resizeMode: "contain" },
   description: {
     textAlign: "justify",
     fontSize: 14,
@@ -173,17 +211,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 16,
   },
-  ceoProfile: {
-    alignItems: "center",
-    flex: 1,
-    marginHorizontal: 8,
-  },
-  ceoImage: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    marginBottom: 8,
-  },
+  ceoProfile: { alignItems: "center", flex: 1, marginHorizontal: 8 },
+  ceoImage: { width: 80, height: 80, borderRadius: 40, marginBottom: 8 },
   ceoName: {
     fontSize: 16,
     fontWeight: "bold",
@@ -196,9 +225,7 @@ const styles = StyleSheet.create({
     textAlign: "justify",
     marginBottom: 35,
   },
-  mapContainer: {
-    marginBottom: 49,
-  },
+  mapContainer: { marginBottom: 49 },
   locationTitle: {
     fontSize: 16,
     fontWeight: "bold",
@@ -211,15 +238,8 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     textAlign: "justify",
   },
-  map: {
-    width: "100%",
-    height: 200,
-    borderRadius: 8,
-  },
-  contactContainer: {
-    alignItems: "center",
-    marginBottom: 16,
-  },
+  map: { width: "100%", height: 200, borderRadius: 8 },
+  contactContainer: { alignItems: "center", marginBottom: 16 },
   contactTitle: {
     fontSize: 20,
     fontWeight: "bold",
@@ -229,7 +249,7 @@ const styles = StyleSheet.create({
   contactButtonWithoutIcon: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 45,
+    justifyContent: "center",
     backgroundColor: "rgba(161, 161, 161, 0.23)",
     borderRadius: 8,
     padding: 12,
@@ -246,16 +266,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     width: "90%",
   },
-  contactItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 8,
-  },
-  contactText: {
-    fontSize: 14,
-    color: "#fff",
-    marginLeft: 8,
-  },
+  contactText: { fontSize: 14, color: "#fff", marginLeft: 8 },
   line: {
     height: 1,
     backgroundColor: "#D2B070",
@@ -263,21 +274,11 @@ const styles = StyleSheet.create({
     width: "80%",
     marginVertical: 16,
   },
-  instagramItem: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  whatsappIcon: {
-    marginLeft: 8,
-  },
-
-  instagramContainer: {
-    alignItems: "center",
-    marginTop: 8,
-  },
-  instagramText: {
-    color: "#FFFFFF",
-    fontSize: 15,
-    marginTop: 8,
+  instagramContainer: { alignItems: "center", marginTop: 8 },
+  instagramText: { color: "#FFFFFF", fontSize: 15, marginTop: 8 },
+  whatsappIcon: { marginLeft: 8 },
+  video: {
+    width: "100%",
+    height: "100%",
   },
 });
