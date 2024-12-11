@@ -60,19 +60,26 @@ const SignUp = () => {
   const handleSignUp = async () => {
     if (password !== confirmPassword) {
       Toast.show({
-        type: 'error',
-        text1: 'Erro',
-        text2: 'As senhas não coincidem!'
-      })
+        type: "error",
+        text1: "Erro",
+        text2: "As senhas não coincidem!",
+      });
       return;
     }
 
-    if(!email || !password || !confirmPassword || !nome || !telefone || !dataNascimento) {
+    if (
+      !email ||
+      !password ||
+      !confirmPassword ||
+      !nome ||
+      !telefone ||
+      !dataNascimento
+    ) {
       Toast.show({
-        type: 'error',
-        text1: 'Existem campos vazios!',
-        text2: 'Preencha todos os campos.'
-      })
+        type: "error",
+        text1: "Existem campos vazios!",
+        text2: "Preencha todos os campos.",
+      });
       return;
     }
 
@@ -93,26 +100,25 @@ const SignUp = () => {
         });
 
         Toast.show({
-          type: 'success',
-          text1: 'Sucesso!',
-          text2: 'Cadastro realizado com sucesso.'
-        })
+          type: "success",
+          text1: "Sucesso!",
+          text2: "Cadastro realizado com sucesso.",
+        });
 
         router.push("/(auth)/sign-in");
-        
       } else {
         Toast.show({
-          type: 'error',
-          text1: 'Erro ao registrar usuário',
-          text2: 'usuário não encontrado'
-        })
+          type: "error",
+          text1: "Erro ao registrar usuário",
+          text2: "usuário não encontrado",
+        });
       }
     } catch (error: any) {
       Toast.show({
-        type: 'error',
-        text1: 'Erro ao registrar usuário',
-        text2: String(error.FirebaseError.Firebase)
-      })
+        type: "error",
+        text1: "Erro ao registrar usuário",
+        text2: String(error.FirebaseError.Firebase),
+      });
     }
   };
 
@@ -130,6 +136,19 @@ const SignUp = () => {
           keyboardShouldPersistTaps="handled"
         >
           <View style={styles.text}>
+            <View style={{ marginBottom: 20 }}>
+              <TouchableOpacity onPress={() => router.push("/sign-in")}>
+                <Text
+                  style={{
+                    fontFamily: "CircularSpotifyText-Medium",
+                    color: Colors.goldColor,
+                    fontSize: 12,
+                  }}
+                >
+                  Voltar para o login
+                </Text>
+              </TouchableOpacity>
+            </View>
             <Text
               style={{
                 display: "flex",
