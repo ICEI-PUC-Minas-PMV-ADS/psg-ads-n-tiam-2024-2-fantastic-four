@@ -78,7 +78,7 @@ const FormField = ({
         )}
 
         {/* Se for senha, mostra o ícone de mostrar/esconder */}
-        {title === "Senha" && (
+        {(title === "Senha" || title === "Confirme sua senha") && (
           <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
             <Image
               source={!showPassword ? Icons.eye : Icons.eyeHide}
