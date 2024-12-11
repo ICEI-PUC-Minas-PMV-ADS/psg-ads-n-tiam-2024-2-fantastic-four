@@ -5,6 +5,8 @@ import firebase from "../../service/firebaseConnection";
 import moment from "moment";
 import "moment/locale/pt-br";
 import { Ionicons } from "@expo/vector-icons"; // Para ícones
+import CancelButton from "@/components/cancelButton";
+import useNotifications from "@/hooks/useNotification";
 
 interface Scheduling {
   id: string;
@@ -13,14 +15,16 @@ interface Scheduling {
   idBarber: number;
   idUser: string;
   services: { id: string; serviceName: string }[];
+  status: string;
 }
 
 const Historic = () => {
   const [appointments, setAppointments] = useState<Scheduling[]>([]);
-  const [upcomingAppointments, setUpcomingAppointments] = useState<Scheduling[]>(
-    []
-  );
+  const [upcomingAppointments, setUpcomingAppointments] = useState<
+    Scheduling[]
+  >([]);
   const [uid, setUid] = useState<string | null>(null);
+  const { addNotification } = useNotifications();
 
   // Fetch user ID (uid)
   useEffect(() => {
@@ -77,7 +81,7 @@ const Historic = () => {
           .sort((a, b) => {
             const dateA = moment(`${a.day} ${a.time}`, "YYYY-MM-DD HH:mm");
             const dateB = moment(`${b.day} ${b.time}`, "YYYY-MM-DD HH:mm");
-            return dateB.diff(dateA); 
+            return dateB.diff(dateA);
           });
 
         setUpcomingAppointments(upcoming);
@@ -89,6 +93,36 @@ const Historic = () => {
 
     fetchAppointments();
   }, [uid]);
+
+  function cancelAgen(idSchedulling: string, dateSchedulling: string) {
+    console.log(idSchedulling);
+    if (!uid) return;
+
+    const schedullingRef = firebase
+      .firestore()
+      .collection("schedullings")
+      .doc(idSchedulling);
+
+    schedullingRef
+      .update({
+        status: "canceled",
+        time: [],
+      })
+      .then(() => {
+        addNotification({
+          message: `Agendamento ${dateSchedulling} cancelado com sucesso!`,
+          icon: "notifications",
+          status: "ler",
+          idUser: uid,
+          isAction: false,
+          date: new Date().toISOString(),
+          idSchedullings: null,
+        });
+      })
+      .catch((error) => {
+        console.error("Erro ao cancelar agendamento:", error);
+      });
+  }
 
   const getBarberName = (idBarber: number) => {
     switch (idBarber) {
@@ -119,10 +153,15 @@ const Historic = () => {
 
     return (
       <View
-        key={item.id} 
+        key={item.id}
         style={[
           styles.card,
-          isUpcoming && isPending ? styles.pendingCard : styles.historyCard,
+          item.status === "canceled"
+            ? styles.CanceledBord
+            : isUpcoming && isPending
+            ? styles.pendingCard
+            : styles.historyCard,
+          ,
         ]}
       >
         <View style={styles.cardHeader}>
@@ -130,18 +169,40 @@ const Historic = () => {
             <Ionicons
               name="person-circle"
               size={24}
-              color={isUpcoming && isPending ? "#F8F8F8" : "#979797"}
+              color={
+                item.status === "canceled"
+                  ? "#5f5858"
+                  : isUpcoming && isPending
+                  ? "#F8F8F8"
+                  : "#979797"
+              }
             />
-            <Text style={styles.text}>{getBarberName(item.idBarber)}</Text>
+            <Text
+              style={
+                item.status === "canceled" ? styles.textCancel : styles.text
+              }
+            >
+              {getBarberName(item.idBarber)}
+            </Text>
           </View>
 
           <View style={styles.iconTextContainer}>
             <Ionicons
               name="calendar"
               size={24}
-              color={isUpcoming && isPending ? "#F8F8F8" : "#979797"}
+              color={
+                item.status === "canceled"
+                  ? "#5f5858"
+                  : isUpcoming && isPending
+                  ? "#F8F8F8"
+                  : "#979797"
+              }
             />
-            <Text style={styles.text}>
+            <Text
+              style={
+                item.status === "canceled" ? styles.textCancel : styles.text
+              }
+            >
               {moment(item.day).format("ddd, MMM D")}
             </Text>
           </View>
@@ -150,17 +211,50 @@ const Historic = () => {
             <Ionicons
               name="time"
               size={24}
-              color={isUpcoming && isPending ? "#F8F8F8" : "#979797"}
+              color={
+                item.status === "canceled"
+                  ? "#5f5858"
+                  : isUpcoming && isPending
+                  ? "#F8F8F8"
+                  : "#979797"
+              }
             />
-            <Text style={styles.text}>
+            <Text
+              style={
+                item.status === "canceled" ? styles.textCancel : styles.text
+              }
+            >
               {moment(item.time, "HH:mm").format("HH:mm")}
             </Text>
           </View>
         </View>
 
         <View style={styles.separator} />
+        {item.status === "canceled" ? (
+          <>
+            <View style={[styles.servicesRow]}>
+              <Text style={styles.textCancel}>
+                {renderServices(item.services)}
+              </Text>
+            </View>
+          </>
+        ) : (
+          <View style={[styles.servicesRow]}>
+            <Text style={styles.textServicoNome}>
+                {renderServices(item.services)}
+              </Text>
+          </View>
+        )}
 
-        <View style={styles.servicesRow}>{renderServices(item.services)}</View>
+        <View style={styles.cancelButtonConfig}>
+          {item.status === "canceled" ? (
+            <>
+              <Text style={styles.cancelText}>Cancelado</Text>
+            </>
+          ) : (
+            <CancelButton onPress={() => cancelAgen(item.id, item.time)} />
+          )}
+        </View>
       </View>
     );
   };
@@ -173,13 +267,12 @@ const Historic = () => {
           fontFamily: "CircularSpotifyText-Bold",
           color: "white",
           fontSize: 15,
+          textAlign: "center",
         }}
       >
         Histórico de agendamentos
       </Text>
-      {upcomingAppointments.map((item) =>
-        renderCard(item, true)
-      )}
+      {upcomingAppointments.map((item) => renderCard(item, true))}
       <View style={styles.separatorLine} />
       {appointments.map((item) => renderCard(item, false))}
     </MobileLayout>
@@ -233,13 +326,32 @@ const styles = StyleSheet.create({
   },
   serviceText: {
     fontSize: 14,
-    color: "#F8F8F8",
     marginRight: 5,
   },
   separatorLine: {
     height: 2,
     backgroundColor: "#AE8333",
     marginVertical: 15,
+  },
+  cancelButtonConfig: {
+    flex: 1,
+    alignItems: "center",
+    marginTop: 10,
+  },
+  cancelText: {
+    color: "#Ffffff",
+    fontFamily: "CircularSpotifyText-Medium",
+  },
+  CanceledBord: {
+    borderColor: "transparent",
+    backgroundColor: "#3c3838e5",
+    color: "#3c3838e5",
+  },
+  textCancel: {
+    color: "#8d8282e4",
+  },
+  textServicoNome:{
+color: "#fff",
   },
 });
 
