@@ -77,20 +77,6 @@ interface TimeSelectModalProps {
   selectedBarber: string | undefined;
 }
 
-const times = [
-  {
-    id: 1,
-    day: "13",
-    time: ["10:00"],
-    status: true,
-  },
-  {
-    id: 1,
-    day: "3",
-    time: "11:00",
-    status: true,
-  },
-];
 
 export default function TimeSelectModal({
   onClose,

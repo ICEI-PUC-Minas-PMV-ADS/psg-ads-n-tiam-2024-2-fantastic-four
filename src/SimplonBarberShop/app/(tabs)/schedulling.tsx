@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Alert } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MobileLayout from "@/components/layout/mobileLayout";
 import BarberSelect from "@/components/schedulling/barberSelect";
 import ServiceSelect from "@/components/schedulling/serviceSelect";
@@ -19,7 +19,7 @@ import CustomerSelectModal from "@/components/modals/schedulling/customerSelectM
 import { Barber, Service, Time } from "@/utils/types";
 
 interface Customer {
-  id: string;
+  uid: string;
   nome: string;
   telefone: string;
   email: string;
@@ -48,7 +48,20 @@ const Schedulling = () => {
       return;
     }
     if (user) {
-      const payload = {
+      let payload;
+      if(user?.isBarber){
+      payload = {
+        day: selectedTime.date,
+        time: selectedTime.time,
+        idUser: selectedCustomer?.uid,
+        idBarber: user.uid,
+        services: [selectedService],
+        products: [],
+        totalPrice: selectedService.price || 0,
+        status: "pending",
+      };
+    } else {
+      payload = {
         day: selectedTime.date,
         time: selectedTime.time,
         idUser: user.uid,
@@ -58,6 +71,7 @@ const Schedulling = () => {
         totalPrice: selectedService.price || 0,
         status: "pending",
       };
+    }
 
       try {
         const agendamento = await firebase
@@ -76,9 +90,13 @@ const Schedulling = () => {
         });
 
         Alert.alert("Sucesso", "Agendamento concluído com sucesso!");
+        setSelectedTime(null)
+        setSelectedService(null)
+        setSelectedCustomer(null)
       } catch (e) {
         Alert.alert("Erro", "Erro ao salvar agendamento");
       }
+
       navigation.navigate("homeTab" as never);
     }
   }
