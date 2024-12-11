@@ -140,7 +140,7 @@ const About = () => {
               color="#fff"
               onPress={() => handlePhonePress("+5531991650801")} // Discar
             />
-            <Text style={styles.contactText}>(31) 9 9165-0801 | Fábio</Text>
+            <Text style={styles.contactText}>Fábio</Text>
             <FontAwesome
               name="whatsapp"
               size={24}
@@ -157,7 +157,7 @@ const About = () => {
               color="#fff"
               onPress={() => handlePhonePress("+5531999883988")} // Discar
             />
-            <Text style={styles.contactText}>(31) 9 9988-3988 | Alexandre</Text>
+            <Text style={styles.contactText}>Alexandre</Text>
             <FontAwesome
               name="whatsapp"
               size={24}
@@ -222,7 +222,7 @@ const styles = StyleSheet.create({
   ceoDescription: {
     fontSize: 12,
     color: "#aaa",
-    textAlign: "justify",
+    textAlign: "center",
     marginBottom: 35,
   },
   mapContainer: { marginBottom: 49 },
