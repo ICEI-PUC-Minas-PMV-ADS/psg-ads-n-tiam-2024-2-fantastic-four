@@ -1,5 +1,5 @@
 import React from "react";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createDrawerNavigator, DrawerItem } from "@react-navigation/drawer";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialIcons } from "@expo/vector-icons";
 import { View, StyleSheet, Image } from "react-native";
@@ -17,6 +17,8 @@ import Statistics from "./statistics";
 import ScheddullingBarber from "./scheddullingBarber";
 import Toast from "react-native-toast-message";
 import toastConfig from "@/utils/toastConfig";
+import { signOut } from "@/service/firebase";
+import { router } from "expo-router";
 
 type DrawerNavigatorParamList = {
   homeDrawer: undefined;
@@ -28,6 +30,7 @@ type DrawerNavigatorParamList = {
   statisticsTab: undefined;
   customersDrawer: undefined;
   statisticsDrawer: undefined;
+  logoutDrawer: undefined;
 };
 
 type TabNavigatorParamList = {
@@ -173,8 +176,6 @@ const TabsLayout: React.FC<{ tab: string }> = ({ tab }) => {
 };
 
 export default function DrawerWithTabs() {
-  const { user } = useAuthContext();
-
   const commonScreenOptions = {
     drawerStyle: {
       backgroundColor: "black",
@@ -183,6 +184,14 @@ export default function DrawerWithTabs() {
     drawerActiveTintColor: Colors.goldColor,
     drawerInactiveTintColor: "white",
     header: () => <Header />,
+  };
+
+  const { user, setIsLoggedIn } = useAuthContext();
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    signOut();
+    router.push("/");
   };
 
   return (
@@ -258,6 +267,23 @@ export default function DrawerWithTabs() {
           >
             {() => <TabsLayout tab="notificationsTab" />}
           </Drawer.Screen>
+          <Drawer.Screen
+            name="logoutDrawer"
+            options={{
+              drawerIcon: ({ color }) => (
+                <MaterialIcons name="logout" size={24} color={color} />
+              ),
+              drawerLabel: "Fazer Logout",
+            }}
+            listeners={{
+              drawerItemPress: (e) => {
+                e.preventDefault();
+                handleLogout();
+              },
+            }}
+          >
+            {() => null}
+          </Drawer.Screen>
         </Drawer.Navigator>
       ) : (
         <Drawer.Navigator screenOptions={commonScreenOptions}>
@@ -326,9 +352,26 @@ export default function DrawerWithTabs() {
             }}
             component={About}
           />
+          <Drawer.Screen
+            name="logoutDrawer"
+            options={{
+              drawerIcon: ({ color }) => (
+                <MaterialIcons name="logout" size={24} color={color} />
+              ),
+              drawerLabel: "Fazer Logout",
+            }}
+            listeners={{
+              drawerItemPress: (e) => {
+                e.preventDefault();
+                handleLogout();
+              },
+            }}
+          >
+            {() => null}
+          </Drawer.Screen>
         </Drawer.Navigator>
       )}
-      <Toast config={toastConfig}/>
+      <Toast config={toastConfig} />
     </>
   );
 }

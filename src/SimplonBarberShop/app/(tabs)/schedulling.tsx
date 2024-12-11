@@ -55,7 +55,7 @@ const Schedulling = () => {
       let payload;
       if (user?.isBarber) {
         payload = {
-          day: selectedTime.date,
+          day: selectedTime.date.dateString,
           time: selectedTime.time,
           idUser: selectedCustomer?.uid,
           idBarber: user.uid,
@@ -66,7 +66,7 @@ const Schedulling = () => {
         };
       } else {
         payload = {
-          day: selectedTime.date,
+          day: selectedTime.date.dateString,
           time: selectedTime.time,
           idUser: user.uid,
           idBarber: selectedBarber.uid,
@@ -96,11 +96,14 @@ const Schedulling = () => {
         Toast.show({
           type: "success",
           text1: "Sucesso",
-          text2: "Agendamento concluído com sucesso!",
+          text2: "Agendamento realizado!",
         });
         setSelectedTime(null);
         setSelectedService(null);
         setSelectedCustomer(null);
+        if (!user.isBarber) {
+          setSelectedBarber(null);
+        }
       } catch (e) {
         Toast.show({
           type: "error",
@@ -112,6 +115,22 @@ const Schedulling = () => {
       navigation.navigate("homeTab" as never);
     }
   }
+
+  const handleDateTimeClick = () => {
+    if (user?.isBarber) {
+      setTimeVisible(true);
+      return;
+    }
+    if (selectedBarber) {
+      setTimeVisible(true);
+    } else {
+      Toast.show({
+        type: "error",
+        text1: "Barbeiro não selecionado!",
+        text2: "Para marcar o horário, selecione um!",
+      });
+    }
+  };
 
   return (
     <MobileLayout>
@@ -135,7 +154,7 @@ const Schedulling = () => {
             selectedService={selectedService}
           />
           <DateTimeSelect
-            onPress={() => setTimeVisible(true)}
+            onPress={() => handleDateTimeClick()}
             selectedTime={selectedTime}
           />
         </View>

@@ -1,13 +1,19 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { formatDateToDDMMYYYY } from "@/utils/utils";
 import { Time } from "@/utils/types";
 
 interface timeSelectProps {
   onPress: () => void;
   selectedTime: Time | null;
 }
+
+const formatDateToDDMMYYYY = (date: any) => {
+  const correctedDate = new Date(date.year, date.month - 1, date.day); 
+  const formattedDate = correctedDate.toLocaleDateString("pt-BR"); 
+  return formattedDate;
+};
+
 const DateTimeSelect = ({ onPress, selectedTime }: timeSelectProps) => {
   return (
     <TouchableOpacity style={styles.card} onPress={onPress}>

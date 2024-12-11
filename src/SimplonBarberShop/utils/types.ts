@@ -13,7 +13,7 @@ export interface Service {
   timeSpent: Number;
 }
 export interface Time {
-  date: string;
+  date: any;
   time: string[];
 }
 

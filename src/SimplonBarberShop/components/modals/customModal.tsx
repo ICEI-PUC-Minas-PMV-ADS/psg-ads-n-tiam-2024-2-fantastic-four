@@ -20,6 +20,7 @@ export default CustomModal;
 
 const styles = StyleSheet.create({
   overlay: {
+    zIndex: 1,
     flex: 1,
     backgroundColor: "rgba(0, 0, 0, 0.7)",
     justifyContent: "center",
