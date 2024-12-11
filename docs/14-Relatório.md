@@ -28,13 +28,14 @@ O código está hospedado no repositório GitHub e gerido por meio de branches. 
 
 #### Status Atual das Contribuições dos Membros do Time no Github
 
+Todos os membros da equipe colaboraram ativamente no desenvolvimento do projeto, contribuindo com suas habilidades específicas para garantir que todas as etapas fossem concluídas com sucesso. O trabalho conjunto foi essencial para a realização de tarefas, desde o planejamento até a implementação, assegurando a qualidade do produto final.
 
 #### Comentários sobre Participações Individuais
 
-- **Adrielly:** 
-- **Filipe:** 
-- **Pedro:** 
-- **Yuri:** 
+- **Adrielly:** Atuou como desenvolvedora e realizou testes no sistema, focando em garantir que o usuário tenha uma experiência fluida e satisfatória.
+- **Filipe:** Atuou como desenvolvedor e Scrum Master, orientando a equipe nas tarefas e assegurando que os processos seguissem as práticas ágeis.
+- **Pedro:** Atuou como desenvolvedor e DevOps, gerenciando o pipeline de desenvolvimento e as integrações do projeto.
+- **Yuri:** Atuou como desenvolvedor, realizou testes no sistema para melhorar a experiência do usuário e foi responsável pelo design completo do sistema, assegurando uma interface intuitiva e moderna.
 
 ---
 
