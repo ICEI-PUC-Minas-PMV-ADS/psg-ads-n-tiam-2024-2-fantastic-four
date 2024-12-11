@@ -71,22 +71,19 @@ const About = () => {
             <Image source={Fabio} style={styles.ceoImage} />
             <Text style={styles.ceoName}>CEO e Barbeiro Fábio</Text>
             <Text style={styles.ceoDescription}>
-              Com mais de 30 anos de experiência como barbeiro, Fábio é um dos
-              fundadores da Barbearia Simplon.
+            Com mais de 30 anos de experiência como barbeiro, Fábio é um dos fundadores da Barbearia Simplon.
             </Text>
           </View>
           <View style={styles.ceoProfile}>
             <Image source={Alexandre} style={styles.ceoImage} />
             <Text style={styles.ceoName}>CEO e Barbeiro Alexandre</Text>
             <Text style={styles.ceoDescription}>
-              Co-fundador da Barbearia Simplon, Alexandre soma mais de três
-              décadas de dedicação à profissão de barbeiro.
+            Co-fundador da Barbearia Simplon, Alexandre soma mais de três décadas de dedicação à profissão de barbeiro.
             </Text>
           </View>
         </View>
 
-
-        <ScrollView style={styles.mapContainer}>
+        <View style={styles.mapContainer}>
           <Text style={styles.locationTitle}>Localização</Text>
           <Text style={styles.address}>
             Rua Monte Simplon, 1124 - Salgado Filho
@@ -99,8 +96,8 @@ const About = () => {
               latitudeDelta: 0.001,
               longitudeDelta: 0.001,
             }}
-            scrollEnabled={false}
-            zoomEnabled={false}
+            scrollEnabled={false} 
+            zoomEnabled={false} 
           >
             <Marker
               coordinate={{ latitude: -19.93823, longitude: -43.98028 }}
@@ -108,8 +105,10 @@ const About = () => {
             />
           </MapView>
 
-          {/* Botão para abrir diretamente no Google Maps */}
-          <TouchableOpacity onPress={handleOpenInMaps}>
+          
+          <TouchableOpacity
+            onPress={handleOpenInMaps}
+          >
             <Text>Abrir no Maps</Text>
           </TouchableOpacity>
         </View>
@@ -135,38 +134,38 @@ const About = () => {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.contactButton}>
-            <MaterialIcons
-              name="phone"
-              size={24}
-              color="#fff"
-              onPress={() => handlePhonePress("+5531991650801")} // Discar
-            />
-            <Text style={styles.contactText}>(31) 9 9165-0801 | Fábio</Text>
-            <FontAwesome
-              name="whatsapp"
-              size={24}
-              color="#D2B070"
-              style={styles.whatsappIcon}
-              onPress={() => handleWhatsappPress("+5531991650801")} // WhatsApp
-            />
-          </TouchableOpacity>
+  <MaterialIcons
+    name="phone"
+    size={24}
+    color="#fff"
+    onPress={() => handlePhonePress("+5531991650801")} 
+  />
+  <Text style={styles.contactText}>(31) 9 9165-0801 | Fábio</Text>
+  <FontAwesome
+    name="whatsapp"
+    size={24}
+    color="#D2B070"
+    style={styles.whatsappIcon}
+    onPress={() => handleWhatsappPress("+5531991650801")} 
+  />
+</TouchableOpacity>
 
-          <TouchableOpacity style={styles.contactButton}>
-            <MaterialIcons
-              name="phone"
-              size={24}
-              color="#fff"
-              onPress={() => handlePhonePress("+5531999883988")} // Discar
-            />
-            <Text style={styles.contactText}>(31) 9 9988-3988 | Alexandre</Text>
-            <FontAwesome
-              name="whatsapp"
-              size={24}
-              color="#D2B070"
-              style={styles.whatsappIcon}
-              onPress={() => handleWhatsappPress("+5531999883988")} // WhatsApp
-            />
-          </TouchableOpacity>
+<TouchableOpacity style={styles.contactButton}>
+  <MaterialIcons
+    name="phone"
+    size={24}
+    color="#fff"
+    onPress={() => handlePhonePress("+5531999883988")} 
+  />
+  <Text style={styles.contactText}>(31) 9 9988-3988 | Alexandre</Text>
+  <FontAwesome
+    name="whatsapp"
+    size={24}
+    color="#D2B070"
+    style={styles.whatsappIcon}
+    onPress={() => handleWhatsappPress("+5531999883988")} 
+  />
+</TouchableOpacity>
           <View style={styles.line} />
 
           <TouchableOpacity
@@ -177,6 +176,7 @@ const About = () => {
             <Text style={styles.instagramText}>@barbeariasimplon</Text>
           </TouchableOpacity>
         </View>
+      </ScrollView>
     </MobileLayout>
   );
 };
@@ -189,10 +189,8 @@ const styles = StyleSheet.create({
   logo: { width: 161, height: 168, resizeMode: "contain" },
   description: {
     textAlign: "justify",
-    textAlign: "justify",
     fontSize: 14,
     fontFamily: "CircularSpotifyText-Book",
-    color: "#fff",
     color: "#fff",
     marginTop: 8,
     marginBottom: 17,
