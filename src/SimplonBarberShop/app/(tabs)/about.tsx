@@ -4,6 +4,10 @@ import MapView, { Marker } from 'react-native-maps';
 import MobileLayout from '@/components/layout/mobileLayout';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import logo from "../../assets/images/logo.png";
+import Fabio from "../../assets/images/Fabio.png";
+import Alexandre from "../../assets/images/Alexandre.png";
+import Video from "react-native-video";
+
 
 const About = () => {
   const handlePhonePress = (phone: string) => {
@@ -32,19 +36,24 @@ const About = () => {
         </View>
 
         <View style={styles.videoContainer}>
-          <Image source={{ uri: 'https://via.placeholder.com/300x150' }} style={styles.videoThumbnail} />
+          <Video
+            source={require("../../videoApresentacao.mp4")} // Corrigir o caminho do vídeo
+            style={styles.video}
+            controls={true} // Mostra controles de play/pause
+            resizeMode="cover" // Ajusta o vídeo para cobrir a área
+          />
         </View>
 
         <View style={styles.ceoContainer}>
           <View style={styles.ceoProfile}>
-            <Image source={{ uri: 'https://via.placeholder.com/100' }} style={styles.ceoImage} />
+          <Image source={Fabio} style={styles.ceoImage} />
             <Text style={styles.ceoName}>CEO e Barbeiro Fábio</Text>
             <Text style={styles.ceoDescription}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </Text>
           </View>
           <View style={styles.ceoProfile}>
-            <Image source={{ uri: 'https://via.placeholder.com/100' }} style={styles.ceoImage} />
+          <Image source={Alexandre} style={styles.ceoImage} />
             <Text style={styles.ceoName}>CEO e Barbeiro Alexandre</Text>
             <Text style={styles.ceoDescription}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -167,5 +176,9 @@ const styles = StyleSheet.create({
   line: { height: 1, backgroundColor: '#D2B070', alignSelf: 'center', width: '80%', marginVertical: 16 },
   instagramContainer: { alignItems: 'center', marginTop: 8 },
   instagramText: { color: '#FFFFFF', fontSize: 15, marginTop: 8 },
-  whatsappIcon: { marginLeft: 8 }, // Adicionado
+  whatsappIcon: { marginLeft: 8 }, 
+    video: {
+      width: "100%",
+      height: "100%",
+    },
 });
