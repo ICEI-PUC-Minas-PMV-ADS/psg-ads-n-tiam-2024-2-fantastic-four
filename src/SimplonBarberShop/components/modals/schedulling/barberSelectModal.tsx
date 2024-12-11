@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import CustomButton from "@/components/customButton";
 import { Barber } from "@/utils/types";
+import Alexandre from "../../../assets/images/Alexandre.png";
+import Fabio from "../../../assets/images/Fabio.png";
 
 interface BarberSelectModalProps {
   onClose: () => void;
@@ -13,21 +15,21 @@ const barbers: Barber[] = [
   {
     uid: "QeKedO6vcAVMwJDbt6WyGsr7jcq1",
     nome: "Fábio",
-    telefone: '31993273796',
+    telefone: "31993273796",
     email: "fabiodiniz@yahoo.com.br",
     dataNascimento: "25/05/1972",
-    image: "https://d28hgpri8am2if.cloudfront.net/book_images/cvr9781421520568_9781421520568_hr.jpg",
+    image: Fabio,
   },
   {
     uid: "Fl9b54rLMDZqo9dDMditGbdl91j1",
     nome: "Alexandre",
-    telefone: '31999883988',
+    telefone: "31999883988",
     email: "xandecomaciel@yahoo.com.br",
     dataNascimento: "24/01/1970",
-    image:
-      "https://th.bing.com/th/id/R.299a77477c4b33625bd9b5f3fca5720c?rik=EJmFrtxG%2ffwr%2bQ&pid=ImgRaw&r=0",
+    image: Alexandre,
   },
 ];
+
 
 export default function BarberSelectModal({
   onClose,
@@ -69,7 +71,7 @@ export default function BarberSelectModal({
           >
             <View style={styles.section1}>
               {barber ? (
-                <Image source={{ uri: barber.image }} style={styles.image} />
+                <Image source={barber.image} style={styles.image} />
               ) : (
                 <MaterialIcons name="person" size={33} color="white" />
               )}
