@@ -16,79 +16,82 @@ interface NotificationCardProps {
   mensage: string;
   buttonStyle?: ViewStyle;
   icon?: any;
-  onPress: () => void;
-  width: DimensionValue;
+  onPressCancel: () => void;
+  onPressConfirm: () => void;
+
   backgroundColor: string;
   border?: number;
   borderColor?: string;
   textColor: string;
-  iconSize?: number;
+
   isAction: boolean;
   notificatioData?: string;
 }
 
 function NotificationCard({
   mensage,
-  onPress,
+  onPressCancel,
+  onPressConfirm,
   buttonStyle,
   icon,
-  width,
+
   backgroundColor,
   border,
   borderColor,
   textColor,
-  iconSize = 30,
   isAction,
   notificatioData,
 }: NotificationCardProps) {
   return (
     <View style={styles.container}>
-      {icon && (
-        <View style={styles.iconContainer}>
-          <MaterialIcons name={icon} size={iconSize} color={Colors.goldColor} />
+      {icon && <MaterialIcons name={icon} size={30} color={Colors.goldColor} />}
+      <View style={styles.alignBtnData}>
+        <View style={styles.textContainer}>
+          <Text style={[styles.mensageText, { color: "white" }]}>
+            {mensage}
+          </Text>
         </View>
-      )}
-      <View style={styles.textContainer}>
-        <Text style={[styles.mensageText, { color:'white' }]}>{mensage}</Text>
-        {notificatioData && (
+        <View
+          style={[
+            styles.containerAction,
+            { justifyContent: isAction ? "space-between" : "flex-end" },
+          ]}
+        >
           <Text style={styles.notificatioDataText}>{notificatioData}</Text>
-        )}
-        {isAction && (
-          <View style={styles.buttonGroup}>
-            <TouchableOpacity
-              style={[
-                styles.button,
-                styles.cancelButton,
-                buttonStyle,
-                {
-                  width: width,
-                  backgroundColor: "#f8d7da",
-                  borderColor: borderColor || "transparent",
-                  borderWidth: border ? 1 : 0,
-                },
-              ]}
-              onPress={onPress}
-            >
-              <Text style={styles.buttonText}>Cancelar</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.button,
-                styles.confirmButton,
-                buttonStyle,
-                {
-                  width: width,
-                  backgroundColor: "#d4edda",
-                  borderColor: borderColor || "transparent",
-                  borderWidth: border ? 1 : 0,
-                },
-              ]}
-              onPress={onPress}
-            >
-              <Text style={styles.buttonText}>Confirmar</Text>
-            </TouchableOpacity>
-          </View>
-        )}
+
+          {isAction && (
+            <View style={styles.buttonGroup}>
+              <TouchableOpacity
+                style={[
+                  styles.button,
+                  styles.cancelButton,
+                  buttonStyle,
+                  {
+                    borderColor: borderColor || "black",
+                    borderWidth: border ? 1 : 0,
+                  },
+                ]}
+                onPress={onPressCancel}
+              >
+                <Text style={styles.buttonText}>Cancelar</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.button,
+                  styles.confirmButton,
+                  buttonStyle,
+                  {
+                    borderColor: borderColor || "transparent",
+                    borderWidth: border ? 1 : 0,
+                  },
+                ]}
+                onPress={onPressConfirm}
+              >
+                <Text style={styles.buttonText}>Confirmar</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        </View>
       </View>
     </View>
   );
@@ -98,67 +101,61 @@ export default NotificationCard;
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 10,
-    padding: 16,
-    borderRadius: 12,
+    paddingTop: 15,
+    paddingBottom: 10,
+    paddingHorizontal: 10,
+    borderRadius: 8,
     backgroundColor: "#4F5050",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.0,
     shadowRadius: 8,
-    elevation: 4,
     flexDirection: "row",
     alignItems: "center",
-    color: 'white'
+    color: "white",
   },
-  iconContainer: {
-    marginRight: 16,
-    padding: 10,
-    borderRadius: 50,
-    alignItems: "center",
-    justifyContent: "center",
+  alignBtnData: {
+    flex: 1,
+    flexDirection: "column",
   },
-  icon: {
-    resizeMode: "contain",
+  containerAction: {
+    flexDirection: "row",
+    alignItems: "flex-end",
   },
   textContainer: {
     flex: 1,
     justifyContent: "center",
-   
   },
   mensageText: {
     fontFamily: "CircularSpotifyText-Medium",
-    fontSize: 16,
+    fontSize: 10,
     color: "#333",
-    marginBottom: 4,
   },
   notificatioDataText: {
-    fontFamily: "CircularSpotifyText-Regular",
-    fontSize: 14,
-    color: "#666",
+    fontFamily: "CircularSpotifyText-Medium",
+    fontSize: 10,
+    color: "#AFAFAF",
+    marginBottom: 4,
   },
   buttonGroup: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: 12,
+    alignItems: "center",
+    gap: 6,
+    marginLeft: 7,
   },
   button: {
-    flex: 1,
-    height: 40,
     borderRadius: 8,
-    alignItems: "center",
-    justifyContent: "center",
-    marginHorizontal: 4,
+    padding: 4,
   },
   cancelButton: {
-    backgroundColor: "#f8d7da",
+    backgroundColor: "#AE3333",
   },
   confirmButton: {
-    backgroundColor: "#d4edda",
+    backgroundColor: "#079010",
   },
   buttonText: {
     fontFamily: "CircularSpotifyText-Medium",
-    fontSize: 14,
+    fontSize: 11,
     color: "#fff",
   },
 });
