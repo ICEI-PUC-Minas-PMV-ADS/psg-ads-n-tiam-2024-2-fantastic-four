@@ -10,7 +10,7 @@ interface timeSelectProps {
 }
 const DateTimeSelect = ({ onPress, selectedTime }: timeSelectProps) => {
   return (
-    <View style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={onPress}>
       <View style={styles.section1}>
         <MaterialIcons name="event" size={33} color="white" />
         {selectedTime ? (
@@ -32,7 +32,7 @@ const DateTimeSelect = ({ onPress, selectedTime }: timeSelectProps) => {
           color={selectedTime ? "#4ECB71" : "white"}
         />
       </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
   );
 };
 

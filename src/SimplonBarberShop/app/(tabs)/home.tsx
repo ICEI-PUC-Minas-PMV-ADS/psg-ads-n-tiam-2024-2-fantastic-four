@@ -82,13 +82,18 @@ const Home = () => {
     fetchAppointments();
   }, []);
 
+  const [isFirstRender, setIsFirstRender] = useState(true);
+
   useEffect(() => {
-    Toast.show({
-      type: "success",
-      text1: `Bem vindo ${user?.nome?.split(" ")[0]}!`,
-      text2: "Login realizado com sucesso",
-    });
-  }, [user?.uid]);
+    if (isFirstRender && user?.uid) {
+      Toast.show({
+        type: "success",
+        text1: `Bem vindo ${user?.nome?.split(" ")[0]}!`,
+        text2: "Login realizado com sucesso",
+      });
+      setIsFirstRender(false);
+    }
+  }, []);
   
   const navigateToSchedulingTab = () => {
     navigation.navigate("schedullingTab" as never);
@@ -142,7 +147,7 @@ const Home = () => {
           textColor="#121212"
         />
         <CustomButton
-          title={user?.isBarber ? "Ver agendamentos" : "Reserva Agendamento"}
+          title={user?.isBarber ? "Ver agendamentos" : "Meus agendamentos"}
           onPress={navigateToHistoricTab}
           width={310}
           backgroundColor={"#121212"}
@@ -165,8 +170,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
   },
   title: {
-    fontSize: 24,
-    fontFamily: "CircularSpotifyText-Medium.ttf",
+    fontSize: 15,
+    fontFamily: "CircularSpotifyText-Book",
     fontWeight: "medium",
     color: "#D2B070",
     marginBottom: 0,

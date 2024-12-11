@@ -31,7 +31,7 @@ const SignUp = () => {
   const [nome, setNome] = useState("");
   const [dataNascimento, setDataNascimento] = useState("");
   const [telefone, setTelefone] = useState("");
-  const [isBarber, setIsBarber] = useState(true);
+  const [isBarber, setIsBarber] = useState(false);
 
   const handleNextStep = () => {
     if (currentStep < 1) {
