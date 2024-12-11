@@ -2,6 +2,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import CustomButton from "@/components/customButton";
+import { Service } from "@/utils/types";
 
 interface BarberSelectModalProps {
   onClose: () => void;

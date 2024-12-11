@@ -7,13 +7,14 @@ interface Notification {
   icon: string;
   status: string;
   idUser: string;
-  type: string;
+  isAction: boolean;
+  date: string;
+  idSchedullings?: string | null;
 }
 
 const useNotifications = () => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
 
-  // Busca notificações do Firestore
   const fetchNotifications = async (idUser: string) => {
     try {
       const fetchedNotifications = await firebase
@@ -22,11 +23,12 @@ const useNotifications = () => {
         .where("idUser", "==", idUser)
         .get();
 
-      // Mapeia os documentos para um array de objetos Notification
-      const notificationsArray: Notification[] = fetchedNotifications.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as Notification[];
+      const notificationsArray: Notification[] = fetchedNotifications.docs.map(
+        (doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })
+      ) as Notification[];
 
       setNotifications(notificationsArray);
     } catch (err) {
@@ -34,13 +36,9 @@ const useNotifications = () => {
     }
   };
 
-  // Adiciona uma nova notificação ao Firestore
   const addNotification = async (notification: Notification) => {
     try {
-      await firebase
-        .firestore()
-        .collection("notifications")
-        .add(notification);
+      await firebase.firestore().collection("notifications").add(notification);
     } catch (e) {
       console.error("Erro ao adicionar notificação.", e);
     }

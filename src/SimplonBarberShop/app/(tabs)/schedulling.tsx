@@ -18,7 +18,6 @@ import CustomerSelect from "@/components/schedulling/customerSelect";
 import CustomerSelectModal from "@/components/modals/schedulling/customerSelectModal";
 import { Barber, Service, Time } from "@/utils/types";
 
-
 interface Customer {
   id: string;
   nome: string;
@@ -34,8 +33,12 @@ const Schedulling = () => {
   const [isCustomerVisible, setCustomerVisible] = useState(false);
   const [isServiceVisible, setServiceVisible] = useState(false);
   const [isTimeVisible, setTimeVisible] = useState(false);
-  const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null);
-  const [selectedBarber, setSelectedBarber] = useState<Barber | null>(user?.isBarber ? user : null);
+  const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(
+    null
+  );
+  const [selectedBarber, setSelectedBarber] = useState<Barber | null>(
+    user?.isBarber ? user : null
+  );
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [selectedTime, setSelectedTime] = useState<Time | null>(null);
   const { addNotification } = useNotifications();
@@ -57,18 +60,19 @@ const Schedulling = () => {
       };
 
       try {
-        await firebase
+        const agendamento = await firebase
           .firestore()
           .collection("schedullings")
-          .doc()
-          .set(payload);
+          .add(payload);
 
         addNotification({
-          message: "Notificação teste.",
+          message: "Agendamento teste botoes.",
           icon: "notifications",
           status: "ler",
           idUser: user.uid,
-          type: "info",
+          isAction: true,
+          date: new Date().toISOString(),
+          idSchedullings: agendamento.id,
         });
 
         Alert.alert("Sucesso", "Agendamento concluído com sucesso!");
