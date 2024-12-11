@@ -197,12 +197,12 @@ const styles = StyleSheet.create({
   customerName: {
     fontSize: 16,
     color: "#FFFFFF",
-    fontFamily: "CircularSpotifyText-Medium.ttf",
+    fontFamily: "CircularSpotifyText-Medium",
   },
   customerPhone: {
     fontSize: 15,
     color: "#B9B9B9",
-    fontFamily: "CircularSpotifyText-Medium.ttf",
+    fontFamily: "CircularSpotifyText-Medium",
   },
   modalContainer: {
     flex: 1,
