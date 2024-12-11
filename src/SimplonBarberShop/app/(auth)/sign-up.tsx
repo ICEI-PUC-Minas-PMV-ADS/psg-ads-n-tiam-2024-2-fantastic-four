@@ -245,35 +245,6 @@ const SignUp = () => {
               </View>
             )}
           </TouchableOpacity>
-
-          {currentStep === 0 && (
-            <>
-              <View style={styles.center}>
-                <View style={styles.line2} />
-              </View>
-              <Text
-                style={{
-                  fontFamily: "CircularSpotifyText-Bold",
-                  color: "#fff",
-                  fontSize: 16,
-                }}
-              >
-                ou
-              </Text>
-              <TouchableOpacity style={styles.buttonGoogle}>
-                <Image source={GoogleImg} />
-                <Text
-                  style={{
-                    fontFamily: "CircularSpotifyText-Bold",
-                    color: "white",
-                    textAlign: "center",
-                  }}
-                >
-                  Continue com o Google
-                </Text>
-              </TouchableOpacity>
-            </>
-          )}
         </ScrollView>
       </SafeAreaView>
     </KeyboardAvoidingView>
