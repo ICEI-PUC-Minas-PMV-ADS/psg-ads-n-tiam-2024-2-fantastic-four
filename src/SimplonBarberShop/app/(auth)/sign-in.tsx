@@ -2,7 +2,6 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
   TouchableOpacity,
   Image,
   Alert,
@@ -17,6 +16,7 @@ import CustomModal from "@/components/modals/customModal";
 import InformativeModal from "@/components/modals/informativeModal";
 import Toast from "react-native-toast-message";
 import toastConfig from "@/utils/toastConfig";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const SignIn = () => {
   const [email, setEmail] = useState<string>("");
@@ -51,7 +51,12 @@ const SignIn = () => {
 
   return (
     <SafeAreaView style={styles.body}>
-      <ScrollView contentContainerStyle={{ height: "100%" }}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={{ flexGrow: 1 }}
+        enableOnAndroid
+        extraHeight={100} 
+        extraScrollHeight={100}
+      >
         <View
           style={{
             display: "flex",
@@ -126,7 +131,7 @@ const SignIn = () => {
             </TouchableOpacity>
           </View>
         </View>
-      </ScrollView>
+      </KeyboardAwareScrollView>
       <CustomModal visible={isModalVisible}>
         <InformativeModal
           title={modalTitle}
@@ -134,7 +139,7 @@ const SignIn = () => {
           onClose={closeModal}
         />
       </CustomModal>
-      <Toast config={toastConfig}/>
+      <Toast config={toastConfig} />
     </SafeAreaView>
   );
 };
@@ -143,7 +148,7 @@ export default SignIn;
 
 const styles = StyleSheet.create({
   body: {
-    height: "100%",
+    flex: 1,
     backgroundColor: "#121212",
   },
   login: {
