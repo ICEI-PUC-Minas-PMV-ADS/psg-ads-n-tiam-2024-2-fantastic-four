@@ -12,7 +12,7 @@ const BarberSelect = ({ onPress, selectedBarber }: BarberSelectProps) => {
     <TouchableOpacity style={styles.card} onPress={onPress}>
       <View style={styles.section1}>
         {selectedBarber ? (
-          <Image source={{ uri: selectedBarber.image }} style={styles.image} />
+          <Image source={selectedBarber.image} style={styles.image} />
         ) : (
           <MaterialIcons name="person" size={33} color="white" />
         )}
