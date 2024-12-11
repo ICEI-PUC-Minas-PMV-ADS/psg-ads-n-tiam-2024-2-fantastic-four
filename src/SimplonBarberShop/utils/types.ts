@@ -18,7 +18,7 @@ export interface Time {
 }
 
 export interface Customer {
-  id: string;
+  uid: string;
   nome: string;
   telefone: string;
   email: string;

@@ -4,18 +4,11 @@ import { MaterialIcons } from "@expo/vector-icons";
 import CustomButton from "@/components/customButton";
 import firebase from "firebase/compat";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
+import { Customer } from "@/utils/types";
 
 interface CustomerSelectModalProps {
   onClose: () => void;
   onSelectCustomer: (customer: Customer) => void;
-}
-
-interface Customer {
-  id: string;
-  nome: string;
-  telefone: string;
-  email: string;
-  dataNascimento: string;
 }
 
 export default function CustomerSelectModal({
@@ -38,7 +31,7 @@ export default function CustomerSelectModal({
           .get();
 
         const data = snapshot.docs.map((doc) => ({
-          id: doc.id,
+          uid: doc.id,
           ...doc.data(),
         })) as Customer[];
 
