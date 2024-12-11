@@ -7,7 +7,6 @@ import React, {
 } from "react";
 import firebase from "../../service/firebaseConnection";
 import { getUserProfile } from "../../service/firebase";
-import { Alert } from "react-native";
 interface AuthContextData {
   signed: boolean;
   user: UserProfile | null;

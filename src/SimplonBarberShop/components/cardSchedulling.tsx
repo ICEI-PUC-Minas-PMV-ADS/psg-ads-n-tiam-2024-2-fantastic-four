@@ -1,7 +1,7 @@
 import { formatDateToDDMMYYYY } from "@/utils/utils";
 import firebase from "firebase/compat";
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Alert } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 type CardSchedullingProps = {
   schedulling: any;
