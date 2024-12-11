@@ -16,9 +16,8 @@ const SchedulingBarber = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedSchedullings, setSelectedSchedullings] = useState<any[]>([]);
-  const [isExpanded, setIsExpanded] = useState(false); // New state to handle section expansion
+  const [isExpanded, setIsExpanded] = useState(false);
 
-  // Carregar agendamentos do dia atual
   useEffect(() => {
     if (!user?.uid) return;
 
