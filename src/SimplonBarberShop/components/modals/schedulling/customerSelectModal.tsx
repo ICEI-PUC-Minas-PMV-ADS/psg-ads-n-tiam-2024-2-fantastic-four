@@ -188,6 +188,6 @@ const styles = StyleSheet.create({
     padding: 12,
     marginBottom: 20,
     fontSize: 16,
-    width: 400
+    width: 300
   },
 });
