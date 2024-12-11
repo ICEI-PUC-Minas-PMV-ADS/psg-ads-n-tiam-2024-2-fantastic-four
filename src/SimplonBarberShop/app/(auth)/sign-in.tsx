@@ -2,10 +2,9 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
   TouchableOpacity,
   Image,
-  Alert,
+  ActivityIndicator, // Importação adicional
 } from "react-native";
 import React, { useState } from "react";
 import CustomInput from "@/components/customInput";
@@ -17,10 +16,12 @@ import CustomModal from "@/components/modals/customModal";
 import InformativeModal from "@/components/modals/informativeModal";
 import Toast from "react-native-toast-message";
 import toastConfig from "@/utils/toastConfig";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const SignIn = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const {
     handleResetPassword,
@@ -32,17 +33,24 @@ const SignIn = () => {
 
   const handleLogin = async () => {
     if (email === "" || password === "") {
-      Alert.alert("Erro", "Por favor, preencha todos os campos.");
+      Toast.show({
+        type: "error",
+        text1: "Erro",
+        text2: "Por favor, preencha todos os campos.",
+      });
       return;
     }
+
+    setLoading(true);
 
     const response = await signIn(
       email.replaceAll(" ", ""),
       password.replaceAll(" ", "")
     );
 
-    if (response.error) {
-      Alert.alert("Erro", response.error);
+    setLoading(false);
+
+    if (!response.success) {
       return;
     }
 
@@ -51,7 +59,12 @@ const SignIn = () => {
 
   return (
     <SafeAreaView style={styles.body}>
-      <ScrollView contentContainerStyle={{ height: "100%" }}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={{ flexGrow: 1 }}
+        enableOnAndroid
+        extraHeight={100}
+        extraScrollHeight={100}
+      >
         <View
           style={{
             display: "flex",
@@ -79,16 +92,24 @@ const SignIn = () => {
             />
           </View>
           <View>
-            <TouchableOpacity onPress={handleLogin} style={styles.buttonLogin}>
-              <Text
-                style={{
-                  fontFamily: "CircularSpotifyText-Bold",
-                  fontSize: 20,
-                  color: "white",
-                }}
-              >
-                Login
-              </Text>
+            <TouchableOpacity
+              onPress={handleLogin}
+              style={styles.buttonLogin}
+              disabled={loading}
+            >
+              {loading ? (
+                <ActivityIndicator color="white" />
+              ) : (
+                <Text
+                  style={{
+                    fontFamily: "CircularSpotifyText-Bold",
+                    fontSize: 20,
+                    color: "white",
+                  }}
+                >
+                  Login
+                </Text>
+              )}
             </TouchableOpacity>
           </View>
           <View>
@@ -126,7 +147,7 @@ const SignIn = () => {
             </TouchableOpacity>
           </View>
         </View>
-      </ScrollView>
+      </KeyboardAwareScrollView>
       <CustomModal visible={isModalVisible}>
         <InformativeModal
           title={modalTitle}
@@ -134,7 +155,7 @@ const SignIn = () => {
           onClose={closeModal}
         />
       </CustomModal>
-      <Toast config={toastConfig}/>
+      <Toast config={toastConfig} />
     </SafeAreaView>
   );
 };
@@ -143,6 +164,10 @@ export default SignIn;
 
 const styles = StyleSheet.create({
   body: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
     height: "100%",
     backgroundColor: "#121212",
   },
@@ -166,6 +191,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#AE8333",
     marginTop: 24,
+    opacity: 1,
   },
   registrar: {
     display: "flex",

@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import firebase from "../../service/firebaseConnection";
+import Toast from "react-native-toast-message";
 
 interface EditProfileModalProps {
   visible: boolean;
@@ -31,12 +32,20 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
 
   const updateDados = async () => {
     if (!newPhone || newPhone === currentPhone) {
-      alert("Informe um novo número de telefone diferente do atual.");
+      Toast.show({
+        type: "error",
+        text1: "Erro",
+        text2: "Informe um novo número de telefone diferente do atual.",
+      });
       return;
     }
 
     if (newPhone.replace(/\D/g, "").length < 11) {
-      alert("O número de telefone deve ter no mínimo 11 dígitos.");
+      Toast.show({
+        type: "error",
+        text1: "Erro",
+        text2: "O número de telefone deve ter no mínimo 11 dígitos.",
+      });
       return;
     }
 
@@ -46,11 +55,18 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
       await firebase.firestore().collection("users").doc(userId).update({
         telefone: newPhone,
       });
-      alert("Número de telefone atualizado com sucesso!");
+      Toast.show({
+        type: "success",
+        text1: "Sucesso!",
+        text2: "Número de telefone atualizado com sucesso!",
+      });
       onClose();
     } catch (error) {
-      alert("Erro ao atualizar o telefone. Tente novamente.");
-      console.error(error);
+      Toast.show({
+        type: "error",
+        text1: "Erro",
+        text2: "Erro ao atualizar o telefone. Tente novamente.",
+      });
     } finally {
       setLoading(false);
     }

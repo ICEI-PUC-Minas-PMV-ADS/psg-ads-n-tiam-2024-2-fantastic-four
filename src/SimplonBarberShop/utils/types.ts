@@ -4,7 +4,7 @@ export interface Barber {
   telefone: string;
   email: string;
   dataNascimento: string;
-  image?: string;
+  image?: any;
 }
 export interface Service {
   id: Number;

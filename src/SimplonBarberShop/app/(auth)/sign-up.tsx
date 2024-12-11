@@ -10,6 +10,7 @@ import {
   Image,
   KeyboardAvoidingView,
   Platform,
+  ActivityIndicator,
 } from "react-native";
 import React, { useState, useRef } from "react";
 import { Colors } from "@/constants/Colors";
@@ -31,7 +32,8 @@ const SignUp = () => {
   const [nome, setNome] = useState("");
   const [dataNascimento, setDataNascimento] = useState("");
   const [telefone, setTelefone] = useState("");
-  const [isBarber, setIsBarber] = useState(true);
+  const [isBarber, setIsBarber] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleNextStep = () => {
     if (currentStep < 1) {
@@ -58,12 +60,29 @@ const SignUp = () => {
   };
 
   const handleSignUp = async () => {
+    setLoading(true);
     if (password !== confirmPassword) {
       Toast.show({
-        type: 'error',
-        text1: 'Erro',
-        text2: 'As senha não coincidem'
-      })
+        type: "error",
+        text1: "Erro",
+        text2: "As senhas não coincidem!",
+      });
+      return;
+    }
+
+    if (
+      !email ||
+      !password ||
+      !confirmPassword ||
+      !nome ||
+      !telefone ||
+      !dataNascimento
+    ) {
+      Toast.show({
+        type: "error",
+        text1: "Existem campos vazios!",
+        text2: "Preencha todos os campos.",
+      });
       return;
     }
 
@@ -83,15 +102,28 @@ const SignUp = () => {
           isBarber: isBarber,
         });
 
-        console.log("Dados adicionais salvos no Firestore");
+        Toast.show({
+          type: "success",
+          text1: "Sucesso!",
+          text2: "Cadastro realizado com sucesso.",
+        });
+
         router.push("/(auth)/sign-in");
       } else {
-        alert("Erro ao registrar usuário: usuário não encontrado.");
+        Toast.show({
+          type: "error",
+          text1: "Erro ao registrar usuário",
+          text2: "usuário não encontrado",
+        });
       }
-    } catch (error) {
-      console.error("Erro ao registrar usuário:", error);
-      alert("Erro ao registrar usuário: ");
+    } catch (error: any) {
+      Toast.show({
+        type: "error",
+        text1: "Erro ao registrar usuário",
+        text2: String(error.FirebaseError.Firebase),
+      });
     }
+    setLoading(false);
   };
 
   return (
@@ -108,6 +140,19 @@ const SignUp = () => {
           keyboardShouldPersistTaps="handled"
         >
           <View style={styles.text}>
+            <View style={{ marginBottom: 20 }}>
+              <TouchableOpacity onPress={() => router.push("/sign-in")}>
+                <Text
+                  style={{
+                    fontFamily: "CircularSpotifyText-Medium",
+                    color: Colors.goldColor,
+                    fontSize: 12,
+                  }}
+                >
+                  Voltar para o login
+                </Text>
+              </TouchableOpacity>
+            </View>
             <Text
               style={{
                 display: "flex",
@@ -208,50 +253,25 @@ const SignUp = () => {
             }
             onPress={currentStep === 1 ? handleSignUp : handleNextStep}
           >
-            <Text
-              style={{
-                fontFamily: "CircularSpotifyText-Bold",
-                color: "#D2B070",
-                textAlign: "center",
-              }}
-            >
-              {currentStep === 0 ? "Próximo passo" : "Concluir cadastro"}
-            </Text>
+            {loading ? (
+              <ActivityIndicator color="white" />
+            ) : (
+              <Text
+                style={{
+                  fontFamily: "CircularSpotifyText-Bold",
+                  color: "#D2B070",
+                  textAlign: "center",
+                }}
+              >
+                {currentStep === 0 ? "Próximo passo" : "Concluir cadastro"}
+              </Text>
+            )}
             {currentStep === 0 && (
               <View style={styles.center}>
                 <View style={styles.line} />
               </View>
             )}
           </TouchableOpacity>
-
-          {currentStep === 0 && (
-            <>
-              <View style={styles.center}>
-                <View style={styles.line2} />
-              </View>
-              <Text
-                style={{
-                  fontFamily: "CircularSpotifyText-Bold",
-                  color: "#fff",
-                  fontSize: 16,
-                }}
-              >
-                ou
-              </Text>
-              <TouchableOpacity style={styles.buttonGoogle}>
-                <Image source={GoogleImg} />
-                <Text
-                  style={{
-                    fontFamily: "CircularSpotifyText-Bold",
-                    color: "white",
-                    textAlign: "center",
-                  }}
-                >
-                  Continue com o Google
-                </Text>
-              </TouchableOpacity>
-            </>
-          )}
         </ScrollView>
       </SafeAreaView>
     </KeyboardAvoidingView>

@@ -2,6 +2,7 @@ import { Alert } from "react-native";
 import firebase from "./firebaseConnection";
 import { useState } from "react";
 import "firebase/auth";
+import Toast from "react-native-toast-message";
 
 export const signIn = async (email: string, password: string) => {
   try {
@@ -23,27 +24,67 @@ export const signIn = async (email: string, password: string) => {
     if (!userProfile.exists) {
       throw new Error("Usuário não encontrado no Firestore");
     }
-    return true;
+
+    return { success: true };
   } catch (error: any) {
-    switch (error.code) {
-      case "auth/user-not-found":
-        alert("Usuário não encontrado.");
-        break;
-      case "auth/wrong-password":
-        alert("Senha incorreta.");
-        break;
-      case "auth/invalid-email":
-        alert("E-mail inválido.");
-        break;
-      case "auth/user-disabled":
-        alert("Usuário desativado.");
-        break;
-      default:
-        alert("Ocorreu um erro desconhecido. Tente novamente mais tarde.");
+    console.log(error);
+
+    if (error.code) {
+      switch (error.code) {
+        case "auth/user-not-found":
+          Toast.show({
+            type: "error",
+            text1: "Erro",
+            text2: "Usuário não encontrado.",
+          });
+          break;
+        case "auth/wrong-password":
+          Toast.show({
+            type: "error",
+            text1: "Erro",
+            text2: "Senha incorreta.",
+          });
+          break;
+        case "auth/invalid-email":
+          Toast.show({
+            type: "error",
+            text1: "Erro",
+            text2: "E-mail inválido.",
+          });
+          break;
+        case "auth/user-disabled":
+          Toast.show({
+            type: "error",
+            text1: "Erro",
+            text2: "Usuário desativado.",
+          });
+          break;
+        case "auth/invalid-credential":
+          Toast.show({
+            type: "error",
+            text1: "Credenciais inválidas!",
+            text2: "Verifique as informações inseridas.",
+          });
+          break;
+        default:
+          Toast.show({
+            type: "error",
+            text1: "Erro",
+            text2: "Ocorreu um erro desconhecido. Tente novamente mais tarde.",
+          });
+      }
+    } else {
+      Toast.show({
+        type: "error",
+        text1: "Erro",
+        text2: error.message || "Ocorreu um erro desconhecido. Tente novamente mais tarde.",
+      });
     }
-    return error;
+
+    return { success: false, error: error.message };
   }
 };
+
 
 export const signUp = async (
   email: string,
@@ -70,19 +111,39 @@ export const signUp = async (
   } catch (error: any) {
     switch (error.code) {
       case "auth/email-already-in-use":
-        alert("Este e-mail já está em uso.");
+        Toast.show({
+          type: "error",
+          text1: "Erro",
+          text2: "Este e-mail já está em uso.",
+        });
         break;
       case "auth/invalid-email":
-        alert("E-mail inválido.");
+        Toast.show({
+          type: "error",
+          text1: "Erro",
+          text2: "E-mail inválido.",
+        });
         break;
       case "auth/operation-not-allowed":
-        alert("Operação não permitida.");
+        Toast.show({
+          type: "error",
+          text1: "Erro",
+          text2: "Operação não permitida.",
+        });
         break;
       case "auth/weak-password":
-        alert("A senha é muito fraca.");
+        Toast.show({
+          type: "error",
+          text1: "Erro",
+          text2: "A senha é muito fraca.",
+        });
         break;
       default:
-        alert("Ocorreu um erro desconhecido. Tente novamente mais tarde.");
+        Toast.show({
+          type: "error",
+          text1: "Erro",
+          text2: "Ocorreu um erro desconhecido. Tente novamente mais tarde.",
+        });
     }
   }
 };
