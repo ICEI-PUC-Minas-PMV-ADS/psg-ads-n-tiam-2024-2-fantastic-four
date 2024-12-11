@@ -148,6 +148,7 @@ const SignIn = () => {
           </View>
         </View>
       </KeyboardAwareScrollView>
+      
       <CustomModal visible={isModalVisible}>
         <InformativeModal
           title={modalTitle}

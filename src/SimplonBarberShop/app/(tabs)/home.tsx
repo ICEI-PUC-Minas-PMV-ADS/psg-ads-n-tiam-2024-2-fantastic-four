@@ -10,14 +10,6 @@ import CardSchedulling from "@/components/cardSchedulling";
 import { NoAppointment } from "@/components/noAppointmen";
 import firebase from "firebase/compat";
 import moment from "moment";
-import Toast from "react-native-toast-message";
-
-function convertDateToISOFormat(date: string): string {
-  const [day, month, year] = date.split("/").map(Number);
-  return `${year}-${month.toString().padStart(2, "0")}-${day
-    .toString()
-    .padStart(2, "0")}`;
-}
 
 interface Scheduling {
   id: string;
@@ -37,9 +29,7 @@ const Home = () => {
     ? firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase()
     : "";
 
-  const [nextSchedulling, setNextSchedulling] = useState<Scheduling | null>(
-    null
-  );
+  const [nextSchedulling, setNextSchedulling] = useState<Scheduling | null>(null);
 
   useEffect(() => {
     if (!uid) return;
@@ -73,28 +63,15 @@ const Home = () => {
             return dateA.diff(dateB);
           });
 
-        setNextSchedulling(upcoming[0]);
+        setNextSchedulling(upcoming[0] || null);
       } catch (error) {
         console.error("Error fetching appointments:", error);
       }
     };
 
     fetchAppointments();
-  }, []);
+  }, [uid]);
 
-  const [isFirstRender, setIsFirstRender] = useState(true);
-
-  useEffect(() => {
-    if (isFirstRender && user?.uid) {
-      Toast.show({
-        type: "success",
-        text1: `Bem vindo ${user?.nome?.split(" ")[0]}!`,
-        text2: "Login realizado com sucesso",
-      });
-      setIsFirstRender(false);
-    }
-  }, []);
-  
   const navigateToSchedulingTab = () => {
     navigation.navigate("schedullingTab" as never);
   };
@@ -147,7 +124,7 @@ const Home = () => {
           textColor="#121212"
         />
         <CustomButton
-          title={user?.isBarber ? "Ver agendamentos" : "Meus agendamentos"}
+          title={user?.isBarber ? "Ver agendamentos" : "Reserva Agendamento"}
           onPress={navigateToHistoricTab}
           width={310}
           backgroundColor={"#121212"}
@@ -170,8 +147,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
   },
   title: {
-    fontSize: 15,
-    fontFamily: "CircularSpotifyText-Book",
+    fontSize: 24,
+    fontFamily: "CircularSpotifyText-Medium.ttf",
     fontWeight: "medium",
     color: "#D2B070",
     marginBottom: 0,
