@@ -13,3 +13,6 @@ O teste implementado para a conexão com o Firebase tem como objetivo verificar 
 
 ### Foi realizado o teste de inserção de dados no firebase
 ![Teste Firebase Agendamentos](img/firebaseAgendamentos.jpeg)
+
+### Autenticação no firebase
+![Teste Firebase Autenticacao](img/FirebaseAuthentication.png)
